@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<select id="getBuyerNotCompeleteOrderCount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		<![CDATA[
+select count(0) from td_buyer b join td_order o on b.buyerid=o.buyerid
+where o.statuscode not in ('OC101','OC102','OC103','OC201','OC202','OC203') 
+and b.buyerid=#value#
+		]]>
+	</select>
+	
+	
+		<update id="updateBuyerRejectEmailCount" parameterClass="java.lang.String">
+		<![CDATA[
+	update TD_BUYER set REJECT_EMAIL_TIME=sysdate, REJECT_EMAIL_COUNT=REJECT_EMAIL_COUNT+1 
+	where BUYERID=#value#
+		]]>
+	</update>
+	
+</sqlMap>
