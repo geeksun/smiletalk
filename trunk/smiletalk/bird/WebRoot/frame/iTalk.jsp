@@ -1,8 +1,16 @@
 <%@ page language="java"  import="java.util.*,com.bird.vo.*" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
 <jsp:include page="top.jsp"/>
+<style>
+.style1 {
+	color: green;
+	font-weight: bold;
+}
+</style>
 
 <% 
 	String username = (String)session.getAttribute("username");
+	String action = (String)request.getAttribute("action");
+	<%=action%>
 	String path = request.getContextPath();
 	if(username==null){
  %>
@@ -11,14 +19,13 @@
 	}
 	else{
 	 %>
-	 <script src="<%=path%>/js/prototype.js"></script> 
 <% 
 	List topicList = (List)request.getAttribute("topicList");
  %>
 
 <!-- ×* -->
 <form action="NewTalk.htm" name="iTalk" method="post">
-	<table width="40%"  align="center">
+	<table width="49%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#99CCFF">
 		<tr align="center" >
 			<td>What are you doing?record here↓                     还可以输入<span id="validNum">140</span>字</td>
 		</tr>
@@ -29,7 +36,7 @@
 			</td>
 		</tr>
 		<tr align="center">
-			<td><input type="button" onclick="justTalk()" value="Talk" ></td>
+			<td><input type="button" onclick="justTalk()" value="  Talk  " ></td>
 		</tr>
 		
 		<%
@@ -40,13 +47,12 @@
 		%>
 		<tr align="center" >
 			<td align="left">
-				<font color="red"><%=tbean.getUsername()%></font>  <font color="blue"><%=tbean.getTopicTime()%></font> Speaking
+				<span class="style1"><%=tbean.getUsername()%></span>  <font color="#9900FF"><%=tbean.getTopicTime()%></font>
 			</td>
 		</tr>
-		<tr align="center" >
+		<tr>
 			<td>
 				<%= tbean.getTopicContent()%>
-				<hr>
 			</td>
 		</tr>
 		<% 
@@ -56,6 +62,7 @@
 		 %>
 	</table>
 	<input type="hidden" name="iTalkAct" value="iTalkTopic">
+	<input type="hidden" name="action" value=<%=action%> /></form>
 </form>
  <% 
    }
@@ -71,10 +78,18 @@
 	}	 
 	function checkTalk(){
 		var a = document.iTalk.talkTopic;
+		str = a.value.replace(/\s+/g,"");
+		if(str==''){
+			alert("输入不可为空!");
+			a.value = '';
+			a.focus();
+		   	return false;
+		}
         if(a.value.length > 140)
 		{
-		   alert("输入的长度不能超过140个字符!");
-		   return false;
+		   	alert("输入的长度不能超过140个字符!");
+		   	a.focus();
+		   	return false;
 		}
 		return true;
 	}
