@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
 import com.bird.db.DataBaseUtil;
+import com.bird.util.DateUtil;
 import com.bird.vo.TopicBean;
 import com.bird.vo.UserBean;
 
@@ -31,8 +31,10 @@ public class NewTalk extends HttpServlet{
 		HttpSession session = request.getSession(true);
 		
 		String iTalkAct = request.getParameter("iTalkAct");		//iTalk 的动作标记
+		String action = request.getParameter("action");
+		
 		if(iTalkAct!=null){
-			if(iTalkAct.equals("iTalkTopic")){					//talk topic-话题
+			if(iTalkAct.equals("iTalkTopic")&&!"ins".equals(action)){					//talk topic-话题
 				String talkTopic = request.getParameter("talkTopic");
 				if(talkTopic!=null){
 					if(session!=null){
@@ -73,8 +75,10 @@ public class NewTalk extends HttpServlet{
 								tbean.setTopicTime(rs.getString("topicTime"));
 								topicList.add(tbean);
 							}
+							request.setAttribute("action", "ins");
 							request.setAttribute("topicList", topicList);
 							request.getRequestDispatcher("/frame/iTalk.jsp").forward(request, response);
+							//response.sendRedirect("");
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}finally{
@@ -146,8 +150,8 @@ public class NewTalk extends HttpServlet{
 					pst.setString(2, iTalkpwd);
 					pst.setString(3, iTalkemail);
 					Date d = new Date();
-					DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-					String regTime = df.format(d);
+					/*DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");*/
+					String regTime = DateUtil.getDateString(d);
 					pst.setString(4,  regTime);
 					pst.execute();
 				} catch (SQLException e) {
@@ -162,6 +166,7 @@ public class NewTalk extends HttpServlet{
 				}
 				request.getRequestDispatcher("/frame/iTalk.jsp").forward(request, response);
 			}
+			
 		}
 		
 		//System.out.println(talkTopic);
