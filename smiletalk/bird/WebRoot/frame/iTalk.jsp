@@ -1,4 +1,4 @@
-<%@ page language="java"  import="java.util.*,com.bird.vo.*" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
+<%@ page language="java"  import="java.util.*,com.bird.vo.*,com.bird.util.*" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
 <jsp:include page="top.jsp"/>
 <style>
 .style1 {
@@ -6,11 +6,29 @@
 	font-weight: bold;
 }
 </style>
-
+<% 
+		//生成一个formhash,算法可以自己定，不随便重复就可以了，可以用sessionid+时间的Long值的组合计算值
+		//String formhash = MD5.toMD5(Long.toString(new Date().getTime()));
+		Random ran = new Random();
+		String formhash = String.valueOf(ran.nextInt());
+		//读取当前session里面的hashCode集合，此处使用了Set，方便判断。
+		Set<String> formhashSession = (Set<String>) session.getAttribute("formhashSession");
+		if (formhashSession == null) {
+		    formhashSession = new HashSet<String>();
+		}
+		// 检测重复问题
+		while (formhashSession.contains(formhash)) {
+		    //formhash = MD5.toMD5(Long.toString(new Date().getTime()));
+		    formhash = String.valueOf(ran.nextInt());
+		}
+		// 保存到session里面
+		formhashSession.add(formhash);
+		// 保存
+		session.setAttribute("formhashSession", formhashSession);
+ %>
 <% 
 	String username = (String)session.getAttribute("username");
 	String action = (String)request.getAttribute("action");
-	<%=action%>
 	String path = request.getContextPath();
 	if(username==null){
  %>
@@ -21,9 +39,10 @@
 	 %>
 <% 
 	List topicList = (List)request.getAttribute("topicList");
- %>
+%>
 
 <!-- ×* -->
+<body >
 <form action="NewTalk.htm" name="iTalk" method="post">
 	<table width="49%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#99CCFF">
 		<tr align="center" >
@@ -32,7 +51,7 @@
 		<tr  align="center" >
 			<td>
 				<textarea name="talkTopic" id="talkTopic" rows="4" cols="60" maxlength='140' onKeyDown="checkLength()"
-				 onKeyUp="checkLength()" onPaste="checkLength()"></textarea>
+				 onKeyUp="checkLength()" onPaste="checkLength()" style="overflow:hidden"></textarea>
 			</td>
 		</tr>
 		<tr align="center">
@@ -62,8 +81,9 @@
 		 %>
 	</table>
 	<input type="hidden" name="iTalkAct" value="iTalkTopic">
-	<input type="hidden" name="action" value=<%=action%> /></form>
+	<input type="hidden" name="formhash" id="formhash" value="<%=formhash%>" />
 </form>
+</body>
  <% 
    }
  %>
