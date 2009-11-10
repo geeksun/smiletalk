@@ -6,22 +6,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.bird.db.DataBaseUtil;
+import com.bird.domain.TopicBean;
+import com.bird.domain.UserBean;
+import com.bird.service.TopicService;
+import com.bird.service.impl.TopicServiceImpl;
 import com.bird.util.DateUtil;
-import com.bird.util.MD5;
-import com.bird.vo.TopicBean;
-import com.bird.vo.UserBean;
 
 /**
  * @author jzq
@@ -41,49 +39,37 @@ public class NewTalk extends HttpServlet{
 		HttpSession session = request.getSession(true);
 		
 		String iTalkAct = request.getParameter("iTalkAct");		//iTalk 的动作标记
-		String action = request.getParameter("action");
 		
 		if(iTalkAct!=null){
-			if(iTalkAct.equals("iTalkTopic")&&!"ins".equals(action)){					//talk topic-话题
-				Long userid = (Long) session.getAttribute("userid");
+			if(iTalkAct.equals("iTalkTopic")){					//talk topic-话题
+				Long userId = (Long) session.getAttribute("userId");
 				Connection con = DataBaseUtil.getConnection();
 				
-				// 拿到表单的formhash
-			    String formhash = request.getParameter("formhash");
-			    // 拿到session里面的集合
-			    Set<String> formhashSession = (Set<String>) session.getAttribute("formhashSession");
-			    // 如果没有，则是重复提交，或者非法提交
-			    if (formhashSession == null || !formhashSession.contains(formhash)) {
-				      System.out.println("请不要重复提交！");
-				      //return;
-			    }else{
-			    	String talkTopic = request.getParameter("talkTopic");
+				String clientToken = request.getParameter("clientToken");
+				String sessionToken = (String) session.getAttribute("token");
+				
+				if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//重复提交
+					;
+				}else{
+					String topicContent = request.getParameter("talkTopic");
 			    	String username = (String) session.getAttribute("username");
-					String exe_sql = "insert topic (username,topicContent,userid,topicTime) values (?,?,?,?)";
-					try {
-						PreparedStatement pst = con.prepareStatement(exe_sql);
-						pst.setString(1, username);
-						pst.setString(2, talkTopic);
-						pst.setLong(3, userid);
-						Date d = new Date();
-						DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-						String topicTime = df.format(d);
-						pst.setString(4,  topicTime);
-						pst.execute();
-					} catch (SQLException e) {
-							try {
-								con.rollback();
-							} catch (SQLException e1) {
-								e1.printStackTrace();
-							}
-						e.printStackTrace();
-					}
+			    	TopicService topicService = new TopicServiceImpl();
+					TopicBean topic = new TopicBean();
+					topic.setUserId(userId);
+					topic.setTopicContent(topicContent);
+					topic.setUsername(username);
+					topicService.insertObject(topic);
 			    }
+				//生成新令牌
+				String token = generateToken(request);
+				request.setAttribute("clientToken", token);
+				//替换旧令牌
+				session.setAttribute("token", token);
 			    
 				String next_sql = "select * from topic t where t.userid = ?";
 				try {
 					PreparedStatement pst = con.prepareStatement(next_sql);
-					pst.setLong(1, userid);
+					pst.setLong(1, userId);
 					ResultSet rs = pst.executeQuery();
 					List<TopicBean> topicList = new ArrayList<TopicBean>();
 					TopicBean tbean = null;
@@ -96,10 +82,6 @@ public class NewTalk extends HttpServlet{
 					}
 					request.setAttribute("topicList", topicList);
 					request.getRequestDispatcher("/frame/iTalk.jsp").forward(request, response);
-					
-					// 最后,如果操作成功,从session里面把这个 formhash 删掉！
-				    formhashSession.remove(formhash);
-				    session.setAttribute("formhashSession", formhashSession);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}finally{
@@ -115,7 +97,6 @@ public class NewTalk extends HttpServlet{
 					pst = con.prepareStatement(sql);
 					pst.setString(1, iTalkName);
 					pst.setString(2, iTalkpwd);
-					//System.out.println(sql);
 					ResultSet rs = pst.executeQuery();
 					List<UserBean> userList = new ArrayList<UserBean>();
 					UserBean ubean = null;
@@ -128,13 +109,13 @@ public class NewTalk extends HttpServlet{
 					if(userList.size()>0){
 						ubean = userList.get(0);
 						session.setAttribute("username", ubean.getUsername());
-						long userid = ubean.getUserId();
-						session.setAttribute("userid", userid);
+						long userId = ubean.getUserId();
+						session.setAttribute("userId", userId);
 						
 						String next_sql = "select * from topic t where t.userid = ?";
 						try {
 							pst = con.prepareStatement(next_sql);
-							pst.setLong(1, userid);
+							pst.setLong(1, userId);
 							rs = pst.executeQuery();			//preparedStatement用executeQuery而不是executeQuery(sql)!
 							List<TopicBean> topicList = new ArrayList<TopicBean>();
 							TopicBean tbean = null;
@@ -168,7 +149,6 @@ public class NewTalk extends HttpServlet{
 					pst.setString(2, iTalkpwd);
 					pst.setString(3, iTalkemail);
 					Date d = new Date();
-					/*DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");*/
 					String regTime = DateUtil.getDateString(d);
 					pst.setString(4,  regTime);
 					pst.execute();
@@ -186,8 +166,6 @@ public class NewTalk extends HttpServlet{
 			}
 			
 		}
-		
-		//System.out.println(talkTopic);
 		
 	}
 	
@@ -222,6 +200,5 @@ public class NewTalk extends HttpServlet{
             sb.append(Integer.toHexString((int) buffer[i] & 0xff));
         return (sb.toString());
     }
-	
 	
 }

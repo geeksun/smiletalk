@@ -1,4 +1,4 @@
-package com.bird.vo;
+package com.bird.domain;
 
 /**
  * @author jzq

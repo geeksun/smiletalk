@@ -1,4 +1,4 @@
-package com.bird.vo;
+package com.bird.domain;
 
 /**
  * @author jzq
@@ -7,15 +7,22 @@ package com.bird.vo;
  */
 public class TopicBean {
 	
-	private String username;
+	private Long userId;
+	private String userName;
 	private String topicContent;
 	private String topicTime;
 	
-	public String getUsername() {
-		return username;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUsername(String userName) {
+		this.userName = userName;
 	}
 	public String getTopicContent() {
 		return topicContent;
