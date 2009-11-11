@@ -19,16 +19,16 @@ public class DBConnection {
 		try
 		{
 			Context initCtx = new InitialContext(); 
-			System.out.println("====InitialContext()=====");
+			//System.out.println("====InitialContext()=====");
 			Context ctx = (Context) initCtx.lookup("java:comp/env");		
-			System.out.println("====initCtx.lookup(\"java:comp/env\")====");
+			//System.out.println("====initCtx.lookup(\"java:comp/env\")====");
 			ds = (DataSource) ctx.lookup("jdbc/italk"); 
-			System.out.println("====ctx.lookup(\"jdbc/italk\");====");
+			//System.out.println("====ctx.lookup(\"jdbc/italk\");====");
 		}
 		catch(Exception e)
 		{
 			System.out.println("数据库连接错误：");
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class DBConnection {
 	
 	public DataSource getDataSource()
 	{
-		System.out.println("ds:" + ds);
+		//System.out.println("ds:" + ds);
 		return ds;
 	}
 
@@ -50,8 +50,8 @@ public class DBConnection {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		DBConnection db = new DBConnection();
+		
 	}
 
 }
