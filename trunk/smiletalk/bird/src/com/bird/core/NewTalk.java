@@ -41,7 +41,7 @@ public class NewTalk extends HttpServlet{
 		String iTalkAct = request.getParameter("iTalkAct");		//iTalk 的动作标记
 		
 		if(iTalkAct!=null){
-			if(iTalkAct.equals("iTalkTopic")){					//talk topic-话题
+			if(iTalkAct.equals("iTalkTopic")){					//talk topic-发布话题
 				Long userId = (Long) session.getAttribute("userId");
 				Connection con = DataBaseUtil.getConnection();
 				
