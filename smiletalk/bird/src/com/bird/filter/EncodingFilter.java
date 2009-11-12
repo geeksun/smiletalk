@@ -36,7 +36,6 @@ public class EncodingFilter extends HttpServlet implements Filter {
 
 	public void destroy() {
 		this.encoding = null;
-
 	}
 
 	public void init() throws ServletException {

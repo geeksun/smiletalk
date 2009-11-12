@@ -12,11 +12,11 @@
  %>
  
 <% 
-	String username = (String)session.getAttribute("username");
+	String username = (String)session.getAttribute("userName");
 	String path = request.getContextPath();
 	if(username==null){
  %>
-	您还没有登录，请先<a href="<%=path%>/login.html">登录 iTalk</a>
+	您还没有登录，请先<a href="<%=path%>/login.jsp">登录 iTalk</a>
 	<% 
 	}
 	else{
