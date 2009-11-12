@@ -14,13 +14,11 @@ import com.bird.db.DBConnection;
 public class SuperService {
 	
 	private TopicDaoImpl topicDao;
-	private DataSource dataSource;
 	
 	public SuperService() {
 		super();
 		topicDao = new TopicDaoImpl();
-		DBConnection dbc = DBConnection.getDBConnection();
-		setDataSource(dbc.getDataSource());
+		
 	}
 	
 	public TopicDaoImpl getTopicDao() {
@@ -31,13 +29,7 @@ public class SuperService {
 		this.topicDao = topicDao;
 	}
 
-	public DataSource getDataSource() {
-		return dataSource;
-	}
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 	
 	
 	

@@ -6,10 +6,12 @@
 	</head>
 	<body>
 		<%
+			String path = request.getContextPath();
 			String guest = (String)session.getAttribute("username");
 			guest = guest == null?"guest":guest;
 		 %>
-		 <%=guest%>， 欢迎您使用 iTalk
+		 
+		 <pre> <%=guest%>， 欢迎您使用 iTalk											  		<a href="<%=path%>/login.jsp">登录iTalk</a></pre>
 		 
 		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="FFBB00">
             <tr>

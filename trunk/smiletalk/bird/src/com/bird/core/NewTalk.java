@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,55 +44,63 @@ public class NewTalk extends HttpServlet{
 		if(iTalkAct!=null){
 			if(iTalkAct.equals("iTalkTopic")){					//talk topic-发布话题
 				Long userId = (Long) session.getAttribute("userId");
-				Connection con = DataBaseUtil.getConnection();
-				
 				String clientToken = request.getParameter("clientToken");
 				String sessionToken = (String) session.getAttribute("token");
+				TopicBean topic = null;
+				TopicService topicService = null;
 				
 				if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//重复提交
 					;
 				}else{
 					String topicContent = request.getParameter("talkTopic");
-			    	String username = (String) session.getAttribute("username");
-			    	TopicService topicService = new TopicServiceImpl();
-					TopicBean topic = new TopicBean();
+			    	String userName = (String) session.getAttribute("userName");
+			    	topicService = new TopicServiceImpl();
+					topic = new TopicBean();
 					topic.setUserId(userId);
 					topic.setTopicContent(topicContent);
-					topic.setUsername(username);
+					topic.setUserName(userName);
 					topicService.insertObject(topic);
 			    }
+			    
+				if(topic==null){
+					topic = new TopicBean();
+				}
+				if(topicService == null){
+					topicService = new TopicServiceImpl();
+				}
+				topic.setUserId(userId);
+				List<TopicBean> topicList = topicService.getObjectList(topic);
 				//生成新令牌
 				String token = generateToken(request);
 				request.setAttribute("clientToken", token);
 				//替换旧令牌
 				session.setAttribute("token", token);
-			    
-				String next_sql = "select * from topic t where t.userid = ?";
-				try {
-					PreparedStatement pst = con.prepareStatement(next_sql);
-					pst.setLong(1, userId);
-					ResultSet rs = pst.executeQuery();
-					List<TopicBean> topicList = new ArrayList<TopicBean>();
-					TopicBean tbean = null;
-					while(rs.next()){
-						tbean = new TopicBean();
-						tbean.setUsername(rs.getString("username"));
-						tbean.setTopicContent(rs.getString("topicContent"));
-						tbean.setTopicTime(rs.getString("topicTime"));
-						topicList.add(tbean);
-					}
-					request.setAttribute("topicList", topicList);
-					request.getRequestDispatcher("/frame/iTalk.jsp").forward(request, response);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}finally{
-					DataBaseUtil.closeConnection(con);
-				}
-			}else if(iTalkAct.equals("iTalkLogin")){				// login-登录
+				request.setAttribute("topicList", topicList);
+				request.getRequestDispatcher("/frame/iTalk.jsp").forward(request, response);
+			}else if(iTalkAct.equals("iTalkLogin")) {				// login-登录
 				String iTalkName = request.getParameter("iTalkName");
 				String iTalkpwd = request.getParameter("iTalkpwd");
+				String autoLogin = request.getParameter("autoLogin");
+				String cookieFlag = null;
+				
+				Cookie[] cookies=request.getCookies();
+				if(cookies!=null){
+				    for(int i=0;i<cookies.length;i++){
+				        if(cookies[i].getName().equals("usrCookie")&&cookies[i].getValue().equals(iTalkName)){
+				           cookieFlag = "1";
+				        }
+				    }
+				}
+				
+				if(!cookieFlag.equals("1")&&autoLogin!=null) {
+					Cookie usrCookie = new Cookie("usrCookie", iTalkName);
+					Cookie pwdCookie = new Cookie("pwdCookie", iTalkName);
+					response.addCookie(usrCookie);
+					response.addCookie(pwdCookie);
+				}
+				
 				Connection con = DataBaseUtil.getConnection();
-				String sql = "select * from user t where t.username=? and t.password=?";
+				String sql = "select * from user t where t.userName=? and t.password=?";
 				PreparedStatement pst;
 				try {
 					pst = con.prepareStatement(sql);
@@ -103,16 +112,16 @@ public class NewTalk extends HttpServlet{
 					while(rs.next()) {
 						ubean = new UserBean();
 						ubean.setUserId(rs.getLong("userId"));
-						ubean.setUsername(rs.getString("username"));
+						ubean.setUserName(rs.getString("userName"));
 						userList.add(ubean);
 					}
 					if(userList.size()>0){
 						ubean = userList.get(0);
-						session.setAttribute("username", ubean.getUsername());
+						session.setAttribute("userName", ubean.getUserName());
 						long userId = ubean.getUserId();
 						session.setAttribute("userId", userId);
 						
-						String next_sql = "select * from topic t where t.userid = ?";
+						String next_sql = "select * from topic t where t.userId = ?";
 						try {
 							pst = con.prepareStatement(next_sql);
 							pst.setLong(1, userId);
@@ -121,7 +130,7 @@ public class NewTalk extends HttpServlet{
 							TopicBean tbean = null;
 							while(rs.next()) {
 								tbean = new TopicBean();
-								tbean.setUsername(rs.getString("username"));
+								tbean.setUserName(rs.getString("userName"));
 								tbean.setTopicContent(rs.getString("topicContent"));
 								tbean.setTopicTime(rs.getString("topicTime"));
 								topicList.add(tbean);
@@ -142,7 +151,7 @@ public class NewTalk extends HttpServlet{
 				String iTalkpwd =  request.getParameter("iTalkpwd");
 				String iTalkemail =  request.getParameter("iTalkemail");
 				Connection con = DataBaseUtil.getConnection();
-				String exe_sql = "insert user (username,password,email,regTime) values (?,?,?,?)";
+				String exe_sql = "insert user (userName,password,email,regTime) values (?,?,?,?)";
 				try {
 					PreparedStatement pst = con.prepareStatement(exe_sql);
 					pst.setString(1, iTalkName);
