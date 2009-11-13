@@ -43,12 +43,12 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public List<UserBean> getObjectList(Object o) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public int insertObject(Object o) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
