@@ -52,7 +52,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" name="iTalksub" value="µÇÂ¼ iTalk" >
-					<a href="register.html">×¢²á iTalk</a>
+					<a href="register.jsp">×¢²á iTalk</a>
 				</td>
 			</tr>
 			<input type="hidden" name="iTalkAct" value="iTalkLogin">
