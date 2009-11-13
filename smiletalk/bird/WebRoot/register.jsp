@@ -6,13 +6,16 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>注册 -- italk</title>
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/register.css" />
 <script src="<%=path%>/js/prototype140.js"></script>
 <script src="<%=path%>/js/common.js"></script>
 <script>
 	function checkEmail(successid,elem,id){
-		if(validateEmail(elem) == 1){
+		if(trim(elem.value)==''){
+			return false;
+		}
+		else if(validateEmail(elem) == 1){
 			showError(successid,id
 			,"&nbsp;&nbsp;&nbsp;<font color='red'>电子邮件格式不正确!</font>");
 			return false;
@@ -42,8 +45,24 @@
 		}
 	}
 	function checkUserName(successid,elem,id){
-		if(validateUsername(elem) == 1){
+		if(trim(elem.value)==''){
+			return false;
+		}
+		else if(validateUsername(elem) == 1){
 			showError(successid,id,"<font color='red'>&nbsp;&nbsp;&nbsp;5-20个字符，一旦注册成功会员名不能修改。</font>");
+			return false;
+		}else{
+			showSuccess(successid,id);
+			return true;
+		}
+	}
+	function checkPassword(successid,elem,id){
+		if(elem.value==''){
+			return false;
+		}
+		else if(validateUsername(elem) == 1){
+			showError(successid,id
+			,"&nbsp;&nbsp;&nbsp;<font color='red'>5-20个字符，不能与用户名相同。</font>");
 			return false;
 		}else{
 			showSuccess(successid,id);
@@ -93,6 +112,9 @@
 </script>
 </head>
 <body>
+	<p align="center">
+		注册italk
+	</p>
 	<form action="iTalkRegister.htm" method="post" name="iTalkRegister">
 	<table align="center">
 	<tr>
@@ -107,7 +129,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td align=right><span id="username_img"></span>会员名:<font color=red>*</font></td>
+		<td align=right><span id="username_img"></span>用户名:<font color=red>*</font></td>
 		<td><input type=text id="iTalkName" name="iTalkName" onFocus="doEnhance('username_condition');" 
 		onBlur="checkUser('username_img',this,'username_condition')"></td>
 		<td width="256" class="bg1">
@@ -116,6 +138,22 @@
 			</div>
 		</td>
 	</tr>
+	<tr>
+		<td align=right><span id="password_img"></span>密码:<font color=red>*</font></td>
+		<td><input type=password id="iTalkpwd" name="iTalkpwd" onBlur="checkPassword('password_img',this,'password_condition')"
+		onFocus="doEnhance('password_condition');"  size=22></td>
+		<td>
+		<div class="note" id="password_condition">
+		5-20个字符 <font color="red">(注意：不能与用户名相同)</font>
+		</div>
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="2">
+			<input type="submit" name="iTalksub" value="注册 iTalk">
+		</td>
+	</tr>
+	<input type="hidden" name="iTalkAct" value="iTalkRegister">
   </table>
   </form>
 </body>
