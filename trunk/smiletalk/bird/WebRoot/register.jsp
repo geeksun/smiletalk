@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=gbk" pageEncoding="gbk"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
- <%
+<%
 	String path = request.getContextPath();
- %>
+%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -21,9 +21,6 @@
 			return true;
 		}
 	}
-  	/*
- 	 *  检测用户名称是否已经被注册
- 	 */	
 	function checkUser(successid,elem,id){
 		if(checkUserName(successid,elem,id)){
 			$(id).innerHTML = "<img border=0 src='<%=path%>/images/gif/ajax-loader.gif'/>";
@@ -96,7 +93,6 @@
 </script>
 </head>
 <body>
-
 	<form action="iTalkRegister.htm" method="post" name="iTalkRegister">
 	<table align="center">
 	<tr>
@@ -120,9 +116,7 @@
 			</div>
 		</td>
 	</tr>
-		  
   </table>
   </form>
-  
 </body>
 </html>
