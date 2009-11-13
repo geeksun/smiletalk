@@ -20,6 +20,14 @@
 	   <filter-name>EncodingFilter</filter-name>
 	   <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <filter>
+		<filter-name>AccessPurviewFilter</filter-name>
+		<filter-class>com.bird.filter.AccessPurviewFilter</filter-class>
+  </filter>
+  <filter-mapping>
+	   <filter-name>AccessPurviewFilter</filter-name>
+	   <url-pattern>/*</url-pattern>
+  </filter-mapping>
   
   <servlet>
     <servlet-name>action</servlet-name>
