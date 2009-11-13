@@ -1,9 +1,9 @@
 package com.bird.service;
 
-import javax.sql.DataSource;
-
+import com.bird.dao.TopicDao;
+import com.bird.dao.UserDao;
 import com.bird.dao.impl.TopicDaoImpl;
-import com.bird.db.DBConnection;
+import com.bird.dao.impl.UserDaoImpl;
 
 
 /**
@@ -13,20 +13,29 @@ import com.bird.db.DBConnection;
  */
 public class SuperService {
 	
-	private TopicDaoImpl topicDao;
+	private TopicDao topicDao;
+	private UserDao userDao;
 	
 	public SuperService() {
 		super();
 		topicDao = new TopicDaoImpl();
-		
+		userDao = new UserDaoImpl();
 	}
 	
 	public TopicDaoImpl getTopicDao() {
-		return topicDao;
+		return (TopicDaoImpl) topicDao;
 	}
 
 	public void setTopicDao(TopicDaoImpl topicDao) {
 		this.topicDao = topicDao;
+	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
 
 
