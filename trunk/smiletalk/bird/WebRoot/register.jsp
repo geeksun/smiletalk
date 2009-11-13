@@ -150,11 +150,22 @@
 	</tr>
 	<tr align="center">
 		<td colspan="2">
-			<input type="submit" name="iTalksub" value="зЂВс iTalk">
+			<input type="button" value="зЂВс iTalk"  onclick="register()" />
 		</td>
 	</tr>
 	<input type="hidden" name="iTalkAct" value="iTalkRegister">
   </table>
   </form>
+  <script type="text/javascript">
+  	function register(){
+    	   if(checkEmail('email_img',$("iTalkemail"),'email_condition')
+		&& checkUserName('username_img',$("iTalkName"),'username_condition')		    	
+		&& checkPassword('password_img',$("iTalkpwd"),'password_condition')
+		){
+			var form = document.iTalkRegister;
+			form.submit();
+		}
+	}
+  </script>
 </body>
 </html>
