@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao {
 	private Connection con;
 
 	public int deleteObject(Object o) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

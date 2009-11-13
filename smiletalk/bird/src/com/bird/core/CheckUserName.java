@@ -19,12 +19,12 @@ public class CheckUserName extends HttpServlet {
 	private UserBean userBean;
 	
 	public void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) 
-		throws javax.servlet.ServletException, java.io.IOException{
+		throws javax.servlet.ServletException, java.io.IOException {
 		return;
 	}
 
 	public void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) 
-		throws javax.servlet.ServletException, java.io.IOException{
+		throws javax.servlet.ServletException, java.io.IOException {
 		request.setCharacterEncoding("GBK");
 		response.setContentType("text/xml;charset=GBK");
 		response.setHeader("Cache-Control", "no-cache");
@@ -48,5 +48,6 @@ public class CheckUserName extends HttpServlet {
 		userBean = null;
 		out.close();
 	}
-
+	
+	
 }
