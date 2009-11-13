@@ -26,7 +26,7 @@
   </filter>
   <filter-mapping>
 	   <filter-name>AccessPurviewFilter</filter-name>
-	   <url-pattern>/*</url-pattern>
+	   <url-pattern>/frame/*</url-pattern>
   </filter-mapping>
   
   <servlet>
@@ -42,11 +42,18 @@
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>
-	
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>checkUserName</servlet-name>
+    <servlet-class>com.bird.core.CheckUserName</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkUserName</servlet-name>
+    <url-pattern>/checkUserName</url-pattern>
+  </servlet-mapping>  
 
   <resource-ref>
       <description>DB Connection</description>
