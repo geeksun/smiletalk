@@ -7,7 +7,7 @@
 	<body>
 		<%
 			String path = request.getContextPath();
-			String guest = (String)session.getAttribute("username");
+			String guest = (String)session.getAttribute("userName");
 			guest = guest == null?"guest":guest;
 		 %>
 		 
