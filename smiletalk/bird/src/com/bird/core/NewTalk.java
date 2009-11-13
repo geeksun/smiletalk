@@ -92,7 +92,7 @@ public class NewTalk extends HttpServlet{
 				    }
 				}
 				
-				if(!cookieFlag.equals("1")&&autoLogin!=null) {
+				if(!"1".equals(cookieFlag)&&autoLogin!=null) {
 					Cookie usrCookie = new Cookie("usrCookie", iTalkName);
 					Cookie pwdCookie = new Cookie("pwdCookie", iTalkName);
 					response.addCookie(usrCookie);

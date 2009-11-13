@@ -15,7 +15,7 @@ public class TopicServiceImpl extends SuperService implements TopicService{
 		return getTopicDao().insertObject(o);
 	}
 
-	public Object getObject() {
+	public Object getObject(Object o) {
 		return null;
 	}
 
