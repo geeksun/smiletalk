@@ -30,21 +30,12 @@
   </filter-mapping>
   
   <servlet>
-    <servlet-name>action</servlet-name>
+    <servlet-name>NewTalk</servlet-name>
     <servlet-class>com.bird.core.NewTalk</servlet-class>
-    <init-param>
-      <param-name>debug</param-name>
-      <param-value>2</param-value>
-    </init-param>
-    <init-param>
-      <param-name>detail</param-name>
-      <param-value>2</param-value>
-    </init-param>
-    <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.htm</url-pattern>
+    <servlet-name>NewTalk</servlet-name>
+    <url-pattern>/newTalk</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>checkUserName</servlet-name>
@@ -53,6 +44,30 @@
   <servlet-mapping>
     <servlet-name>checkUserName</servlet-name>
     <url-pattern>/checkUserName</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <servlet-name>TalkRegister</servlet-name>
+    <servlet-class>com.bird.core.TalkRegister</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TalkRegister</servlet-name>
+    <url-pattern>/talkRegister</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>TalkLogin</servlet-name>
+    <servlet-class>com.bird.core.TalkLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TalkLogin</servlet-name>
+    <url-pattern>/talkLogin</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <servlet-name>CheckUniqueEmail</servlet-name>
+    <servlet-class>com.bird.core.CheckUniqueEmail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckUniqueEmail</servlet-name>
+    <url-pattern>/checkUniqueEmail</url-pattern>
   </servlet-mapping>  
 
   <resource-ref>
