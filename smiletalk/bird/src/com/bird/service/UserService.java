@@ -2,6 +2,8 @@ package com.bird.service;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import com.bird.domain.UserBean;
 
 public interface UserService {
@@ -10,5 +12,6 @@ public interface UserService {
 	public Object getObject(Object o);
 	public int deleteObject(Object o);
 	public UserBean loginUser(UserBean userBean);
+	public void sendActivateEmail(UserBean userBean) throws MessagingException;
 	
 }

@@ -1,5 +1,6 @@
 package com.bird.core;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServlet;
 
 import com.bird.domain.UserBean;
@@ -39,13 +40,18 @@ public class TalkRegister extends HttpServlet {
 		userBean.setEmail(iTalkemail);
 		userBean.setPassword(iTalkpwd);
 		
-		userBean = (UserBean) userService.getObject(userBean);
-		if(userBean!=null){
+		UserBean uBean = (UserBean) userService.getObject(userBean);
+		if(uBean!=null){
 			request.setAttribute("validate", "fail");
 			request.getRequestDispatcher("/register.jsp").forward(
 					request, response);
 		}else{
 			userService.insertObject(userBean);
+			try {
+				userService.sendActivateEmail(userBean);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
 			request.getRequestDispatcher("/frame/iTalk.jsp").forward(
 					request, response);
 		}

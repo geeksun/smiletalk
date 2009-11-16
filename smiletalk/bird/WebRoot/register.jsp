@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=gbk" pageEncoding="gbk"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html> 
 <%
 	String path = request.getContextPath();
 	String validate = (String)request.getAttribute("validate");
@@ -8,9 +8,9 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>зЂВс -- italk</title>
+<title>зЂВс -- italk</title> 
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/register.css" />
-<script src="<%=path%>/js/prototype140.js"></script>
+<script src="<%=path%>/js/prototype140.js"></script> 
 <script src="<%=path%>/js/common.js"></script>
 <script>
 	function checkUniqueEmail(successid,elem,id){
