@@ -9,7 +9,6 @@ import com.bird.service.UserService;
 public class UserServiceImpl extends SuperService implements UserService {
 
 	public int deleteObject(Object o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -18,13 +17,16 @@ public class UserServiceImpl extends SuperService implements UserService {
 	}
 
 	public List<UserBean> getObjectList(Object o) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public int insertObject(Object o) {
+		return getUserDao().insertObject(o);
+	}
+
+	public UserBean loginUser(UserBean userBean) {
 		// TODO Auto-generated method stub
-		return 0;
+		return getUserDao().loginUser(userBean);
 	}
 
 }
