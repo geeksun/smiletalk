@@ -27,6 +27,9 @@ public class TopicDaoImpl  implements TopicDao {
 	}
 
 	public List<TopicBean> getObjectList(Object o) {
+		if(o==null){
+			return null;
+		}
 		TopicBean topic = (TopicBean) o;
 		List<TopicBean> topicList = new ArrayList<TopicBean>();
 		String next_sql = "select * from topic t where t.userId = ?";

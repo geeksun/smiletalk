@@ -9,5 +9,6 @@ public interface UserService {
 	public List<UserBean> getObjectList(Object o);
 	public Object getObject(Object o);
 	public int deleteObject(Object o);
+	public UserBean loginUser(UserBean userBean);
 	
 }

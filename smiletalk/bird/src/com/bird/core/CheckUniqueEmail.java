@@ -10,11 +10,10 @@ import com.bird.service.impl.UserServiceImpl;
 
 /**
  * @author jzq
- *  检查用户名重复
- *  2009-11-13
+ * 检测Email唯一性
+ * 2009-11-16
  */
-public class CheckUserName extends HttpServlet {
-	
+public class CheckUniqueEmail extends HttpServlet {
 	private UserService userService;
 	private UserBean userBean;
 	
@@ -31,12 +30,12 @@ public class CheckUserName extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//HttpSession session = request.getSession(true);
 		
-		String iTalkName = request.getParameter("iTalkName").trim();
-		iTalkName = java.net.URLDecoder.decode(iTalkName, "UTF-8").trim();
+		String iTalkemail = request.getParameter("iTalkemail").trim();
+		iTalkemail = java.net.URLDecoder.decode(iTalkemail, "UTF-8").trim();
 		
 		userService = new UserServiceImpl();
 		userBean = new UserBean();
-		userBean.setUserName(iTalkName);
+		userBean.setEmail(iTalkemail);
 		
 		userBean = (UserBean) userService.getObject(userBean);
 		if(userBean!=null){
