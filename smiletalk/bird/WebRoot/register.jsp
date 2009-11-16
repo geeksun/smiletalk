@@ -69,6 +69,22 @@
 			return true;
 		}
 	}
+	function checkPasswordConfirm(successid,elem,id){
+		if(validateUsername($("iTalkpwd")) == 0)
+		{
+			if($("iTalkpwd").value == elem.value){
+				showSuccess(successid,id);
+				return true;
+			}else
+			{
+				showError(successid,id
+				,"&nbsp;&nbsp;&nbsp;<font color='red'>两次输入的密码不相同，请重新输入上面的密码。</font>");
+				return false;
+			}
+		}else{
+			$(id).className="note";
+		}
+	}
 	function validateUsername(obj){
 		var str = obj.value;
 		var patn = /^[a-zA-Z0-9]+$/;
@@ -118,7 +134,17 @@
 	<form action="iTalkRegister.htm" method="post" name="iTalkRegister">
 	<table align="center">
 	<tr>
-		<td align=right><span id="email_img"></span>电子邮箱:<font color=red>*</font></td>
+		<td align=right><span id="username_img"></span>呢称:<font color=red>*</font></td>
+		<td><input type=text id="iTalkName" name="iTalkName" onFocus="doEnhance('username_condition');" 
+		onBlur="checkUser('username_img',this,'username_condition')"></td>
+		<td width="256" class="bg1">
+			<div class="note" id="username_condition">
+				5-20个字符，一旦注册成功会员名不能修改。
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td align=right><span id="email_img"></span>Email:<font color=red>*</font></td>
 		<td><input type=text id="iTalkemail" name="iTalkemail" onBlur="checkEmail('email_img',this,'email_condition')"
 		 onFocus="doEnhance('email_condition');">
 		</td>
@@ -129,23 +155,21 @@
 		</td>
 	</tr>
 	<tr>
-		<td align=right><span id="username_img"></span>用户名:<font color=red>*</font></td>
-		<td><input type=text id="iTalkName" name="iTalkName" onFocus="doEnhance('username_condition');" 
-		onBlur="checkUser('username_img',this,'username_condition')"></td>
-		<td width="256" class="bg1">
-			<div class="note" id="username_condition">
-				5-20个字符，一旦注册成功会员名不能修改。
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td align=right><span id="password_img"></span>密码:<font color=red>*</font></td>
+		<td align=right><span id="password_img"></span>登录密码:<font color=red>*</font></td>
 		<td><input type=password id="iTalkpwd" name="iTalkpwd" onBlur="checkPassword('password_img',this,'password_condition')"
 		onFocus="doEnhance('password_condition');"  size=22></td>
 		<td>
 		<div class="note" id="password_condition">
 		5-20个字符 <font color="red">(注意：不能与用户名相同)</font>
 		</div>
+		</td>
+	</tr>
+	<tr>
+		<td align=right><span id="confirm_password_img"></span>密码确认:<font color=red>*</font></td>
+		<td><input  type=password id="iTalkconpwd" name="iTalkconpwd" onFocus="doEnhance('confirm_password_condition');"
+		 onBlur="checkPasswordConfirm('confirm_password_img',this,'confirm_password_condition')"  size=22></td>
+		 <td width="256" class="bg1">
+			<div class="note" id="confirm_password_condition">请再输入一遍上面填写的密码。</div>
 		</td>
 	</tr>
 	<tr align="center">
@@ -158,13 +182,14 @@
   </form>
   <script type="text/javascript">
   	function register(){
-    	   if(checkEmail('email_img',$("iTalkemail"),'email_condition')
-		&& checkUserName('username_img',$("iTalkName"),'username_condition')		    	
-		&& checkPassword('password_img',$("iTalkpwd"),'password_condition')
-		){
-			var form = document.iTalkRegister;
-			form.submit();
-		}
+    	if(checkEmail('email_img',$("iTalkemail"),'email_condition')
+			&& checkUserName('username_img',$("iTalkName"),'username_condition')
+			&& checkPassword('password_img',$("iTalkpwd"),'password_condition')
+			&& checkPasswordConfirm('confirm_password_img',$("iTalkconpwd"),'confirm_password_condition')
+			){
+				var form = document.iTalkRegister;
+				form.submit();
+			}
 	}
   </script>
 </body>
