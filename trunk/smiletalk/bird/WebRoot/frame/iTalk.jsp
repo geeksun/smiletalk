@@ -27,7 +27,7 @@
 
 <!-- ×* -->
 <body >
-<form action="NewTalk.htm" name="iTalk" method="post">
+<form action="newTalk" name="iTalk" method="post">
 	<table width="49%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#99CCFF">
 		<tr align="center" >
 			<td>What are you doing?record here↓                     还可以输入<span id="validNum">140</span>字</td>
@@ -64,7 +64,6 @@
 		}
 		 %>
 	</table>
-	<input type="hidden" name="iTalkAct" value="iTalkTopic">
 	<input type="hidden" name="clientToken" value="<%=clientToken%>" />
 	
 </form>
