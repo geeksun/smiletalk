@@ -1,17 +1,11 @@
 package com.bird.core;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
-import com.bird.db.DataBaseUtil;
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
