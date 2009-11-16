@@ -28,7 +28,7 @@
 	<p align="center">
 	iTalk ÓÃ»§µÇÂ¼
 	</p>
-	<form action="iTalkLogin.htm" method="post" name="iTalkLogin">
+	<form action="talkLogin" method="post" name="iTalkLogin">
 		<table align="center">
 			<tr>
 				<td>
@@ -55,7 +55,6 @@
 					<a href="register.jsp">×¢²á iTalk</a>
 				</td>
 			</tr>
-			<input type="hidden" name="iTalkAct" value="iTalkLogin">
 		</table>
 	</form>
 </body>
