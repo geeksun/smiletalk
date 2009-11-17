@@ -82,12 +82,14 @@ import java.security.*;
  *
  * I believe that it is important that the algorithm for
  * generating random GUIDs be open for inspection and modification.
- * This class is free for all uses.
+ * This class is free for all uses.		open--->open
  * - Marc
  */
 
 /**
- * @see Globals Unique Identifiers 全局统一标识符
+ * @see Globals Unique Identifiers 
+ *  全局统一标识符
+ *  
  */
 public class RandomGUID extends Object {
 
@@ -216,14 +218,17 @@ public class RandomGUID extends Object {
 
     /**
      * Use Exceple 
+     * @throws UnknownHostException   
+     *  根据当前时间和本地主机名生成 GUID
      */
-     public static void main(String args[]) {
-    	 for (int i=0; i< 100; i++) { 
+     public static void main(String args[]) throws UnknownHostException {
+    	 System.out.println(InetAddress.getLocalHost().toString());
+    	 for (int i=0; i< 100; i++) {
     		 RandomGUID myGUID = new RandomGUID(); 
     		 System.out.println("Seeding String=" + myGUID.valueBeforeMD5);
     		 System.out.println("rawGUID=" + myGUID.valueAfterMD5);
     		 System.out.println("RandomGUID=" + myGUID.toString()); 
     	 }
-   }
+     }
      
 }

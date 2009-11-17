@@ -28,8 +28,6 @@ public class TalkRegister extends HttpServlet {
 		request.setCharacterEncoding("GBK");
 		//HttpSession session = request.getSession(true);
 
-		//String iTalkAct = request.getParameter("iTalkAct"); // iTalk 的动作标记
-
 		String iTalkName = request.getParameter("iTalkName");
 		String iTalkpwd = request.getParameter("iTalkpwd");
 		String iTalkemail = request.getParameter("iTalkemail");
