@@ -47,6 +47,7 @@ public class TalkRegister extends HttpServlet {
 					request, response);
 		}else{
 			userService.insertObject(userBean);
+			//发邮件验证用户,激活码
 			try {
 				userService.sendActivateEmail(userBean);
 			} catch (MessagingException e) {
