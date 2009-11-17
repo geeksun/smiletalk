@@ -1,20 +1,11 @@
 package com.bird.service.impl;
 
 import java.util.List;
-import java.util.Properties;
-
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import com.bird.domain.UserBean;
-import com.bird.service.SuperService;
-import com.bird.service.UserService;
 import com.bird.util.MailSenderUtil;
+import com.bird.service.UserService;
+import com.bird.service.SuperService;
+import javax.mail.MessagingException;
 
 public class UserServiceImpl extends SuperService implements UserService {
 
