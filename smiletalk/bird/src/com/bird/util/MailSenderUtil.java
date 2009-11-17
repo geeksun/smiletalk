@@ -139,9 +139,11 @@ public class MailSenderUtil {
         transport.sendMessage(msg, new Address[] { new InternetAddress(userBean.getEmail())});
         transport.close();		
         
-        MailInfo MailInfo = new MailInfo();
-        MailInfo.setContent(userBean.getUserName() + "，你好，用户注册邮件测试");
-        
+        MailInfo mailInfo = new MailInfo();
+        mailInfo.setContent(userBean.getUserName() + "，你好，用户注册邮件测试");
+        mailInfo.setFromAddress("jiangzhiqiang@madeinchina-inc.com");
+        mailInfo.setSubject("用户注册邮件测试");
+        mailInfo.setToAddress(userBean.getEmail());
         
         
 	}
