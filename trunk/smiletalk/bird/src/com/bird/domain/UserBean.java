@@ -10,7 +10,21 @@ public class UserBean {
 	private String userName;
 	private String password;
 	private String email;
+	private String isActive;//¼¤»î×´Ì¬-0:Î´¼¤»î1£º¼¤»î
+	private String validateCode;
 	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	public String getValidateCode() {
+		return validateCode;
+	}
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
+	}
 	public long getUserId() {
 		return userId;
 	}

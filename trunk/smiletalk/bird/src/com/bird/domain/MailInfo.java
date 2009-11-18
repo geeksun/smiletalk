@@ -15,7 +15,7 @@ public class MailInfo {
 	    private String fromAddress;    
 	    // 邮件接收者的地址    
 	    private String toAddress;    
-	    // 登陆邮件发送服务器的用户名和密码    
+	    // 邮件服务器的用户名、密码    
 	    private String userName;    
 	    private String password;    
 	    // 是否需要身份验证    
