@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import com.bird.domain.UserBean;
 import com.bird.service.UserService;
 import com.bird.service.impl.UserServiceImpl;
+import com.bird.util.GuidUtil;
 
 /**
  * register new user
@@ -37,6 +38,8 @@ public class TalkRegister extends HttpServlet {
 		userBean.setUserName(iTalkName);
 		userBean.setEmail(iTalkemail);
 		userBean.setPassword(iTalkpwd);
+		String validateCode = GuidUtil.generateGuid(iTalkemail);
+		userBean.setValidateCode(validateCode);
 		
 		UserBean uBean = (UserBean) userService.getObject(userBean);
 		if(uBean!=null){

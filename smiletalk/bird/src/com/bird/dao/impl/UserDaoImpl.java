@@ -22,19 +22,48 @@ public class UserDaoImpl implements UserDao {
 		return 0;
 	}
 
+	/**
+	 *  判断用户名是否唯一
+	 */
 	public Object getObject(Object o) {
 		if(o==null){
 			return null;
 		}
 		UserBean user = (UserBean) o;
 		String userName = user.getUserName();
-		String email = user.getEmail();
-		String next_sql = "select * from user u where u.userName = ? or u.email = ?";
+		String next_sql = "select * from user u where u.userName = ?";
 		try {
 			con = DBConnection.getConnection();
 			PreparedStatement pst = con.prepareStatement(next_sql);
 			pst.setString(1, userName);
-			pst.setString(2, email);
+			ResultSet rs = pst.executeQuery();
+			UserBean ubean = null;
+			if(rs.next()){
+				ubean = new UserBean();
+				ubean.setUserName(rs.getString("userName"));
+			}
+			DBConnection.closeConnection(con);
+			return ubean;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 *  判断邮件是否唯一
+	 */
+	public Object getUserByEamil(Object o) {
+		if(o==null){
+			return null;
+		}
+		UserBean user = (UserBean) o;
+		String email = user.getEmail();
+		String next_sql = "select * from user u where u.email = ?";
+		try {
+			con = DBConnection.getConnection();
+			PreparedStatement pst = con.prepareStatement(next_sql);
+			pst.setString(1, email);
 			ResultSet rs = pst.executeQuery();
 			UserBean ubean = null;
 			if(rs.next()){
@@ -60,7 +89,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		UserBean user = (UserBean) o;
 		Connection con = DataBaseUtil.getConnection();
-		String exe_sql = "insert user (userName,password,email,regTime) values (?,?,?,?)";
+		String exe_sql = "insert user (userName,password,email,regTime,isActive) values (?,?,?,?,'0')";
 		try {
 			PreparedStatement pst = con.prepareStatement(exe_sql);
 			pst.setString(1, user.getUserName());
@@ -83,11 +112,13 @@ public class UserDaoImpl implements UserDao {
 		return 0;
 	}
 
-	public UserBean loginUser(UserBean userBean) {
-		if(userBean==null){
+	/**
+	 *  用户登录
+	 */
+	public UserBean loginUser(UserBean user) {
+		if(user==null){
 			return null;
 		}
-		UserBean user = (UserBean) userBean;
 		String userName = user.getUserName();
 		String pwd = user.getPassword();
 		String next_sql = "select * from user u where u.userName = ? and u.password = ?";
@@ -111,6 +142,32 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 *  更新用户状态：写入验证码
+	 */
+	public void updateObject(UserBean userBean) {
+		if(userBean==null){
+			return;
+		}
+		String validateCode = userBean.getValidateCode();
+		String sql = "update user u set u.validateCode = ? where u.userName = ?";
+		try {
+			con = DBConnection.getConnection();
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, validateCode);
+			pst.setString(2, userBean.getUserName());
+			pst.executeUpdate();
+			DBConnection.closeConnection(con);
+		}catch(Exception e){
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 	}
 	
 

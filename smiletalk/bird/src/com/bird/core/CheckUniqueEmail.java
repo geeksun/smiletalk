@@ -37,7 +37,7 @@ public class CheckUniqueEmail extends HttpServlet {
 		userBean = new UserBean();
 		userBean.setEmail(iTalkemail);
 		
-		userBean = (UserBean) userService.getObject(userBean);
+		userBean = (UserBean) userService.getUserByEamil(userBean);
 		if(userBean!=null){
 			out.print("fail");
 		}else{

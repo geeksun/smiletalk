@@ -14,10 +14,17 @@ public class MyAuthenticator extends Authenticator{
         
     public MyAuthenticator(){   
     }   
-    public MyAuthenticator(String username, String password) {    
+    
+    /**
+     * 邮件服务器的用户名、密码
+     * @param username
+     * @param password
+     */
+    public MyAuthenticator(String username, String password) {
         this.userName = username;    
         this.password = password;    
     }    
+    
     protected PasswordAuthentication getPasswordAuthentication(){   
         return new PasswordAuthentication(userName, password);   
     }

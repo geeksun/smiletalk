@@ -55,12 +55,12 @@ public class TalkLogin extends HttpServlet {
 			Cookie usrCookie = new Cookie("usrCookie", iTalkName);
 			Cookie pwdCookie = new Cookie("pwdCookie", iTalkName);
 			// 网站域名
-			usrCookie.setDomain("localhost:8080/italk");
-			pwdCookie.setDomain("localhost:8080/italk");
+			usrCookie.setDomain("www.italk.com");
+			pwdCookie.setDomain("www.italk.com");
 			usrCookie.setPath("/");
 			pwdCookie.setPath("/");
-			usrCookie.setMaxAge(24 * 60 * 60);
-			pwdCookie.setMaxAge(24 * 60 * 60);
+			usrCookie.setMaxAge(3 * 24 * 60 * 60);//cookie生存期期3天
+			pwdCookie.setMaxAge(3 * 24 * 60 * 60);
 			response.addCookie(usrCookie);
 			response.addCookie(pwdCookie);
 		}
@@ -70,7 +70,7 @@ public class TalkLogin extends HttpServlet {
 		userBean.setUserName(iTalkName);
 		userBean.setPassword(iTalkpwd);
 		userBean = userService.loginUser(userBean);
-		if(userBean!=null){
+		if(userBean!=null) {
 			session.setAttribute("userName", userBean.getUserName());
 			long userId = userBean.getUserId();
 			session.setAttribute("userId", userId);
