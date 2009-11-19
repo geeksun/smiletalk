@@ -55,8 +55,8 @@ public class TalkLogin extends HttpServlet {
 			Cookie usrCookie = new Cookie("usrCookie", iTalkName);
 			Cookie pwdCookie = new Cookie("pwdCookie", iTalkName);
 			// 网站域名
-			/*usrCookie.setDomain("www.italk.com");
-			pwdCookie.setDomain("www.italk.com");*/
+			usrCookie.setDomain("www.italk.com");
+			pwdCookie.setDomain("www.italk.com");
 			usrCookie.setPath("/");
 			pwdCookie.setPath("/");
 			usrCookie.setMaxAge(3 * 24 * 60 * 60);//cookie生存期期3天
