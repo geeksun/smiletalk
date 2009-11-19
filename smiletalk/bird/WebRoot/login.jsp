@@ -13,16 +13,19 @@
 	String cookieName = null; 
 	String iTalkName = "";
 	String iTalkpwd = ""; 
-	for(int i=0;i<cookies.length;i++){
-		cookie = cookies[i]; 
-		cookieName = cookie.getName();
-		if(cookieName.equals("usrCookie")){
-			iTalkName = cookie.getValue();
-		}
-		else if(cookieName.equals("pwdCookie")){
-			iTalkpwd = cookie.getValue();
-		}
+	if(cookies!=null){
+		for(int i=0;i<cookies.length;i++){
+			cookie = cookies[i]; 
+			cookieName = cookie.getName();
+			if(cookieName.equals("usrCookie")){
+				iTalkName = cookie.getValue();
+			}
+			else if(cookieName.equals("pwdCookie")){
+				iTalkpwd = cookie.getValue();
+			}
+		}	
 	}
+	
  	%>
 	<p></p>
 	<p align="center">
