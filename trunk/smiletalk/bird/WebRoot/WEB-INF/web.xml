@@ -26,7 +26,8 @@
   </filter>
   <filter-mapping>
 	   <filter-name>AccessPurviewFilter</filter-name>
-	   <url-pattern>/frame/*</url-pattern>
+	   <url-pattern>/frame/*,italk</url-pattern>
+	   <!--  <url-pattern>/*</url-pattern> -->
   </filter-mapping>
   
   <servlet>
