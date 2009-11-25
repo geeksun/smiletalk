@@ -32,14 +32,14 @@
 		<tr align="center" >
 			<td>What are you doing?record here↓                     还可以输入<span id="validNum">140</span>字</td>
 		</tr>
-		<tr  align="center" >
+		<tr  align="center">
 			<td>
 				<textarea name="talkTopic" id="talkTopic" rows="4" cols="60" maxlength='140' onKeyDown="checkLength()"
 				 onKeyUp="checkLength()" onPaste="checkLength()" style="overflow:hidden"></textarea>
 			</td>
 		</tr>
 		<tr align="center">
-			<td><input type="button" onclick="justTalk()" value="  Talk  " ></td>
+			<td><input type="button" onclick="justTalk()" value="  Talk  " > </td>
 		</tr>
 		
 		<%
