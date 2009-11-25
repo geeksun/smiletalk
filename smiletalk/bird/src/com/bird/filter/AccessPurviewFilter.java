@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author jzq
- *  URL 访问控制
+ *  URL 访问控制过滤器
  *  2009-11-12
  */
 public class AccessPurviewFilter extends HttpServlet implements Filter {
