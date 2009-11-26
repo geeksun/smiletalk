@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="sbook" type="com.us.jack.pojo.SBook" />
+	<!-- 添加一本新书 -->
+	<insert id="saveBook" parameterClass="sbook">
+		<selectKey keyProperty="id" resultClass="int">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS VALUE
+			]]>
+		</selectKey>
+		<![CDATA[
+			INSERT INTO sbook(title,author,total,price,isbn,publisher)
+			VALUES(#title#,#author#,#total#,#price#,#isbn#,#publisher#)
+		]]>
+	</insert>
+	
+	<!-- 删除图书 -->
+	<delete id="deleteBook" parameterClass="int">
+		<![CDATA[
+			DELETE FROM SBOOK WHERE ID=#id#
+		]]>
+	</delete>
+	
+	<!-- 通过出版社名称查找此出版社出版的图书  -->
+	<select id="findBookByPublisher" parameterClass="string"
+		resultClass="sbook">
+		<![CDATA[
+			SELECT * FROM sbook WHERE publisher=#publisher#
+		]]>
+	</select>
+	<!-- 通过图书唯一的ISBN号码查找图书 -->
+	<select id="findBookByISBN" parameterClass="string"
+		resultClass="sbook">
+		<![CDATA[
+			SELECT * FROM sbook WHERE isbn=#isbn#
+		]]>
+	</select>
+	<!-- 查找所有的图书 -->
+	<select id="findAllBook" resultClass="sbook">
+		<![CDATA[
+			SELECT * FROM sbook 
+		]]>
+	</select>
+	<!-- 更新图书信息 -->
+	<update id="updateBook" parameterClass="sbook">
+		<![CDATA[
+			UPDATE SBOOK SET 
+			title=#title#,author=#author#,price=#price#,total=#total#,isbn=#isbn#,publisher=#publisher#
+			WHERE id=#id#
+		]]>
+	</update>
+	<!-- 查找特定图书 -->
+	<select id="findBookById" parameterClass="int" resultClass="sbook">
+		<![CDATA[
+			SELECT * FROM sbook WHERE ID=#id#
+		]]>
+	</select>
+</sqlMap>

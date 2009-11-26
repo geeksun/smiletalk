@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<!-- 为Person类设置一个别名 -->
+	<typeAlias alias="person" type="com.jack.ibatis.pojo.Person"/>
+	<!-- 配置表和类之间的映射关系 -->
+	<resultMap class="com.jack.ibatis.pojo.Person" id="personMap">
+		<result property="id" column="ID"/>
+		<result property="username" column="U_NAME"/>
+		<result property="password" column="U_PASSWORD"/>
+	</resultMap>
+	<!-- 添加用户 -->
+	<insert id="insertPerson" parameterClass="person">
+		<!-- 配置Mysql主键自动增长 -->
+		<selectKey keyProperty="id" resultClass="int">
+			SELECT LAST_INSERT_ID() as value
+		</selectKey>
+                  <!-- 配置Oracle主键自动增长 
+                  <selectKey resultClass="int" keyProperty="id" type="pre">    
+                            <![CDATA[SELECT STOCKIDSEQUENCE.NEXTVAL AS ID FROM DUAL]]>    
+                  </selectKey>-->
+                  <!-- 配置MSServer主键自动增长 
+                  <selectKey resultClass="int" keyProperty="id">    
+                     <![CDATA[SELECT SCOPE_IDENTITY() AS ID ]]>  
+                  </selectKey>-->
+		<![CDATA[
+			INSERT PERSON(U_NAME,U_PASSWORD) VALUES(#username#,#password#)
+		]]>
+	</insert>
+	<!-- 查看特定用户 -->
+	<select id="queryPersonById" parameterClass="int" resultMap="personMap">
+		<![CDATA[
+			SELECT * FROM PERSON WHERE ID=#id#
+		]]>
+	</select>
+	<!-- 查看所有的用户 -->
+	<select id="queryAllPerson" resultMap="personMap">
+		<![CDATA[
+			SELECT * FROM PERSON
+		]]>
+	</select>
+</sqlMap>

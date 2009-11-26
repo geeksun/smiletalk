@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="User">
+    <typeAlias alias="user" type="org.login.vo.Users"/>
+    
+    <select id="recordCount" resultClass="int">
+		select count(*) as count from users
+	</select>
+	<select id="firstPage" resultClass="user" parameterClass="user">
+		select top $pagesize$ * from users order by id desc
+	</select>
+
+	<!--分页排序-->
+	<sql id="paginationStart">
+		<![CDATA[
+		   select * from (select row_.*, rownum rownum_ from (
+		  ]]>
+	</sql>
+	<sql id="paginationEnd">
+		<![CDATA[
+		   )row_ where rownum<=#end# ) where rownum_>=#start#
+		  ]]>
+	</sql>
+
+	<select id="otherPage" resultClass="user" parameterClass="map">
+        <include refid="paginationStart"/>
+        <![CDATA[
+            SELECT 
+             * 
+            FROM 
+             users
+        ]]>
+        <include refid="paginationEnd"/> 
+	</select>
+	
+    <select id="checkUser" parameterClass="user" resultClass="user">
+        <![CDATA[
+            SELECT id, username, password FROM users WHERE username = #userName# and password = #password#
+        ]]>
+    </select>
+    
+    <select id="getUserById" parameterClass="java.lang.Integer" resultClass="user">
+        <![CDATA[
+            SELECT id, username, password FROM users WHERE id = #id#
+        ]]>
+    </select>
+    
+    <select id="getAllUser" resultClass="user" parameterClass="map">
+        <![CDATA[
+            SELECT id, username, password FROM users limit #start# ,#end#
+        ]]>
+    </select>
+    
+    <insert id="insertUser" parameterClass="user">
+        <![CDATA[
+            INSERT INTO users (username, password) VALUES (#userName#, #password#)
+        ]]>
+    </insert>
+    
+    <update id="updateUser" parameterClass="user">
+        <![CDATA[
+            UPDATE users SET username=#userName#, password=#password# WHERE id=#id#
+        ]]>
+    </update>
+    
+    <delete id="deleteUser" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM users WHERE id = #id#
+        ]]>
+    </delete>
+</sqlMap>
