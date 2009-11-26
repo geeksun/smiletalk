@@ -2,25 +2,17 @@ package com.bird.core;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.bird.db.DataBaseUtil;
 import com.bird.domain.TopicBean;
-import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
 import com.bird.service.impl.TopicServiceImpl;
-import com.bird.util.DateUtil;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 /**
  * talk topic-发布话题
@@ -28,9 +20,67 @@ import com.bird.util.DateUtil;
  *  beta 0.1
  *  2009-11-9
  */
-public class NewTalk extends HttpServlet{
+public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Preparable {
+	private TopicBean topicBean;
+	private TopicService topicService;
 	
-	public void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) 
+	
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
+	}
+
+	public void setTopicBean(TopicBean topicBean) {
+		this.topicBean = topicBean;
+	}
+
+	public String execute() throws Exception{
+		
+		
+		
+		request.setCharacterEncoding("GBK");
+		HttpSession session = request.getSession(true);
+		
+		//String iTalkAct = request.getParameter("iTalkAct");		//iTalk 的动作标记
+		
+		Long userId = (Long) session.getAttribute("userId");
+		String clientToken = request.getParameter("clientToken");
+		String sessionToken = (String) session.getAttribute("token");
+		TopicBean topic = null;
+		TopicService topicService = null;
+		
+		if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//重复提交
+			;
+		}else{
+			String topicContent = request.getParameter("talkTopic");
+	    	String userName = (String) session.getAttribute("userName");
+	    	topicService = new TopicServiceImpl();
+			topic = new TopicBean();
+			topic.setUserId(userId);
+			topic.setTopicContent(topicContent);
+			topic.setUserName(userName);
+			topicService.insertObject(topic);
+	    }
+	    
+		if(topic==null){
+			topic = new TopicBean();
+		}
+		if(topicService == null){
+			topicService = new TopicServiceImpl();
+		}
+		topic.setUserId(userId);
+		List<TopicBean> topicList = topicService.getObjectList(topic);
+		//生成新令牌
+		String token = generateToken(request);
+		request.setAttribute("clientToken", token);
+		//替换旧令牌
+		session.setAttribute("token", token);
+		request.setAttribute("topicList", topicList);
+		request.getRequestDispatcher("/frame/iTalk.jsp").forward(request, response);
+		
+		return null;
+	}
+	
+/*	public void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) 
 		throws javax.servlet.ServletException, java.io.IOException{
 		return;
 	}
@@ -76,7 +126,7 @@ public class NewTalk extends HttpServlet{
 		session.setAttribute("token", token);
 		request.setAttribute("topicList", topicList);
 		request.getRequestDispatcher("/frame/iTalk.jsp").forward(request, response);
-	}
+	}*/
 	
 	/**
 	 * struts 令牌机制
@@ -109,5 +159,17 @@ public class NewTalk extends HttpServlet{
             sb.append(Integer.toHexString((int) buffer[i] & 0xff));
         return (sb.toString());
     }
+
+	public TopicBean getModel() {
+		return topicBean;
+	}
+
+	public void prepare() throws Exception {
+		 /*if (id == null || id.length() == 0)  
+			 topicBean = new TopicBean();  
+         else  
+        	 topicBean = getUserService().getUserById(Integer.parseInt(id)); */
+		
+	}
 	
 }
