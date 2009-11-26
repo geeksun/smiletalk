@@ -5,19 +5,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 	<import resource="database.xml" />
 	<!-- <import resource="filter.properties.xml" /> -->
-
-<bean name="od002ManagerTarget"
-		class="com.mic.escrow.seller.manager.order.impl.Od002"
-		scope="singleton">
-		<property name="orderService">
-			<ref local="orderServiceProxy" />
-		</property>
-		<property name="financeService">
-			<ref local="financeServiceProxy" />
-		</property>
-	</bean>
-
-<bean id="od002ManagerProxy"
+	<beans default-autowire="autodetect">  
+    	<!-- add your spring beans here -->  
+	</beans>
+	<!--
+	<bean name="od002ManagerTarget"
+			class="com.mic.escrow.seller.manager.order.impl.Od002"
+			scope="singleton">
+			<property name="orderService">
+				<ref local="orderServiceProxy" />
+			</property>
+			<property name="financeService">
+				<ref local="financeServiceProxy" />
+			</property>
+		</bean>
+	
+	<bean id="od002ManagerProxy"
 		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
 		scope="singleton">
 		<property name="transactionManager" ref="transactionManager" />
@@ -83,5 +86,6 @@
 		scope="singleton">
 		<property name="dao" ref="daoProxy" />
 	</bean>
+	 -->
 			
 </beans>
