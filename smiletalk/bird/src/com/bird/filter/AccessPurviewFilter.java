@@ -1,6 +1,7 @@
 package com.bird.filter;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -8,10 +9,18 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.bird.domain.TopicBean;
+import com.bird.domain.UserBean;
+import com.bird.service.TopicService;
+import com.bird.service.UserService;
+import com.bird.service.impl.TopicServiceImpl;
+import com.bird.service.impl.UserServiceImpl;
 
 /**
  * @author jzq
@@ -43,12 +52,49 @@ public class AccessPurviewFilter extends HttpServlet implements Filter {
    
          // 如果回话中的用户名为空,页面重新定向到登陆页面   
          if (session.getAttribute("userName") == null) {
+    	 	 //鉴定cookie是否存在
+    		/* Cookie cookies[] = request.getCookies(); 
+    		 Cookie cookie = null; 
+    		 String cookieName = null; 
+    		 String iTalkName = "";
+    		 String iTalkpwd = ""; 
+    		 if(cookies!=null){
+    			 for(int i=0;i<cookies.length;i++){
+    				 cookie = cookies[i]; 
+    				 cookieName = cookie.getName();
+    				 if(cookieName.equals("usrCookie")){
+    					 iTalkName = cookie.getValue();
+    				 }
+    				 else if(cookieName.equals("pwdCookie")){
+    					 iTalkpwd = cookie.getValue();
+    				 }
+    			 }
+    		 }
+    		 UserService userService = new UserServiceImpl();
+    		 UserBean userBean = new UserBean();
+			 userBean.setUserName(iTalkName);
+			 userBean.setPassword(iTalkpwd);
+			 userBean = userService.loginUser(userBean);
+			 if(userBean!=null) {
+				 session.setAttribute("userName", userBean.getUserName());
+				 long userId = userBean.getUserId();
+				 session.setAttribute("userId", userId);
+				 TopicService topicService = new TopicServiceImpl();
+				 TopicBean topicBean = new TopicBean();
+				 topicBean.setUserId(userId);
+				 List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
+				 request.setAttribute("topicList", topicList);
+				 request.getRequestDispatcher("/frame/iTalk.jsp")
+						.forward(request, response);			
+			 }*/
+    		 //鉴定 cookie 结束 
+        	 
         	 String contextPath  = request.getContextPath();
         	 String currentPath = request.getRequestURI(); 		//当前正在请求的路径
         	 //System.out.println("contextPath:"+contextPath+" currentPath:"+currentPath);
-             response.sendRedirect(contextPath  + redirectURl);   
-         }   
-         // 会话中存在用户，则验证用户是否存在当前页面的权限   
+             response.sendRedirect(contextPath  + redirectURl);
+         }
+         // 会话中存在用户，则验证用户是否存在当前页面的权限
          /*else {
              User user = (User) session.getAttribute(UserAction.CURRENT_USER);   
              try {   
