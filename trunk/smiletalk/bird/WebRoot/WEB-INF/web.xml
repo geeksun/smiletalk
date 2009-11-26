@@ -7,7 +7,42 @@
 <web-app>
   <display-name>iTalk</display-name>
   <description>Online twitter Sample Application</description>
-
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/classes/applicationContext.xml
+    </param-value>
+  </context-param>
+  
+  <!-- load spring config file
+  <context-param>  
+        <param-name>contextConfigLocation</param-name>  
+        <param-value>  
+            WEB-INF/classes/com/us/jack/config/applicationContext.xml  
+            WEB-INF/classes/com/us/jack/config/applicationContext-services.xml  
+        </param-value>  
+  </context-param>-->
+  
+  <listener>
+       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
+  </listener>
+  <filter>
+       <filter-name>struts-cleanup</filter-name>
+       <filter-class>
+            org.apache.struts2.dispatcher.ActionContextCleanUp
+       </filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>struts-cleanup</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping> 
+  <filter>
+       <filter-name>struts2</filter-name>
+       <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+  </filter>
+  <filter-mapping>
+       <filter-name>struts2</filter-name>
+       <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>com.bird.filter.EncodingFilter</filter-class>
@@ -26,18 +61,9 @@
   </filter>
   <filter-mapping>
 	   <filter-name>AccessPurviewFilter</filter-name>
-	   <url-pattern>/frame/*,italk</url-pattern>
-	   <!--  <url-pattern>/*</url-pattern> -->
+	   <url-pattern>/frame/*</url-pattern>
+	   <!--<url-pattern>/frame/*,italk</url-pattern>-->
   </filter-mapping>
-  
-  <servlet>
-    <servlet-name>NewTalk</servlet-name>
-    <servlet-class>com.bird.core.NewTalk</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NewTalk</servlet-name>
-    <url-pattern>/newTalk</url-pattern>
-  </servlet-mapping>
   <servlet>
     <servlet-name>checkUserName</servlet-name>
     <servlet-class>com.bird.core.CheckUserName</servlet-class>
@@ -46,22 +72,7 @@
     <servlet-name>checkUserName</servlet-name>
     <url-pattern>/checkUserName</url-pattern>
   </servlet-mapping>  
-  <servlet>
-    <servlet-name>TalkRegister</servlet-name>
-    <servlet-class>com.bird.core.TalkRegister</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TalkRegister</servlet-name>
-    <url-pattern>/talkRegister</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>TalkLogin</servlet-name>
-    <servlet-class>com.bird.core.TalkLogin</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TalkLogin</servlet-name>
-    <url-pattern>/talkLogin</url-pattern>
-  </servlet-mapping>  
+  
   <servlet>
     <servlet-name>CheckUniqueEmail</servlet-name>
     <servlet-class>com.bird.core.CheckUniqueEmail</servlet-class>
