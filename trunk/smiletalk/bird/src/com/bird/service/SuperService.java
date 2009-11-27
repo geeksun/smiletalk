@@ -1,10 +1,5 @@
 package com.bird.service;
 
-import com.bird.dao.TopicDao;
-import com.bird.dao.UserDao;
-import com.bird.dao.impl.TopicDaoImpl;
-import com.bird.dao.impl.UserDaoImpl;
-
 
 /**
  * @author jzq
@@ -13,30 +8,30 @@ import com.bird.dao.impl.UserDaoImpl;
  */
 public class SuperService {
 	
-	private TopicDao topicDao;
-	private UserDao userDao;
+	//private TopicDao topicDao;
+	//private UserDao userDao;
 	
-	public SuperService() {
+	/*public SuperService() {
 		super();
 		topicDao = new TopicDaoImpl();
-		userDao = new UserDaoImpl();
-	}
+		//userDao = new UserDaoImpl();
+	}*/
 	
-	public TopicDaoImpl getTopicDao() {
+	/*public TopicDaoImpl getTopicDao() {
 		return (TopicDaoImpl) topicDao;
 	}
 
 	public void setTopicDao(TopicDaoImpl topicDao) {
 		this.topicDao = topicDao;
-	}
+	}*/
 
-	public UserDao getUserDao() {
+	/*public UserDao getUserDao() {
 		return userDao;
 	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
-	}
+	}*/
 
 
 	
