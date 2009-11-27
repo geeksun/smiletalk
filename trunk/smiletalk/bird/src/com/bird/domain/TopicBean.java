@@ -1,12 +1,17 @@
 package com.bird.domain;
 
+import java.io.Serializable;
+
 /**
  * @author jzq
  *  ª∞Ã‚BEAN
  *  2009-11-3
  */
-public class TopicBean {
-	
+public class TopicBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3210689259419767229L;
 	private Long userId;
 	private String userName;
 	private String topicContent;

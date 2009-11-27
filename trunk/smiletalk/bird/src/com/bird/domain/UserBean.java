@@ -1,18 +1,31 @@
 package com.bird.domain;
 
+import java.io.Serializable;
+
 /**
  * @author jzq
  * iTalk 用户
  * 2009-11-4
  */
-public class UserBean {
+public class UserBean  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7807593836654741375L;
 	private long userId;
 	private String userName;
 	private String password;
 	private String email;
 	private String isActive;//激活状态-0:未激活1：激活
 	private String validateCode;
+	private String errorMessage;
 	
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
 	public String getIsActive() {
 		return isActive;
 	}
