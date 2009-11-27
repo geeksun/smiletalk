@@ -13,7 +13,9 @@
 		maxSessions="10"
 		maxTransactions="5"
 		useStatementNamespaces="true" />
-		<sqlMap resource="sqlMap/iTalk.xml"/>
+		<sqlMap resource="sqlMap/User.xml"/>
+		<sqlMap resource="sqlMap/Topic.xml"/>
+		
 		
 		
 		

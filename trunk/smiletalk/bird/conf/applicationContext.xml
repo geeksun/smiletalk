@@ -1,91 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 	<import resource="database.xml" />
-	<!-- <import resource="filter.properties.xml" /> -->
-	<beans default-autowire="autodetect">  
-    	<!-- add your spring beans here -->  
-	</beans>
-	<!--
-	<bean name="od002ManagerTarget"
-			class="com.mic.escrow.seller.manager.order.impl.Od002"
-			scope="singleton">
-			<property name="orderService">
-				<ref local="orderServiceProxy" />
-			</property>
-			<property name="financeService">
-				<ref local="financeServiceProxy" />
-			</property>
-		</bean>
+	<bean id="userDao" class="com.bird.dao.impl.UserDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+	<bean id="userService" class="com.bird.service.impl.UserServiceImpl">
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
+	</bean>
+	<bean id="topicDao" class="com.bird.dao.impl.TopicDaoImpl">
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClient"/>
+		</property>
+	</bean>
+	<bean id="topicService" class="com.bird.service.impl.TopicServiceImpl">
+		<property name="topicDao">
+			<ref local="topicDao" />
+		</property>
+	</bean>
 	
-	<bean id="od002ManagerProxy"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
-		scope="singleton">
-		<property name="transactionManager" ref="transactionManager" />
-		<property name="target" ref="od002ManagerTarget" />
-		<property name="transactionAttributes">
-			<props>
-				<prop key="get*">
-					PROPAGATION_SUPPORTS,readOnly,-Exception
-				</prop>
-				<prop key="close*">
-					PROPAGATION_REQUIRED,-Exception
-				</prop>
-				<prop key="Od002*">
-					PROPAGATION_REQUIRED,-Exception
-				</prop>
-				<prop key="buyer*">
-					PROPAGATION_REQUIRED,-Exception
-				</prop>
-				<prop key="update*">
-					PROPAGATION_REQUIRED,-Exception
-				</prop>
-				<prop key="o*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="O*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="send*">PROPAGATION_REQUIRED,-Exception</prop>
-			</props>
+	<bean id="talkLoginAction" class="com.bird.action.TalkLoginAction">
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
+		<property name="topicService">
+			<ref local="topicService"/>
 		</property>
 	</bean>
-
-	<bean id="daoTarget" class="com.mic.escrow.dao.BaseDao"
-		scope="singleton">
-		<property name="dataSource" ref="dataSource" />
-		<property name="sqlMapClient" ref="sqlMapClient" />
-	</bean>
-
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		scope="singleton">
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
-	</bean>
-
-	<bean id="daoProxy"
-		class="org.springframework.aop.framework.ProxyFactoryBean"
-		scope="singleton">
-		<property name="proxyInterfaces">
-			<value>com.mic.escrow.dao.IBaseDao</value>
-		</property>
-		<property name="target" ref="daoTarget" />
-	</bean>
-	<bean id="buyerServiceProxy"
-		class="com.mic.escrow.buyer.service.buyer.impl.BuyerService"
-		scope="singleton">
-		<property name="dao" ref="daoProxy" />
-	</bean>
-	<bean id="sellerServiceProxy"
-		class="com.mic.escrow.seller.service.seller.impl.SellerService"
-		scope="singleton">
-		<property name="dao" ref="daoProxy" />
-	</bean>
-	<bean id="dictServiceProxy"
-		class="com.mic.escrow.common.service.impl.DictService"
-		scope="singleton">
-		<property name="dao" ref="daoProxy" />
-	</bean>
-	 -->
 			
-</beans>
+</beans>	
+			
