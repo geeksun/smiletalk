@@ -31,14 +31,14 @@
 	<p align="center">
 	iTalk 用户登录
 	</p>
-	<form action="talkLogin" method="post" name="iTalkLogin">
+	<form action="talkLogin.action" method="post" name="iTalkLogin">
 		<table align="center">
 			<tr>
 				<td>
 					用户名：
 				</td>
 				<td>
-					<input type="text" name="iTalkName" id="iTalkName" value="<%=iTalkName%>" size="12">
+					<input type="text" name="model.userName" id="iTalkName" value="<%=iTalkName%>" size="12">
 				</td>
 			</tr>
 			<tr>
@@ -46,7 +46,7 @@
 					密 码：
 				</td>
 				<td>
-					<input type="password" name="iTalkpwd" id="iTalkpwd" value="<%=iTalkpwd%>" size="12">
+					<input type="password" name="model.password" id="iTalkpwd" value="<%=iTalkpwd%>" size="12">
 				</td>
 			</tr>
 			<tr>
