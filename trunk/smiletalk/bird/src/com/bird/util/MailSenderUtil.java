@@ -11,8 +11,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import com.bird.common.MyAuthenticator;
-import com.bird.domain.MailInfo;
 import com.bird.domain.UserBean;
+import com.bird.po.MailInfo;
 
 /**
  * @author jzq
