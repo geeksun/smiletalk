@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,9 +12,20 @@ import com.bird.db.DBConnection;
 import com.bird.db.DataBaseUtil;
 import com.bird.domain.UserBean;
 import com.bird.util.DateUtil;
+import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class UserDaoImpl implements UserDao {
 	private Connection con;
+	
+	private SqlMapClient sqlMapClient;
+	
+	public SqlMapClient getSqlMapClient() {
+		return sqlMapClient;
+	}
+
+	public void setSqlMapClient(SqlMapClient sqlMapClient) {
+		this.sqlMapClient = sqlMapClient;
+	}
 
 	public int deleteObject(Object o) {
 		
@@ -113,14 +123,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	/**
-	 *  用户登录
+	 *  用户登录验证
 	 */
-	public UserBean loginUser(UserBean user) {
-		if(user==null){
-			return null;
-		}
-		String userName = user.getUserName();
-		String pwd = user.getPassword();
+	public UserBean loginUser(UserBean userBean) {
+		/*String userName = userBean.getUserName();
+		String pwd = userBean.getPassword();
 		String next_sql = "select * from user u where u.userName = ? and u.password = ?";
 		try {
 			con = DBConnection.getConnection();
@@ -139,6 +146,13 @@ public class UserDaoImpl implements UserDao {
 			DBConnection.closeConnection(con);
 			return userList.get(0);
 		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;*/
+        try {
+        	UserBean usrBean = (UserBean)sqlMapClient.queryForObject("loginUser", userBean);
+			return usrBean;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;

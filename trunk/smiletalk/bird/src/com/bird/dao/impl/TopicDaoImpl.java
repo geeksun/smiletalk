@@ -2,9 +2,7 @@ package com.bird.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,9 +10,19 @@ import com.bird.dao.TopicDao;
 import com.bird.db.DBConnection;
 import com.bird.domain.TopicBean;
 import com.bird.util.DateUtil;
+import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class TopicDaoImpl  implements TopicDao {
 	private Connection con;
+	private SqlMapClient sqlMapClient;
+	
+	public SqlMapClient getSqlMapClient() {
+		return sqlMapClient;
+	}
+
+	public void setSqlMapClient(SqlMapClient sqlMapClient) {
+		this.sqlMapClient = sqlMapClient;
+	}
 	
 	public int deleteObject(Object o) {
 		
@@ -26,32 +34,14 @@ public class TopicDaoImpl  implements TopicDao {
 		return null;
 	}
 
-	public List<TopicBean> getObjectList(Object o) {
-		if(o==null){
-			return null;
-		}
-		TopicBean topic = (TopicBean) o;
-		List<TopicBean> topicList = new ArrayList<TopicBean>();
-		String next_sql = "select * from topic t where t.userId = ?";
+	public List<TopicBean> getObjectList(TopicBean topicBean) {
 		try {
-			con = DBConnection.getConnection();
-			PreparedStatement pst = con.prepareStatement(next_sql);
-			pst.setLong(1, topic.getUserId());
-			ResultSet rs = pst.executeQuery();
-			TopicBean tbean = null;
-			while(rs.next()){
-				tbean = new TopicBean();
-				tbean.setUserName(rs.getString("userName"));
-				tbean.setTopicContent(rs.getString("topicContent"));
-				tbean.setTopicTime(rs.getString("topicTime"));
-				topicList.add(tbean);
-			}
-			DBConnection.closeConnection(con);
+			List<TopicBean> topicList = (List<TopicBean>)this.sqlMapClient.queryForList("findTopicByUser", topicBean);
 			return topicList;
-		}catch(Exception e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null;		
 	}
 
 	public int insertObject(Object o) {
