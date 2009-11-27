@@ -2,17 +2,22 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <!-- <include file="struts-default.xml"/>  -->
+    <include file="struts-default.xml"/>
     <package name="package1" extends="struts-default">
-        <action name="newTalk" class="com.bird.core.NewTalk">
+        <!--  
+        <action name="newTalk" class="com.bird.action.NewTalk">
             <result>/frame/iTalk.jsp</result>
         </action>
-        <action name="talkRegister" class="com.bird.core.TalkRegister">
+        -->
+        <!-- 
+        <action name="talkRegister" class="com.bird.action.TalkRegister">
             <result name="success">/frame/iTalk.jsp</result>
-            <!-- <result type="redirect-action">Menu</result>-->
+            <result type="redirect-action">Menu</result>
         </action>
-        <action name="talkLogin" class="com.bird.core.TalkLogin">
-            <result>/frame/iTalk.jsp</result>
+        -->
+        <action name="talkLogin" class="talkLoginAction">
+            <result name="success">/frame/iTalk.jsp</result>
+            <result name="login">login.jsp</result>
         </action>
         
     </package>
