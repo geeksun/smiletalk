@@ -30,7 +30,7 @@ public class CheckUniqueEmail extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//HttpSession session = request.getSession(true);
 		
-		String iTalkemail = request.getParameter("iTalkemail").trim();
+		String iTalkemail = request.getParameter("email").trim();
 		iTalkemail = java.net.URLDecoder.decode(iTalkemail, "UTF-8").trim();
 		
 		userService = new UserServiceImpl();

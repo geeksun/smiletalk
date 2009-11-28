@@ -27,7 +27,6 @@ public class TopicServiceImpl extends SuperService implements TopicService{
 	}
 
 	public List<TopicBean> getObjectList(TopicBean topicBean) {
-		//return getTopicDao().getObjectList(o); 
 		if(topicBean==null){
 			return null;
 		}
