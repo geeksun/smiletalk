@@ -4,11 +4,13 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap>
-	<select id="findTopicByUser" resultClass="com.bird.domain.TopicBean" parameterClass="com.bird.domain.TopicBean">
+	<select id="findTopicByUser" parameterClass="com.bird.domain.TopicBean" resultClass="com.bird.domain.TopicBean">
 		<![CDATA[
 select * from topic where userId = #userId#
 		]]>
 	</select>
-	
+	<insert id="insertTopic" parameterClass="com.bird.domain.TopicBean">
+insert into topic (userName,topicContent,userId,topicTime) values (#userName#,#topicContent#,#userId#,#topicTime#)
+	</insert>
 	
 </sqlMap>

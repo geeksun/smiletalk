@@ -9,7 +9,25 @@
 select * from user where userName = #userName# and password = #password#
 		]]>
 	</select>
-	
-	
+	<select id="findUserByName" parameterClass="com.bird.domain.UserBean" resultClass="com.bird.domain.UserBean">
+		<![CDATA[
+select * from user where userName = #userName#
+		]]>
+	</select>
+	<select id="findUserByEmail" parameterClass="com.bird.domain.UserBean" resultClass="com.bird.domain.UserBean">
+		<![CDATA[
+select * from user where email = #email#
+		]]>
+	</select>
+	<insert id="insertUser" parameterClass="com.bird.domain.UserBean">
+		<![CDATA[
+insert user (userName,password,email,regTime,isActive) values (#userName#,#password#,#email#,#regTime#,'0')
+		]]>
+	</insert>
+	<update id="updateUserValidateCode" parameterClass="com.bird.domain.UserBean">
+		<![CDATA[
+update user set validateCode = #validateCode# where userName = #userName#
+		]]>
+	</update>
 	
 </sqlMap>
