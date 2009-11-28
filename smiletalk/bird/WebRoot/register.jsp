@@ -16,8 +16,8 @@
 	function checkUniqueEmail(successid,elem,id){
 		if(checkEmail(successid,elem,id)){
 			$(id).innerHTML = "<img border=0 src='<%=path%>/images/gif/ajax-loader.gif'/>";
-			var url = "<%=path%>/checkUniqueEmail";
-			var pars = "iTalkemail="+$("iTalkemail").value;
+			var url = "<%=path%>/checkUniqueEmail.action";
+			var pars = "email="+$("email").value;
 			new Ajax.Request(url,{
 				method:'post',
 				parameters:pars,
@@ -49,8 +49,8 @@
 	function checkUser(successid,elem,id){
 		if(checkUserName(successid,elem,id)){
 			$(id).innerHTML = "<img border=0 src='<%=path%>/images/gif/ajax-loader.gif'/>";
-			var url = "<%=path%>/checkUserName";
-			var pars = "iTalkName="+$("iTalkName").value;
+			var url = "<%=path%>/checkUserName.action";
+			var pars = "userName="+$("userName").value;
 			new Ajax.Request(url,{
 				method:'post',
 				parameters:pars,
@@ -92,9 +92,9 @@
 		}
 	}
 	function checkPasswordConfirm(successid,elem,id){
-		if(validateUserName($("iTalkpwd")) == 0)
+		if(validateUserName($("password")) == 0)
 		{
-			if($("iTalkpwd").value == elem.value){
+			if($("password").value == elem.value){
 				showSuccess(successid,id);
 				return true;
 			}else
@@ -153,12 +153,12 @@
 	<p align="center">
 		×¢²áitalk<%=validate%>
 	</p>
-	<form action="talkRegister" method="post" name="iTalkRegister">
+	<form action="talkRegister.action" method="post" name="iTalkRegister">
 	<table align="center">
 	<tr>
 		<td width="10%" align=right><span id="username_img"></span></td>
 		<td align=right>ÓÃ»§ÄØ³Æ:<font color=red>*</font></td>
-		<td><input type=text id="iTalkName" name="iTalkName" onFocus="doEnhance('username_condition');" 
+		<td><input type=text id="userName" name="userName" onFocus="doEnhance('username_condition');" 
 		onBlur="checkUser('username_img',this,'username_condition')"></td>
 		<td width="256" class="bg1">
 			<div class="note" id="username_condition">
@@ -169,7 +169,7 @@
 	<tr>
 		<td width="10%" align=right><span id="email_img"></span></td>
 		<td  align=right>Email:<font color=red>*</font></td>
-		<td><input type=text id="iTalkemail" name="iTalkemail" onBlur="checkUniqueEmail('email_img',this,'email_condition')"
+		<td><input type=text id="email" name="email" onBlur="checkUniqueEmail('email_img',this,'email_condition')"
 		 onFocus="doEnhance('email_condition');">
 		</td>
 		<td>
@@ -181,7 +181,7 @@
 	<tr>
 		<td width="10%" align=right><span id="password_img"></span></td>
 		<td align=right>µÇÂ¼ÃÜÂë:<font color=red>*</font></td>
-		<td><input type=password id="iTalkpwd" name="iTalkpwd" onBlur="checkPassword('password_img',this,'password_condition')"
+		<td><input type=password id="password" name="password" onBlur="checkPassword('password_img',this,'password_condition')"
 		onFocus="doEnhance('password_condition');"  size=22></td>
 		<td>
 		<div class="note" id="password_condition">
@@ -207,9 +207,9 @@
   </form>
   <script type="text/javascript">
   	function register(){
-    	if(checkUserName('username_img',$("iTalkName"),'username_condition')
-			&& checkEmail('email_img',$("iTalkemail"),'email_condition')
-			&& checkPassword('password_img',$("iTalkpwd"),'password_condition')
+    	if(checkUserName('username_img',$("userName"),'username_condition')
+			&& checkEmail('email_img',$("email"),'email_condition')
+			&& checkPassword('password_img',$("password"),'password_condition')
 			&& checkPasswordConfirm('confirm_password_img',$("iTalkconpwd"),'confirm_password_condition')
 			){
 				var form = document.iTalkRegister;
