@@ -2,7 +2,6 @@ package com.bird.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +14,6 @@ import com.bird.util.DateUtil;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class UserDaoImpl implements UserDao {
-	private Connection con;
-	
 	private SqlMapClient sqlMapClient;
 	
 	public SqlMapClient getSqlMapClient() {
@@ -39,22 +36,11 @@ public class UserDaoImpl implements UserDao {
 		if(o==null){
 			return null;
 		}
-		UserBean user = (UserBean) o;
-		String userName = user.getUserName();
-		String next_sql = "select * from user u where u.userName = ?";
+		UserBean userBean = (UserBean) o;
 		try {
-			con = DBConnection.getConnection();
-			PreparedStatement pst = con.prepareStatement(next_sql);
-			pst.setString(1, userName);
-			ResultSet rs = pst.executeQuery();
-			UserBean ubean = null;
-			if(rs.next()){
-				ubean = new UserBean();
-				ubean.setUserName(rs.getString("userName"));
-			}
-			DBConnection.closeConnection(con);
-			return ubean;
-		}catch(Exception e){
+        	UserBean usrBean = (UserBean)sqlMapClient.queryForObject("findUserByName", userBean);
+			return usrBean;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -67,22 +53,11 @@ public class UserDaoImpl implements UserDao {
 		if(o==null){
 			return null;
 		}
-		UserBean user = (UserBean) o;
-		String email = user.getEmail();
-		String next_sql = "select * from user u where u.email = ?";
+		UserBean userBean = (UserBean) o;
 		try {
-			con = DBConnection.getConnection();
-			PreparedStatement pst = con.prepareStatement(next_sql);
-			pst.setString(1, email);
-			ResultSet rs = pst.executeQuery();
-			UserBean ubean = null;
-			if(rs.next()){
-				ubean = new UserBean();
-				ubean.setUserName(rs.getString("userName"));
-			}
-			DBConnection.closeConnection(con);
-			return ubean;
-		}catch(Exception e){
+        	UserBean usrBean = (UserBean)sqlMapClient.queryForObject("findUserByEmail", userBean);
+			return usrBean;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -97,26 +72,11 @@ public class UserDaoImpl implements UserDao {
 		if(o==null){
 			return 0;
 		}
-		UserBean user = (UserBean) o;
-		Connection con = DataBaseUtil.getConnection();
-		String exe_sql = "insert user (userName,password,email,regTime,isActive) values (?,?,?,?,'0')";
+		UserBean userBean = (UserBean) o;
 		try {
-			PreparedStatement pst = con.prepareStatement(exe_sql);
-			pst.setString(1, user.getUserName());
-			pst.setString(2, user.getPassword());
-			pst.setString(3, user.getEmail());
-			Date d = new Date();
-			String regTime = DateUtil.getDateString(d);
-			pst.setString(4, regTime);
-			int result = pst.executeUpdate();
-			DBConnection.closeConnection(con);
-			return result;
+        	sqlMapClient.insert("insertUser", userBean);
+			return 1;
 		} catch (SQLException e) {
-			try {
-				con.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 			e.printStackTrace();
 		}
 		return 0;
@@ -126,29 +86,6 @@ public class UserDaoImpl implements UserDao {
 	 *  用户登录验证
 	 */
 	public UserBean loginUser(UserBean userBean) {
-		/*String userName = userBean.getUserName();
-		String pwd = userBean.getPassword();
-		String next_sql = "select * from user u where u.userName = ? and u.password = ?";
-		try {
-			con = DBConnection.getConnection();
-			PreparedStatement pst = con.prepareStatement(next_sql);
-			pst.setString(1, userName);
-			pst.setString(2, pwd);
-			ResultSet rs = pst.executeQuery();
-			UserBean ubean = null;
-			List<UserBean> userList = new ArrayList<UserBean>();
-			while(rs.next()){
-				ubean = new UserBean();
-				ubean.setUserId(rs.getLong("userId"));
-				ubean.setUserName(rs.getString("userName"));
-				userList.add(ubean);
-			}
-			DBConnection.closeConnection(con);
-			return userList.get(0);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return null;*/
         try {
         	UserBean usrBean = (UserBean)sqlMapClient.queryForObject("loginUser", userBean);
 			return usrBean;
@@ -165,21 +102,9 @@ public class UserDaoImpl implements UserDao {
 		if(userBean==null){
 			return;
 		}
-		String validateCode = userBean.getValidateCode();
-		String sql = "update user u set u.validateCode = ? where u.userName = ?";
 		try {
-			con = DBConnection.getConnection();
-			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setString(1, validateCode);
-			pst.setString(2, userBean.getUserName());
-			pst.executeUpdate();
-			DBConnection.closeConnection(con);
-		}catch(Exception e){
-			try {
-				con.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+        	sqlMapClient.update("updateUserValidateCode", userBean);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
