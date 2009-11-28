@@ -9,6 +9,7 @@ import java.util.List;
 import com.bird.dao.TopicDao;
 import com.bird.db.DBConnection;
 import com.bird.domain.TopicBean;
+import com.bird.domain.UserBean;
 import com.bird.util.DateUtil;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -46,27 +47,11 @@ public class TopicDaoImpl  implements TopicDao {
 
 	public int insertObject(Object o) {
 		TopicBean topic = (TopicBean) o;
-		String exe_sql = "insert topic (username,topicContent,userid,topicTime) values (?,?,?,?)";
 		try {
-			con = DBConnection.getConnection();
-			con.setAutoCommit(false);
-			PreparedStatement pst = con.prepareStatement(exe_sql);
-			pst.setString(1, topic.getUserName());
-			pst.setString(2, topic.getTopicContent());
-			pst.setLong(3, topic.getUserId());
-			Date d = new Date();
-			String topicTime = DateUtil.getDateString(d);
-			pst.setString(4,  topicTime);
-			int result = pst.executeUpdate();
-			con.commit();
-			DBConnection.closeConnection(con);
-			return result;
+        	//int result = (Integer)sqlMapClient.insert("insertTopic", topic);
+			sqlMapClient.insert("insertTopic", topic);
+			return 1;
 		} catch (SQLException e) {
-				try {
-					con.rollback();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
 			e.printStackTrace();
 		}
 		return 0;
