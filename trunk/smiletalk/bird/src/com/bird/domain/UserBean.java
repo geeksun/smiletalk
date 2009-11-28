@@ -18,6 +18,7 @@ public class UserBean  implements Serializable{
 	private String email;
 	private String isActive;//¼¤»î×´Ì¬-0:Î´¼¤»î1£º¼¤»î
 	private String validateCode;
+	private String regTime;
 	private String errorMessage;
 	
 	public String getErrorMessage() {
@@ -61,6 +62,12 @@ public class UserBean  implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getRegTime() {
+		return regTime;
+	}
+	public void setRegTime(String regTime) {
+		this.regTime = regTime;
 	}
 	
 	
