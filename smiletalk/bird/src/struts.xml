@@ -4,22 +4,24 @@
 <struts>
     <include file="struts-default.xml"/>
     <package name="package1" extends="struts-default">
-        <!--  
-        <action name="newTalk" class="com.bird.action.NewTalk">
-            <result>/frame/iTalk.jsp</result>
-        </action>
-        -->
-        <!-- 
-        <action name="talkRegister" class="com.bird.action.TalkRegister">
+        <action name="newTalk" class="newTalk">
             <result name="success">/frame/iTalk.jsp</result>
-            <result type="redirect-action">Menu</result>
+            <result name="login">login.jsp</result>
+            <result name="error">error.jsp</result>
         </action>
-        -->
-        <action name="talkLogin" class="talkLoginAction">
+        <action name="talkRegister" class="talkRegister">
+            <result name="success">/frame/iTalk.jsp</result>
+            <result name="register">register.jsp</result>
+            <!-- <result type="redirect-action">Menu</result> -->
+        </action>
+        <action name="talkLogin" class="talkLogin">
             <result name="success">/frame/iTalk.jsp</result>
             <result name="login">login.jsp</result>
         </action>
-        
+        <action name="checkUserName" class="checkUserName">
+        </action>
+        <action name="checkUniqueEmail" class="checkUniqueEmail">
+        </action>
     </package>
     
     
