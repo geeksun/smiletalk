@@ -2,21 +2,27 @@ package com.bird.servlet;
 
 import java.io.PrintWriter;
 
-import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bird.domain.UserBean;
 import com.bird.service.UserService;
 import com.bird.service.impl.UserServiceImpl;
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * @author jzq
  *  检查用户名重复
  *  2009-11-13
  */
-public class CheckUserName extends HttpServlet {
-	
+public class CheckUserName extends ActionSupport implements ServletRequestAware,ServletResponseAware {
 	private UserService userService;
 	private UserBean userBean;
+	HttpServletRequest request;
+	HttpServletResponse response;
 	
 	public void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) 
 		throws javax.servlet.ServletException, java.io.IOException {
@@ -31,7 +37,7 @@ public class CheckUserName extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//HttpSession session = request.getSession(true);
 		
-		String iTalkName = request.getParameter("iTalkName").trim();
+		String iTalkName = request.getParameter("userName").trim();
 		iTalkName = java.net.URLDecoder.decode(iTalkName, "UTF-8").trim();
 		
 		userService = new UserServiceImpl();
@@ -47,6 +53,14 @@ public class CheckUserName extends HttpServlet {
 		userService = null;
 		userBean = null;
 		out.close();
+	}
+
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
 	}
 	
 }

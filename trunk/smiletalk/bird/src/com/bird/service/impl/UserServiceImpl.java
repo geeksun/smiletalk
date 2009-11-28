@@ -25,15 +25,14 @@ public class UserServiceImpl extends SuperService implements UserService {
 	 *  判断用户名是否唯一
 	 */
 	public Object getObject(Object o) {
-		//return getUserDao().getObject(o);
-		
-		return null;
+		return userDao.getObject(o);
 	}
 	
+	/**
+	 * @see 判断email是否唯一
+	 */
 	public Object getUserByEamil(Object o){
-		//return getUserDao().getUserByEamil(o);
-		
-		return null;
+		return userDao.getUserByEamil(o);
 	}
 
 	public List<UserBean> getObjectList(Object o) {
@@ -41,10 +40,7 @@ public class UserServiceImpl extends SuperService implements UserService {
 	}
 
 	public int insertObject(Object o) {
-		//return getUserDao().insertObject(o);
-		
-		
-		return 0;
+		return userDao.insertObject(o);
 	}
 
 	/**
@@ -74,7 +70,7 @@ public class UserServiceImpl extends SuperService implements UserService {
 		}
 		int flag = MailSenderUtil.sendActivateEmail(userBean);
 		if(flag>0){
-			//getUserDao().updateObject(userBean);
+			userDao.updateObject(userBean);
 			
 		}
 	}
