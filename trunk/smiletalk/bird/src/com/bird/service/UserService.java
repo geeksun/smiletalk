@@ -3,9 +3,7 @@ package com.bird.service;
 import java.util.List;
 
 import javax.mail.MessagingException;
-
 import com.bird.domain.UserBean;
-import com.bird.vo.UserVo;
 
 public interface UserService {
 	public int insertObject(Object o);
