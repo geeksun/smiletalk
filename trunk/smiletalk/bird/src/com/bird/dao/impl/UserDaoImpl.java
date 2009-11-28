@@ -1,16 +1,10 @@
 package com.bird.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import com.bird.dao.UserDao;
-import com.bird.db.DBConnection;
-import com.bird.db.DataBaseUtil;
 import com.bird.domain.UserBean;
-import com.bird.util.DateUtil;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class UserDaoImpl implements UserDao {
@@ -68,6 +62,9 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	/**
+	 *  增加新用户
+	 */
 	public int insertObject(Object o) {
 		if(o==null){
 			return 0;
@@ -96,7 +93,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	/**
-	 *  更新用户状态：写入验证码
+	 *  更新用户状态：写入用户的验证码
 	 */
 	public void updateObject(UserBean userBean) {
 		if(userBean==null){
