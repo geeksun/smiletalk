@@ -24,7 +24,7 @@
 		</property>
 	</bean>
 	
-	<bean id="talkLoginAction" class="com.bird.action.TalkLoginAction">
+	<bean id="talkLogin" class="com.bird.action.TalkLogin">
 		<property name="userService">
 			<ref local="userService"/>
 		</property>
@@ -32,6 +32,25 @@
 			<ref local="topicService"/>
 		</property>
 	</bean>
-			
+	<bean id="talkRegister" class="com.bird.action.TalkRegister">
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
+	</bean>
+	<bean id="newTalk" class="com.bird.action.NewTalk">
+		<property name="topicService">
+			<ref local="topicService"/>
+		</property>
+	</bean>
+	<bean id="checkUserName" class="com.bird.action.CheckUserName">
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
+	</bean>
+	<bean id="checkUniqueEmail" class="com.bird.action.CheckUniqueEmail">
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
+	</bean>		
 </beans>	
 			
