@@ -27,14 +27,14 @@
 
 <!-- ×* -->
 <body >
-<form action="newTalk" name="iTalk" method="post">
+<form action="newTalk.action" name="iTalk" method="post">
 	<table width="49%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#99CCFF">
 		<tr align="center" >
 			<td>What are you doing?record here↓                     还可以输入<span id="validNum">140</span>字</td>
 		</tr>
 		<tr  align="center">
 			<td>
-				<textarea name="talkTopic" id="talkTopic" rows="4" cols="60" maxlength='140' onKeyDown="checkLength()"
+				<textarea name="topicContent" id="topicContent" rows="4" cols="60" maxlength='140' onKeyDown="checkLength()"
 				 onKeyUp="checkLength()" onPaste="checkLength()" style="overflow:hidden"></textarea>
 			</td>
 		</tr>
@@ -73,15 +73,15 @@
  %>
 <script>
 	function checkLength(){
-		var value = document.getElementById("talkTopic").value;
+		var value = document.getElementById("topicContent").value;
 		if(value.length>140){
-			document.getElementById("talkTopic").value=document.getElementById("talkTopic").value.substr(0, 140);
+			document.getElementById("topicContent").value=document.getElementById("topicContent").value.substr(0, 140);
 		}else{
 			document.getElementById("validNum").innerHTML = 140 - value.length;
 		}
 	}	 
 	function checkTalk(){
-		var a = document.iTalk.talkTopic;
+		var a = document.iTalk.topicContent;
 		str = a.value.replace(/\s+/g,"");
 		if(str==''){
 			alert("输入不可为空!");
