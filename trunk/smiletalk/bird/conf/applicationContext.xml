@@ -42,6 +42,13 @@
 			<ref local="topicService"/>
 		</property>
 	</bean>
+	<bean id="storageTalk" class="com.bird.action.StorageTalk">
+		<property name="topicService">
+			<ref local="topicService"/>
+		</property>
+	</bean>
+	
+	
 	<bean id="checkUserName" class="com.bird.action.CheckUserName">
 		<property name="userService">
 			<ref local="userService"/>
