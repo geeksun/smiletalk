@@ -18,6 +18,12 @@
             <result name="success">/frame/iTalk.jsp</result>
             <result name="login">login.jsp</result>
         </action>
+        <action name="storageTalk" class="storageTalk">
+            <result name="success">/frame/storageTalk.jsp</result>
+            <result name="login">login.jsp</result>
+        </action>
+        
+        
         <action name="checkUserName" class="checkUserName">
         </action>
         <action name="checkUniqueEmail" class="checkUniqueEmail">
