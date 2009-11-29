@@ -2,14 +2,9 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
 "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans default-lazy-init="true">
+    <!--
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton">
-    	<!--  dbcp connection pool
-        <property name="driverClassName" value="org.apache.commons.dbcp.BasicDataSource" />
-         -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <!-- 
-        <property name="url" value="jdbc:mysql://localhost:3306/italk" />
-         -->
         <property name="url" value="jdbc:mysql://localhost/italk?useUnicode=true&amp;characterEncoding=gbk" />
         <property name="username" value="root" />
         <property name="password" value="" />
@@ -17,7 +12,25 @@
         <property name="maxIdle" value="30" />
         <property name="maxWait" value="3000" />
     </bean>
+    -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/italk?useUnicode=true&amp;characterEncoding=gbk" />
+		<property name="user" value="root" />
+		<property name="password" value="" />
+		<property name="minPoolSize" value="3" />
+		<property name="maxPoolSize" value="30" />
 
+		<property name="maxIdleTime" value="1800" />
+		<property name="acquireIncrement" value="3" />
+		<property name="maxStatements" value="0" />
+		<property name="initialPoolSize" value="3" />
+		<property name="idleConnectionTestPeriod" value="60" />
+
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="testConnectionOnCheckout" value="false" />
+	</bean>
+	
     <!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName">
             <value>java:comp/env/jdbc/italk</value>
