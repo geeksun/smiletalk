@@ -47,6 +47,7 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 			return LOGIN;
 		}
 		else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//重复提交,struts2防重复提交还没做,此处还不行
+			
 			return null;
 		}else{
 			String topicContent = topicBean.getTopicContent();
