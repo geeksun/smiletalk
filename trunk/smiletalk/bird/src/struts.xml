@@ -26,6 +26,9 @@
             <result name="success">/frame/iTalk.jsp</result>
             <result name="login">login.jsp</result>
         </action>
+        <action name="exitTalk" class="exitTalk">
+            <result name="login">login.jsp</result>
+        </action>
         
         <action name="checkUserName" class="checkUserName">
         </action>
