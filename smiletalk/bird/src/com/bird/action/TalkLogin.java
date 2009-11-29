@@ -40,7 +40,7 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 		this.topicService = topicService;
 	}
 	
-	public String execute() throws Exception {	
+	public String execute() throws Exception {
 		String userName = userBean.getUserName();
 		String password = userBean.getPassword();
 		UserBean user = new UserBean();
