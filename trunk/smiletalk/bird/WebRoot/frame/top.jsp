@@ -11,7 +11,7 @@
 			guest = guest == null?"guest":guest;
 		 %>
 		 
-		 <pre> <%=guest%>， 欢迎您使用 iTalk									<a href="">Home</a>&nbsp;<a href="">Profile</a>&nbsp;<a href="">Find People</a>&nbsp;<a href="">Settings</a>&nbsp;<a href="">Help</a>&nbsp;<a href="">Sign out</a>&nbsp;<a href="<%=path%>/login.jsp">登录iTalk</a></pre>
+		 <pre> 		<%=guest%>， 欢迎您使用 iTalk						  <a href="">Home</a>&nbsp;<a href="storageTalk.action">Profile</a>&nbsp;<a href="">Find People</a>&nbsp;<a href="">Settings</a>&nbsp;<a href="">Help</a>&nbsp;<a href="">Sign out</a>&nbsp;<a href="<%=path%>/login.jsp">登录iTalk</a></pre>
 		 
 		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="FFBB00">
             <tr>
