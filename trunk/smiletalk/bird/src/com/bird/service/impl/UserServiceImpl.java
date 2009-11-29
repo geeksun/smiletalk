@@ -51,6 +51,7 @@ public class UserServiceImpl extends SuperService implements UserService {
 		if(userBean==null){
 			return null;
 		}
+		//用domain object代替po和vo,省去两个对象的操作
 		/*UserPo userPo = new UserPo();
 		PropertyUtils.copyProperties(userPo, userVo);
 		userPo = userDao.loginUser(userPo);
