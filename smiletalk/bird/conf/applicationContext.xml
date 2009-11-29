@@ -52,6 +52,8 @@
 			<ref local="topicService"/>
 		</property>
 	</bean>
+	<bean id="exitTalk" class="com.bird.action.ExitTalk">
+	</bean>
 	
 	<bean id="checkUserName" class="com.bird.action.CheckUserName">
 		<property name="userService">
