@@ -14,7 +14,7 @@ import com.bird.service.TopicService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * 查看用户的ITalk发言记录
+ * 用户的ITalk发言记录
  * @author 姜志强
  * @version beta 0.1 
  * 2009-11-29
@@ -28,7 +28,6 @@ public class StorageTalk extends ActionSupport implements SessionAware,ServletRe
 		if(session!=null&&session.size()>0){
 			long userId = (Long) session.get("userId");
 			TopicBean topicBean = new TopicBean();
-			//topicBean.setUserId(userId);
 			List<Long> userIdList = new ArrayList<Long>();
 			userIdList.add(userId);
 			topicBean.setUserIdList(userIdList);
