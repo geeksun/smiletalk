@@ -1,6 +1,5 @@
 package com.bird.action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -96,11 +95,6 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				Follow follow = new Follow();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
-				/*if(userIdList.size()==0){
-					userIdList.set(0, userId);
-				}else{
-					userIdList.add(userId);
-				}*/
 				userIdList.add(userId);
 				session.put("userId", userId);
 				topicBean = new TopicBean();

@@ -16,7 +16,7 @@
 	String path = request.getContextPath();
 	if(username==null){
  %>
-	您还没有登录，请先<a href="<%=path%>/login.jsp">登录 iTalk</a>
+	您还没有登录，请先登录
 	<% 
 	}
 	else{

@@ -47,7 +47,7 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 		if(session==null||session.size()==0){
 			return LOGIN;
 		}
-		else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
+		else if(sessionToken!=null&&clientToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
 			topicBean.setUserId(userId);
 			List<TopicBean> topicList = topicService.getObjectList(topicBean);
 			//生成新令牌
@@ -70,11 +70,6 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 				Follow follow = new Follow();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
-				/*if(userIdList.size()==0){
-					userIdList.set(0, userId);
-				}else{
-					userIdList.add(userId);
-				}*/
 				userIdList.add(userId);
 				topicBean.setUserIdList(userIdList);
 				List<TopicBean> topicList = topicService.getObjectList(topicBean);
