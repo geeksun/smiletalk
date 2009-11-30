@@ -19,6 +19,12 @@ select * from user where userName = #userName#
 select * from user where email = #email#
 		]]>
 	</select>
+	<select id="findUserById" parameterClass="com.bird.domain.UserBean" resultClass="com.bird.domain.UserBean">
+		<![CDATA[
+select * from user where userId = #userId#
+		]]>
+	</select>
+	
 	<insert id="insertUser" parameterClass="com.bird.domain.UserBean">
 		<![CDATA[
 insert user (userName,password,email,regTime,isActive) values (#userName#,#password#,#email#,#regTime#,'0')
