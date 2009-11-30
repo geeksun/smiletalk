@@ -72,8 +72,14 @@ public class UserServiceImpl extends SuperService implements UserService {
 		int flag = MailSenderUtil.sendActivateEmail(userBean);
 		if(flag>0){
 			userDao.updateObject(userBean);
-			
 		}
+	}
+
+	public UserBean getUserById(UserBean userBean) {
+		if(userBean==null){
+			return null;
+		}
+		return userDao.getUserById(userBean);
 	}
 	
 

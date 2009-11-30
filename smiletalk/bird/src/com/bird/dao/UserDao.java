@@ -12,6 +12,7 @@ public interface UserDao {
 	public int deleteObject(Object o);
 	public UserBean loginUser(UserBean userBean);
 	public void updateObject(UserBean userBean);
+	public UserBean getUserById(UserBean userBean);
 	
 	
 }

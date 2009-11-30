@@ -13,5 +13,6 @@ public interface UserService {
 	public int deleteObject(Object o);
 	public UserBean loginUser(UserBean userVo);
 	public void sendActivateEmail(UserBean user) throws MessagingException;
+	public UserBean getUserById(UserBean userBean);
 	
 }
