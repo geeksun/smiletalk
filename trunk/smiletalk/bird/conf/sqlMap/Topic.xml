@@ -4,10 +4,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap>
-	<select id="findTopicByUser" parameterClass="com.bird.domain.TopicBean" resultClass="com.bird.domain.TopicBean">
-		<![CDATA[
-select * from topic where userId = #userId#
-		]]>
+	<select id="findTopicByUser" parameterClass="java.util.List" resultClass="com.bird.domain.TopicBean">
+select * from topic where userId in 
+		<iterate open="(" close=")" conjunction=",">   
+               #userIdList[]#
+             </iterate>
+             order by topicTime desc
 	</select>
 	<insert id="insertTopic" parameterClass="com.bird.domain.TopicBean">
 insert into topic (userName,topicContent,userId,topicTime) values (#userName#,#topicContent#,#userId#,#topicTime#)

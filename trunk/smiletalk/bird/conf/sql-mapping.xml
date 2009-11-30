@@ -5,7 +5,8 @@
     "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 
 <sqlMapConfig>
-	<settings cacheModelsEnabled="false" 
+	<settings
+		cacheModelsEnabled="true"
 		enhancementEnabled="true"
 		lazyLoadingEnabled="true" 
 		errorTracingEnabled="true"
@@ -15,7 +16,7 @@
 		useStatementNamespaces="true" />
 		<sqlMap resource="sqlMap/User.xml"/>
 		<sqlMap resource="sqlMap/Topic.xml"/>
-		
+		<sqlMap resource="sqlMap/Follow.xml"/>
 		
 		
 		
