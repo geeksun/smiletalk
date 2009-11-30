@@ -10,16 +10,12 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 public class UserDaoImpl implements UserDao {
 	private SqlMapClient sqlMapClient;
 	
-	public SqlMapClient getSqlMapClient() {
-		return sqlMapClient;
-	}
-
+	
 	public void setSqlMapClient(SqlMapClient sqlMapClient) {
 		this.sqlMapClient = sqlMapClient;
 	}
 
 	public int deleteObject(Object o) {
-		
 		return 0;
 	}
 
@@ -118,6 +114,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		return null;
 	}
+
 	
 
 }

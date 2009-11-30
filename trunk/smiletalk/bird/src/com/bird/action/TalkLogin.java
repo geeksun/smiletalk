@@ -1,5 +1,6 @@
 package com.bird.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.bird.domain.Follow;
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
@@ -63,6 +65,7 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 			if(user!=null){
 				String cookieFlag = null;
 				String autoLogin = request.getParameter("autoLogin");	//自动登录
+				//判断cookie信息
 				Cookie[] cookies = request.getCookies();
 				if (cookies != null) {
 					for (int i = 0; i < cookies.length; i++) {
@@ -88,10 +91,22 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 					response.addCookie(pwdCookie);
 				}
 				session.put("userName", userName);
-				long userId = user.getUserId();
+				Long userId = user.getUserId();
+				Long followUserId = user.getFollowUserId();
+				Follow follow = new Follow();
+				follow.setUserId(userId);
+				List<Long> userIdList = userService.getUserIdList(follow);
+				/*if(userIdList.size()==0){
+					userIdList.set(0, userId);
+				}else{
+					userIdList.add(userId);
+				}*/
+				userIdList.add(userId);
 				session.put("userId", userId);
 				topicBean = new TopicBean();
 				topicBean.setUserId(userId);
+				topicBean.setFollowUserId(followUserId);
+				topicBean.setUserIdList(userIdList);
 				List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
 				request.setAttribute("topicList", topicList);
 				
@@ -119,6 +134,5 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 	}
-
 	
 }

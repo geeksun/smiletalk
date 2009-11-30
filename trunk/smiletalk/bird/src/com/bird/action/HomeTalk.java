@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.bird.domain.Follow;
 import com.bird.domain.TopicBean;
 import com.bird.service.TopicService;
+import com.bird.service.UserService;
 import com.bird.util.TokenUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,6 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * 2009-11-30
  */
 public class HomeTalk extends ActionSupport  implements SessionAware,ServletRequestAware {
+	private UserService userService;
 	private TopicService topicService;
 	Map<String, Object> session;
 	HttpServletRequest request;
@@ -32,6 +35,12 @@ public class HomeTalk extends ActionSupport  implements SessionAware,ServletRequ
 			long userId = (Long) session.get("userId");
 			TopicBean topicBean = new TopicBean();
 			topicBean.setUserId(userId);
+			Follow follow = new Follow();
+			follow.setUserId(userId);
+			List<Long> userIdList = userService.getUserIdList(follow);
+			
+			userIdList.add(userId);
+			topicBean.setUserIdList(userIdList);
 			List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
 			request.setAttribute("topicList", topicList);
 			//Éú³ÉÐÂÁîÅÆ
@@ -51,6 +60,10 @@ public class HomeTalk extends ActionSupport  implements SessionAware,ServletRequ
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 	
 	

@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.bird.domain.Follow;
 import com.bird.domain.TopicBean;
 import com.bird.service.TopicService;
+import com.bird.service.UserService;
 import com.bird.util.DateUtil;
 import com.bird.util.TokenUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -24,6 +26,7 @@ import com.opensymphony.xwork2.ModelDriven;
  */
 public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, SessionAware, ServletRequestAware {
 	private TopicBean topicBean = new TopicBean();
+	private UserService userService;
 	private TopicService topicService;
 	Map<String, Object> session;
 	HttpServletRequest request;
@@ -64,6 +67,16 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 			//未对topicContent,userName,userId进行验证
 			int result = topicService.insertObject(topicBean);
 			if(result>0){
+				Follow follow = new Follow();
+				follow.setUserId(userId);
+				List<Long> userIdList = userService.getUserIdList(follow);
+				/*if(userIdList.size()==0){
+					userIdList.set(0, userId);
+				}else{
+					userIdList.add(userId);
+				}*/
+				userIdList.add(userId);
+				topicBean.setUserIdList(userIdList);
 				List<TopicBean> topicList = topicService.getObjectList(topicBean);
 				//生成新令牌
 				String token = TokenUtil.generateToken(request);
@@ -89,6 +102,10 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 	
 }

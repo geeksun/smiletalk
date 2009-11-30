@@ -13,6 +13,8 @@ public class UserBean  implements Serializable{
 	 */
 	private static final long serialVersionUID = -7807593836654741375L;
 	private long userId;
+	// ¹Ø×¢ÕßID
+	private Long followUserId;
 	private String userName;
 	private String password;
 	private String email;
@@ -69,6 +71,11 @@ public class UserBean  implements Serializable{
 	public void setRegTime(String regTime) {
 		this.regTime = regTime;
 	}
-	
+	public Long getFollowUserId() {
+		return followUserId;
+	}
+	public void setFollowUserId(Long followUserId) {
+		this.followUserId = followUserId;
+	}
 	
 }

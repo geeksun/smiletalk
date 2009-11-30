@@ -1,5 +1,6 @@
 package com.bird.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,11 @@ public class StorageTalk extends ActionSupport implements SessionAware,ServletRe
 		if(session!=null&&session.size()>0){
 			long userId = (Long) session.get("userId");
 			TopicBean topicBean = new TopicBean();
-			topicBean.setUserId(userId);
-			List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
+			//topicBean.setUserId(userId);
+			List<Long> userIdList = new ArrayList<Long>();
+			userIdList.add(userId);
+			topicBean.setUserIdList(userIdList);
+			List<TopicBean> topicList = topicService.getObjectList(topicBean); 		
 			request.setAttribute("topicList", topicList);
 			
 			return SUCCESS;	
