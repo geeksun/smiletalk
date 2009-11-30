@@ -92,7 +92,6 @@ public class UserServiceImpl extends SuperService implements UserService {
 	/**
 	 *  返回用户ID和关注者的ID列表
 	 */
-	//public List<Follow> getUserIdList(Follow follow) {
 	public List<Long> getUserIdList(Follow follow) {
 		if(follow==null){
 			return null;
