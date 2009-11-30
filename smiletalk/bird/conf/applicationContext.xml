@@ -42,16 +42,23 @@
 			<ref local="topicService"/>
 		</property>
 	</bean>
-	<bean id="storageTalk" class="com.bird.action.StorageTalk">
-		<property name="topicService">
-			<ref local="topicService"/>
-		</property>
-	</bean>
 	<bean id="homeTalk" class="com.bird.action.HomeTalk">
 		<property name="topicService">
 			<ref local="topicService"/>
 		</property>
 	</bean>
+	<bean id="storageTalk" class="com.bird.action.StorageTalk">
+		<property name="topicService">
+			<ref local="topicService"/>
+		</property>
+	</bean>
+	<bean id="settingTalk" class="com.bird.action.SettingTalk">
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
+	</bean>
+	
+	
 	<bean id="exitTalk" class="com.bird.action.ExitTalk">
 	</bean>
 	
@@ -64,6 +71,7 @@
 		<property name="userService">
 			<ref local="userService"/>
 		</property>
-	</bean>		
+	</bean>
+	
 </beans>	
 			

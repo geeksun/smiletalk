@@ -65,7 +65,6 @@
 		 %>
 	</table>
 	<input type="hidden" name="clientToken" value="<%=clientToken%>" />
-	
 </form>
 </body>
  <% 
