@@ -21,7 +21,6 @@
 	List topicList = (List)request.getAttribute("topicList");
 %>
 
-<!-- ¡Á* -->
 <body><br>
 	<table width="49%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#99CCFF">
 		<%
