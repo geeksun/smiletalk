@@ -16,7 +16,6 @@ public interface UserService {
 	public UserBean loginUser(UserBean userVo);
 	public void sendActivateEmail(UserBean user) throws MessagingException;
 	public UserBean getUserById(UserBean userBean);
-	//public List<Follow> getUserIdList(Follow follow);
 	public List<Long> getUserIdList(Follow follow);
 	
 }

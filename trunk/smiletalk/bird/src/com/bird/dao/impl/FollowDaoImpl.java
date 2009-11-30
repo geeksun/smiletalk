@@ -17,10 +17,8 @@ public class FollowDaoImpl implements FollowDao{
 	/**
 	 *  返回用户ID和关注者的ID列表
 	 */
-	/*public List<Follow> getUserIdList(Follow follow) {*/
 	public List<Long> getUserIdList(Follow follow) {
 		try {
-			/*List<Follow> userIdList = (List<Follow>) sqlMapClient.queryForList("findUserIdList", follow);*/
 			List<Long> userIdList = (List<Long>) sqlMapClient.queryForList("findUserIdList", follow);
 			return userIdList;
 		} catch (SQLException e) {
