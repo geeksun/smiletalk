@@ -13,17 +13,39 @@
 	UserBean userBean = (UserBean)request.getAttribute("userBean");
 	%>
 <body>
-<form action="newTalk.action" name="iTalk" method="post">
+<p></p>
+基本信息：
+<form action="settingInfo.action" name="iTalk" method="post">
 	<table width="49%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#99CCFF">
-		<tr align="center" >
-			<td align="left">
-				<span class="style1">用户：</span><font color="#9900FF"><%=userBean.getUserName()%></font>
+		<tr>
+			<td align="right">头像： </td><td><input type="file" name="headPhoto"></td>
+		</tr>
+		<tr>
+			<td align="right">个人空间： </td><td></td>
+		</tr>
+		<tr>
+			<td align="right">
+				<span class="style1">呢称：</span></td><td><font color="#9900FF"><%=userBean.getUserName()%></font>
 			</td>
 		</tr>
+		<tr>
+			<td align="right">性别： </td><td></td>
+		</tr>
 		<tr align="center" >
-			<td align="left">
-				<span class="style1">注册时间：</span><font color="#9900FF"><%=userBean.getRegTime()%></font>
+			<td align="right">生日： </td><td></td>
+		</tr>
+		<tr align="center" >
+			<td align="right">地区： </td><td></td>
+		</tr>
+		<tr align="center" >
+			<td align="right">
+				<span class="style1">注册时间：</span></td><td align="left"><font color="#9900FF"><%=userBean.getRegTime()%></font>
 			</td>
+		</tr>
+		
+		
+		<tr align="center">
+			<td colspan="2"><input type="submit" value=" 保 存 "></td>
 		</tr>
 	</table>
 	
