@@ -18,14 +18,20 @@
             <result name="success">/frame/iTalk.jsp</result>
             <result name="login">login.jsp</result>
         </action>
-        <action name="storageTalk" class="storageTalk">
-            <result name="success">/frame/storageTalk.jsp</result>
-            <result name="login">login.jsp</result>
-        </action>
         <action name="homeTalk" class="homeTalk">
             <result name="success">/frame/iTalk.jsp</result>
             <result name="login">login.jsp</result>
         </action>
+        <action name="storageTalk" class="storageTalk">
+            <result name="success">/frame/storageTalk.jsp</result>
+            <result name="login">login.jsp</result>
+        </action>
+        
+        <action name="settingTalk" class="settingTalk">
+        	<result name="success">/frame/settingInfo.jsp</result>
+            <result name="login">login.jsp</result>
+        </action>
+        
         <action name="exitTalk" class="exitTalk">
             <result name="login">login.jsp</result>
         </action>

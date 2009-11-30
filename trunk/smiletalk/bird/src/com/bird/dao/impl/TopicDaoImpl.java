@@ -1,20 +1,13 @@
 package com.bird.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import com.bird.dao.TopicDao;
-import com.bird.db.DBConnection;
 import com.bird.domain.TopicBean;
-import com.bird.domain.UserBean;
-import com.bird.util.DateUtil;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class TopicDaoImpl  implements TopicDao {
-	private Connection con;
 	private SqlMapClient sqlMapClient;
 	
 	public SqlMapClient getSqlMapClient() {

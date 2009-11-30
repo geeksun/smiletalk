@@ -105,6 +105,19 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 *  提取用户信息
+	 */
+	public UserBean getUserById(UserBean userBean) {
+		try {
+        	UserBean usrBean = (UserBean)sqlMapClient.queryForObject("findUserById", userBean);
+			return usrBean;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 
 }
