@@ -87,7 +87,7 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 					response.addCookie(usrCookie);
 					response.addCookie(pwdCookie);
 				}
-				session.put("userName", user.getUserName());
+				session.put("userName", userName);
 				long userId = user.getUserId();
 				session.put("userId", userId);
 				topicBean = new TopicBean();

@@ -1,6 +1,5 @@
 package com.bird.action;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,32 +7,31 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.bird.domain.TopicBean;
-import com.bird.service.TopicService;
+import com.bird.domain.UserBean;
+import com.bird.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * 查看用户的ITalk发言记录
+ * talker信息预览、设置
  * @author 姜志强
- * @version beta 0.1 
- * 2009-11-29
+ * 2009-11-30
  */
-public class StorageTalk extends ActionSupport implements SessionAware,ServletRequestAware  {
-	private TopicService topicService;
+public class SettingTalk extends ActionSupport implements SessionAware,	ServletRequestAware {
+	private UserService userService;
 	Map<String, Object> session;
 	HttpServletRequest request;
 	
 	public String execute() throws Exception {
 		if(session!=null&&session.size()>0){
-			long userId = (Long) session.get("userId");
-			TopicBean topicBean = new TopicBean();
-			topicBean.setUserId(userId);
-			List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
-			request.setAttribute("topicList", topicList);
+			Long userId = (Long) session.get("userId");
+			UserBean userBean = new UserBean();
+			userBean.setUserId(userId);
+			userBean = userService.getUserById(userBean);
+			request.setAttribute("userBean", userBean);
 			
 			return SUCCESS;	
 		}else{
-			return LOGIN;
+			return LOGIN;	
 		}
 	}
 
@@ -45,8 +43,8 @@ public class StorageTalk extends ActionSupport implements SessionAware,ServletRe
 		this.request = request;
 	}
 
-	public void setTopicService(TopicService topicService) {
-		this.topicService = topicService;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 }

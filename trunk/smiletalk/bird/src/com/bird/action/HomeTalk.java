@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.bird.domain.TopicBean;
 import com.bird.service.TopicService;
+import com.bird.util.TokenUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -33,7 +34,11 @@ public class HomeTalk extends ActionSupport  implements SessionAware,ServletRequ
 			topicBean.setUserId(userId);
 			List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
 			request.setAttribute("topicList", topicList);
-			
+			//…˙≥…–¬¡Ó≈∆
+			String token = TokenUtil.generateToken(request);
+			request.setAttribute("clientToken", token);
+			//ÃÊªªæ…¡Ó≈∆
+			session.put("token", token);
 			return SUCCESS;	
 		}else{
 			return LOGIN;

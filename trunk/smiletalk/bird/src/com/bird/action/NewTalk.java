@@ -1,13 +1,10 @@
 package com.bird.action;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -15,11 +12,12 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.bird.domain.TopicBean;
 import com.bird.service.TopicService;
 import com.bird.util.DateUtil;
+import com.bird.util.TokenUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 /**
- * talk topic-发布话题
+ * talk topic-发布话题,有防止重复提交操作
  * @author jzq
  *  beta 0.1
  *  2009-11-9
@@ -43,29 +41,32 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 		String clientToken = request.getParameter("clientToken");
 		String sessionToken = (String) session.get("token");
 		
-		if(session==null){
+		if(session==null||session.size()==0){
 			return LOGIN;
 		}
-		else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//重复提交,struts2防重复提交还没做,此处还不行
-			
-			return null;
+		else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
+			topicBean.setUserId(userId);
+			List<TopicBean> topicList = topicService.getObjectList(topicBean);
+			//生成新令牌
+			String token = TokenUtil.generateToken(request);
+			request.setAttribute("clientToken", token);
+			//替换旧令牌
+			session.put("token", token);
+			request.setAttribute("topicList", topicList);
+			return SUCCESS;
 		}else{
-			String topicContent = topicBean.getTopicContent();
 	    	String userName = (String) session.get("userName");
-	    	TopicBean topic = new TopicBean();
-			topic.setUserId(userId);
-			topic.setTopicContent(topicContent);
-			topic.setUserName(userName);
+	    	topicBean.setUserId(userId);
+	    	topicBean.setUserName(userName);
 			Date now = new Date();
 			String topicTime = DateUtil.getDateString(now);
-			topic.setTopicTime(topicTime);
+			topicBean.setTopicTime(topicTime);
 			//未对topicContent,userName,userId进行验证
-			int result = topicService.insertObject(topic);
+			int result = topicService.insertObject(topicBean);
 			if(result>0){
-				topic.setUserId(userId);
-				List<TopicBean> topicList = topicService.getObjectList(topic);
+				List<TopicBean> topicList = topicService.getObjectList(topicBean);
 				//生成新令牌
-				String token = generateToken(request);
+				String token = TokenUtil.generateToken(request);
 				request.setAttribute("clientToken", token);
 				//替换旧令牌
 				session.put("token", token);
@@ -78,38 +79,6 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 		
 	}
 	
-	/**
-	 * struts   令牌机制
-	 * @param   request
-	 * @return  生成令牌
-	 */
-	protected String generateToken(HttpServletRequest request) {
-       HttpSession session = request.getSession();
-       try {
-           byte id[] = session.getId().getBytes();
-           byte now[] = new Long(System.currentTimeMillis()).toString().getBytes();
-           MessageDigest md = MessageDigest.getInstance("MD5");
-           md.update(id);
-           md.update(now);
-           return (toHex(md.digest()));
-       } catch (IllegalStateException e) {
-           return (null);
-       } catch (NoSuchAlgorithmException e) {
-           return (null);
-       }
-	}
-	
-	/**
-	 * @param  buffer
-	 * @return 16进制的字符串表示
-	 */
-	protected String toHex(byte buffer[]) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < buffer.length; i++)
-            sb.append(Integer.toHexString((int) buffer[i] & 0xff));
-        return (sb.toString());
-    }
-
 	public TopicBean getModel() {
 		return topicBean;
 	}
