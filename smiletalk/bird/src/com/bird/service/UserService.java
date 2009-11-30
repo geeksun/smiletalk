@@ -3,6 +3,8 @@ package com.bird.service;
 import java.util.List;
 
 import javax.mail.MessagingException;
+
+import com.bird.domain.Follow;
 import com.bird.domain.UserBean;
 
 public interface UserService {
@@ -14,5 +16,7 @@ public interface UserService {
 	public UserBean loginUser(UserBean userVo);
 	public void sendActivateEmail(UserBean user) throws MessagingException;
 	public UserBean getUserById(UserBean userBean);
+	//public List<Follow> getUserIdList(Follow follow);
+	public List<Long> getUserIdList(Follow follow);
 	
 }

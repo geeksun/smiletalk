@@ -10,10 +10,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 public class TopicDaoImpl  implements TopicDao {
 	private SqlMapClient sqlMapClient;
 	
-	public SqlMapClient getSqlMapClient() {
-		return sqlMapClient;
-	}
-
+	
 	public void setSqlMapClient(SqlMapClient sqlMapClient) {
 		this.sqlMapClient = sqlMapClient;
 	}
@@ -30,7 +27,7 @@ public class TopicDaoImpl  implements TopicDao {
 
 	public List<TopicBean> getObjectList(TopicBean topicBean) {
 		try {
-			List<TopicBean> topicList = (List<TopicBean>)this.sqlMapClient.queryForList("findTopicByUser", topicBean);
+			List<TopicBean> topicList = (List<TopicBean>)sqlMapClient.queryForList("findTopicByUser", topicBean.getUserIdList());
 			return topicList;
 		} catch (SQLException e) {
 			e.printStackTrace();

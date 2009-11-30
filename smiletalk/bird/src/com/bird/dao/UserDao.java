@@ -15,4 +15,5 @@ public interface UserDao {
 	public UserBean getUserById(UserBean userBean);
 	
 	
+	
 }

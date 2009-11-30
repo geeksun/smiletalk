@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import com.bird.dao.FollowDao;
 import com.bird.dao.UserDao;
+import com.bird.domain.Follow;
 import com.bird.domain.UserBean;
 import com.bird.service.SuperService;
 import com.bird.service.UserService;
@@ -12,7 +14,12 @@ import com.bird.util.MailSenderUtil;
 
 public class UserServiceImpl extends SuperService implements UserService {
 	private UserDao userDao;
+	private FollowDao followDao;
 	
+	public void setFollowDao(FollowDao followDao) {
+		this.followDao = followDao;
+	}
+
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
@@ -81,6 +88,18 @@ public class UserServiceImpl extends SuperService implements UserService {
 		}
 		return userDao.getUserById(userBean);
 	}
+
+	/**
+	 *  返回用户ID和关注者的ID列表
+	 */
+	//public List<Follow> getUserIdList(Follow follow) {
+	public List<Long> getUserIdList(Follow follow) {
+		if(follow==null){
+			return null;
+		}
+		return followDao.getUserIdList(follow);
+	}
+
 	
 
 }

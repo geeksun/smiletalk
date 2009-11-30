@@ -1,6 +1,7 @@
 package com.bird.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author jzq
@@ -13,9 +14,13 @@ public class TopicBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 3210689259419767229L;
 	private Long userId;
+	// 关注者ID
+	private Long followUserId;
 	private String userName;
 	private String topicContent;
 	private String topicTime;
+	//	用户ID和关注者的List
+	private List<Long> userIdList;
 	
 	public Long getUserId() {
 		return userId;
@@ -40,6 +45,18 @@ public class TopicBean implements Serializable{
 	}
 	public void setTopicTime(String topicTime) {
 		this.topicTime = topicTime;
+	}
+	public Long getFollowUserId() {
+		return followUserId;
+	}
+	public void setFollowUserId(Long followUserId) {
+		this.followUserId = followUserId;
+	}
+	public List<Long> getUserIdList() {
+		return userIdList;
+	}
+	public void setUserIdList(List<Long> userIdList) {
+		this.userIdList = userIdList;
 	}
 	
 	
