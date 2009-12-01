@@ -115,6 +115,19 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	/**
+	 * 更新用户设置信息
+	 */
+	public int updateSettingsInfo(UserBean userBean) {
+		try {
+        	int result = (Integer)sqlMapClient.update("updateSettingsInfo", userBean);
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	
 
 }

@@ -13,6 +13,7 @@ public interface UserDao {
 	public UserBean loginUser(UserBean userBean);
 	public void updateObject(UserBean userBean);
 	public UserBean getUserById(UserBean userBean);
+	public int updateSettingsInfo(UserBean userBean);
 	
 	
 	
