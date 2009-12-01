@@ -38,7 +38,7 @@
 					ÓÃ»§Ãû£º
 				</td>
 				<td>
-					<input type="text" name="model.userName" id="iTalkName" value="<%=iTalkName%>" size="12">
+					<input type="text" name="userName" id="iTalkName" value="<%=iTalkName%>" size="12">
 				</td>
 			</tr>
 			<tr>
@@ -46,7 +46,7 @@
 					ÃÜ Âë£º
 				</td>
 				<td>
-					<input type="password" name="model.password" id="iTalkpwd" value="<%=iTalkpwd%>" size="12">
+					<input type="password" name="password" id="iTalkpwd" value="<%=iTalkpwd%>" size="12">
 				</td>
 			</tr>
 			<tr>
