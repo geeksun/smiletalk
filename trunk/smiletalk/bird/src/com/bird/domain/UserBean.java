@@ -18,11 +18,33 @@ public class UserBean  implements Serializable{
 	private String userName;
 	private String password;
 	private String email;
-	private String isActive;//激活状态-0:未激活1：激活
+	private String isActive;	//激活状态-0:未激活1：激活
 	private String validateCode;
 	private String regTime;
 	private String errorMessage;
+	private String photoPath;	//头像地址
+	private String birthday;
+	private String sex;
+	private String region;		//地区
 	
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
 	public String getErrorMessage() {
 		return errorMessage;
 	}
@@ -76,6 +98,12 @@ public class UserBean  implements Serializable{
 	}
 	public void setFollowUserId(Long followUserId) {
 		this.followUserId = followUserId;
+	}
+	public String getPhotoPath() {
+		return photoPath;
+	}
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
 	}
 	
 }

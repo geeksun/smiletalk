@@ -99,6 +99,16 @@ public class UserServiceImpl extends SuperService implements UserService {
 		return followDao.getUserIdList(follow);
 	}
 
+	/**
+	 * 更新用户设置信息
+	 */
+	public int updateSettingsInfo(UserBean userBean) {
+		if(userBean==null)
+			return 0;
+		int result = userDao.updateSettingsInfo(userBean);
+		return result;
+	}
+
 	
 
 }
