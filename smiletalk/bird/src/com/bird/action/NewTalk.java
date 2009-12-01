@@ -40,6 +40,8 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 	}
 
 	public String execute() throws Exception{
+		request.setCharacterEncoding("GBK");
+		
 		Long userId = (Long) session.get("userId");
 		String clientToken = request.getParameter("clientToken");
 		String sessionToken = (String) session.get("token");
@@ -47,6 +49,7 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 		if(session==null||session.size()==0){
 			return LOGIN;
 		}
+		//点击home时clientToken==null，这个未处理
 		else if(sessionToken!=null&&clientToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
 			topicBean.setUserId(userId);
 			List<TopicBean> topicList = topicService.getObjectList(topicBean);
