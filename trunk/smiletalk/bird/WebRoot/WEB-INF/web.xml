@@ -30,7 +30,7 @@
   </filter>
   <filter-mapping>
        <filter-name>struts2</filter-name>
-       <url-pattern>/*</url-pattern>
+       <url-pattern>*.action</url-pattern>
   </filter-mapping>
   <filter> 
         <filter-name>struts-cleanup</filter-name> 
@@ -40,7 +40,7 @@
   </filter>
   <filter-mapping> 
         <filter-name>struts-cleanup</filter-name> 
-        <url-pattern>/*</url-pattern > 
+        <url-pattern>*.action</url-pattern > 
   </filter-mapping>  
   <filter>
 	<filter-name>EncodingFilter</filter-name>
@@ -60,7 +60,7 @@
   </filter>
   <filter-mapping>
 	<filter-name>AccessPurviewFilter</filter-name>
-	<url-pattern>/frame/*</url-pattern>
+	<url-pattern>*.action</url-pattern>
 	<!--<url-pattern>/frame/*,italk</url-pattern>-->
   </filter-mapping>
  
