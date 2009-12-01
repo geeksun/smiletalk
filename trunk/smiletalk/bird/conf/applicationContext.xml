@@ -66,12 +66,16 @@
 			<ref local="topicService"/>
 		</property>
 	</bean>
-	<bean id="settingTalk" class="com.bird.action.SettingTalk">
+	<bean id="settingsTalk" class="com.bird.action.SettingsTalk">
 		<property name="userService">
 			<ref local="userService"/>
 		</property>
 	</bean>
-	
+	<bean id="settingsInfo" class="com.bird.action.SettingsInfo">
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
+	</bean>
 	
 	<bean id="exitTalk" class="com.bird.action.ExitTalk">
 	</bean>
