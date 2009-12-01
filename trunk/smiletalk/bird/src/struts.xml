@@ -26,9 +26,24 @@
             <result name="success">/frame/storageTalk.jsp</result>
             <result name="login">login.jsp</result>
         </action>
-        
-        <action name="settingTalk" class="settingTalk">
-        	<result name="success">/frame/settingInfo.jsp</result>
+        <action name="settingsTalk" class="settingsTalk">
+        	<result name="success">/frame/settingsInfo.jsp</result>
+            <result name="login">login.jsp</result>
+        </action>
+        <action name="settingsInfo" class="settingsInfo">
+        	<param name="savePath">/photo</param>
+        	<!-- start 
+            <interceptor-ref name ="fileUpload"> 
+                <param name ="allowedTypes"> 
+                    image/bmp,image/PNG,image/gif,image/JPEG,image/JPG,image/jpg,image/jpeg
+                </param> 
+                <param name="maximumSize">
+					1024000
+				</param>
+            </interceptor-ref>
+            <interceptor-ref name ="defaultStack"/>-->
+            <!-- end -->
+        	<result name="success" type="chain">settingsTalk</result>
             <result name="login">login.jsp</result>
         </action>
         

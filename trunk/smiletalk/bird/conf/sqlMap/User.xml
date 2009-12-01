@@ -35,5 +35,10 @@ insert user (userName,password,email,regTime,isActive) values (#userName#,#passw
 update user set validateCode = #validateCode# where userName = #userName#
 		]]>
 	</update>
+	<update id="updateSettingsInfo" parameterClass="com.bird.domain.UserBean">
+		<![CDATA[
+update user set photoPath=#photoPath#,birthday=#birthday#,sex=#sex#,region=#region# where userId = #userId#
+		]]>
+	</update>
 	
 </sqlMap>
