@@ -29,7 +29,7 @@ public class SettingsTalk extends ActionSupport implements SessionAware, Servlet
 			userBean = userService.getUserById(userBean);
 			String phothPath = userBean.getPhotoPath();
 			if(phothPath!=null){
-				userBean.setPhotoPath(request.getContextPath()+"/"+phothPath);
+				userBean.setPhotoPath(request.getContextPath()+phothPath);
 			}
 			
 			request.setAttribute("userBean", userBean);
