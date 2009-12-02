@@ -31,6 +31,7 @@ public class SettingsTalk extends ActionSupport implements SessionAware, Servlet
 			if(phothPath!=null){
 				userBean.setPhotoPath(request.getContextPath()+phothPath);
 			}
+			//对要在前台显示的userBean的属性为null的值处理,如果是null,转换成""
 			
 			request.setAttribute("userBean", userBean);
 			
