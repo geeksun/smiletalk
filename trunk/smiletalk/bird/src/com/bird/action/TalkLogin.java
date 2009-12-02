@@ -29,6 +29,7 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 	private TopicService topicService;
 	private UserBean userBean = new UserBean();
 	private TopicBean topicBean;
+	private List<TopicBean> topicList;
 	Map<String, Object> session;
 	HttpServletRequest request;
 	HttpServletResponse response;
@@ -100,10 +101,9 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				topicBean.setUserId(userId);
 				topicBean.setFollowUserId(followUserId);
 				topicBean.setUserIdList(userIdList);
-				List<TopicBean> topicList = topicService.getObjectList(topicBean); 	//16
+				topicList = topicService.getObjectList(topicBean); 	//16
 				
-				request.setAttribute("topicList", topicList);
-				
+				//request.setAttribute("topicList", topicList);
 				return SUCCESS;	
 			}else{
 				userBean.setErrorMessage("用户名或密码错误");
@@ -127,6 +127,14 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
+	}
+
+	public List<TopicBean> getTopicList() {
+		return topicList;
+	}
+
+	public void setTopicList(List<TopicBean> topicList) {
+		this.topicList = topicList;
 	}
 	
 }
