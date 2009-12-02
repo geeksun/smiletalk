@@ -78,35 +78,32 @@ public class SettingsInfo extends ActionSupport implements ModelDriven<UserBean>
 	}
 
 	public String execute() throws Exception {
-		String path = getSavePath() + "\\" + getUploadFileName();
-		FileOutputStream fos = new FileOutputStream(path);			//保存位置: D:\workspace\bird\WebRoot\/photo
-		System.out.println("path："+path);
-		FileInputStream fis = new FileInputStream(getUpload());
-		System.out.println("File大小："+fis.available());
-		
-		byte[] buffer = new byte[1024];
-		int len = 0;
-		while ((len = fis.read(buffer)) > 0) {
-			fos.write(buffer, 0, len);
+		if(uploadFileName!=null){
+			String path = getSavePath() + "\\" + getUploadFileName();
+			FileOutputStream fos = new FileOutputStream(path);			
+			
+			System.out.println("path："+path);		//图片保存位置：path：D:\workspace\bird\WebRoot\/photo\3ab_d7a47830_b232_4936_8847_0d50fefcb5c9_0.jpg
+			FileInputStream fis = new FileInputStream(getUpload());
+			System.out.println("File大小："+fis.available());		//File大小：4594,4.48 KB
+			
+			byte[] buffer = new byte[1024];
+			int len = 0;
+			while ((len = fis.read(buffer)) > 0) {
+				fos.write(buffer, 0, len);
+			}
+			String photoPath = savePath + "/" + getUploadFileName();
+			userBean.setPhotoPath(photoPath);
 		}
-		
 		Long userId = (Long) session.get(ConstantUtil.USERID);
 		userBean.setUserId(userId);
-		String photoPath = savePath + "/" + getUploadFileName();
-		userBean.setPhotoPath(photoPath);
-		String birthday = userBean.getBirthday();
-		birthday = birthday==null?"":birthday;
-		userBean.setBirthday(birthday);
-		String sex = userBean.getSex();
-		sex = sex==null?"":sex;
-		userBean.setSex(sex);
-		String region = userBean.getRegion();
-		region = region==null?"":region;
-		userBean.setRegion(region);
 		int result = userService.updateSettingsInfo(userBean);
+		if(result>0){
+			return SUCCESS;
+		}else{
+			return LOGIN;
+			//return ERROR;		//service occurent exception
+		}
 		
-		return SUCCESS;
-
 	}
 
 	public void setSession(Map<String, Object> session) {

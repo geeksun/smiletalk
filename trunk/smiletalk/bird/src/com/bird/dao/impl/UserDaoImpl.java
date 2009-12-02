@@ -76,12 +76,18 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	/**
-	 *  用户登录验证
+	 *  用户登录验证：用户名、密码
 	 */
 	public UserBean loginUser(UserBean userBean) {
         try {
-        	UserBean usrBean = (UserBean)sqlMapClient.queryForObject("loginUser", userBean);
-			return usrBean;
+        	UserBean usrBean = (UserBean)sqlMapClient.queryForObject("findUserByName", userBean);
+        	if(usrBean!=null){
+        		if(usrBean.getPassword().equals(userBean.getPassword())){
+        			return usrBean;
+        		}
+        		return null;
+        	}
+			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

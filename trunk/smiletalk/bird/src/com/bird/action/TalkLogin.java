@@ -44,26 +44,24 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 	public String execute() throws Exception {
 		String userName = userBean.getUserName();
 		String password = userBean.getPassword();
-		UserBean user = new UserBean();
 		
 		if(userName==null||userName.equals("")){
-			user.setErrorMessage("请输入用户名");                // jsp 文件用 //userVo.setErrormessage()
+			userBean.setErrorMessage("请输入用户名");                // jsp 文件用 //userVo.setErrormessage()
 			//this.addActionError("用户名不能为空!");
 			return LOGIN;
 		}
 		else if(password==null||password.equals("")){
-			user.setErrorMessage("请输入密码");
+			userBean.setErrorMessage("请输入密码");
 			// this.addActionError("密码不能为空!");
 			return LOGIN;
 		}
 		else
 		{	
-			user.setUserName(userName);
-			user.setPassword(password);
-			user = userService.loginUser(user);
-			if(user!=null){
+			userBean = userService.loginUser(userBean);		//1000因为初始化连接池需要时间时间
+			if(userBean!=null){
 				String cookieFlag = null;
-				String autoLogin = request.getParameter("autoLogin");	//自动登录
+				String autoLogin = request.getParameter("autoLogin");	//是否自动登录
+				
 				//判断cookie信息
 				Cookie[] cookies = request.getCookies();
 				if (cookies != null) {
@@ -74,7 +72,6 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 						}
 					}
 				}
-
 				//保存用户cookie信息 
 				if (!"1".equals(cookieFlag) && autoLogin != null) {
 					Cookie usrCookie = new Cookie("usrCookie", userName);
@@ -89,24 +86,27 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 					response.addCookie(usrCookie);
 					response.addCookie(pwdCookie);
 				}
+				
 				session.put("userName", userName);
-				Long userId = user.getUserId();
-				Long followUserId = user.getFollowUserId();
+				Long userId = userBean.getUserId();
+				Long followUserId = userBean.getFollowUserId();
 				Follow follow = new Follow();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
+				
 				userIdList.add(userId);
 				session.put("userId", userId);
 				topicBean = new TopicBean();
 				topicBean.setUserId(userId);
 				topicBean.setFollowUserId(followUserId);
 				topicBean.setUserIdList(userIdList);
-				List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
+				List<TopicBean> topicList = topicService.getObjectList(topicBean); 	//16
+				
 				request.setAttribute("topicList", topicList);
 				
 				return SUCCESS;	
 			}else{
-				user.setErrorMessage("用户名或密码错误");
+				userBean.setErrorMessage("用户名或密码错误");
 				// this.addActionError("用户名或密码错误");
 				return LOGIN;
 			}
