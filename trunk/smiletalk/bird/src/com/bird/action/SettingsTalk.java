@@ -18,13 +18,14 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class SettingsTalk extends ActionSupport implements SessionAware, ServletRequestAware {
 	private UserService userService;
+	private UserBean userBean;
 	Map<String, Object> session;
 	HttpServletRequest request;
 	
 	public String execute() throws Exception {
 		if(session!=null&&session.size()>0){
 			Long userId = (Long) session.get("userId");
-			UserBean userBean = new UserBean();
+			userBean = new UserBean();
 			userBean.setUserId(userId);
 			userBean = userService.getUserById(userBean);
 			String phothPath = userBean.getPhotoPath();
@@ -33,7 +34,8 @@ public class SettingsTalk extends ActionSupport implements SessionAware, Servlet
 			}
 			//对要在前台显示的userBean的属性为null的值处理,如果是null,转换成""
 			
-			request.setAttribute("userBean", userBean);
+			
+			//request.setAttribute("userBean", userBean);
 			
 			return SUCCESS;	
 		}else{
@@ -51,6 +53,14 @@ public class SettingsTalk extends ActionSupport implements SessionAware, Servlet
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 
 }
