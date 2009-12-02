@@ -51,22 +51,13 @@ public class UserServiceImpl extends SuperService implements UserService {
 	}
 
 	/**
-	 * @see com.bird.service.UserService#loginUser(com.bird.vo.UserVo)
 	 * 登录验证
 	 */
 	public UserBean loginUser(UserBean userBean) {
 		if(userBean==null){
 			return null;
 		}
-		//用domain object代替po和vo,省去两个对象的操作
-		/*UserPo userPo = new UserPo();
-		PropertyUtils.copyProperties(userPo, userVo);
-		userPo = userDao.loginUser(userPo);
-		if(userPo!=null){
-			PropertyUtils.copyProperties(userVo, userPo);
-		}*/
-		userBean = userDao.loginUser(userBean);
-		return userBean;
+		return userDao.loginUser(userBean);
 	}
 
 	/**
@@ -108,7 +99,6 @@ public class UserServiceImpl extends SuperService implements UserService {
 		int result = userDao.updateSettingsInfo(userBean);
 		return result;
 	}
-
 	
-
+	
 }

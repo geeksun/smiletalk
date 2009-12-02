@@ -21,28 +21,27 @@
 			<td align="right">头像： </td><td><IMG width=50 height=50 src="<%=userBean.getPhotoPath()%>" />   <input type="file" name="upload" size="30"></td>
 		</tr>
 		<tr>
-			<td align="right">个人空间： </td><td></td>
+			<td align="right">个人空间： </td><td><%=path%>/<%=userBean.getUserName()%></td>
 		</tr>
 		<tr>
 			<td align="right">
-				<span class="style1">呢称：</span></td><td><font color="#9900FF"><%=userBean.getUserName()%></font>
+				<span class="style1">呢称：</span></td><td><font color="#9900FF"><input type="text" name="userName" value="<%=userBean.getUserName()%>"></font><font color=red>*</font>
 			</td>
 		</tr>
 		<tr>
-			<td align="right">性别： </td><td><input type="radio" name="sex" value="1" checked>男 <input type="radio" name="sex" value="0">女<input type="radio" name="sex" value="2">保密</td>
+			<td align="right">性别： </td><td><input type="radio" name="sex" value="1" <%if("1".equals(userBean.getSex())){%> checked <%}%> checked>男 <input type="radio" name="sex" value="0" <%if("0".equals(userBean.getSex())){%> checked <%}%>>女<input type="radio" name="sex" value="2" <%if("2".equals(userBean.getSex())){%> checked <%}%>>保密</td>
 		</tr>
 		<tr align="center" >
 			<td align="right">生日： </td><td align="left"><input type="text" name="birthday" size="30" value="<%=userBean.getBirthday()%>"></td>
 		</tr>
 		<tr align="center" >
-			<td align="right">地区： </td><td align="left"><input type="text" name="birthday" size="30" value="<%=userBean.getRegion()%>"></td>
+			<td align="right">地区： </td><td align="left"><input type="text" name="region" size="30" value="<%=userBean.getRegion()%>"></td>
 		</tr>
 		<tr align="center" >
 			<td align="right">
 				<span class="style1">注册时间：</span></td><td align="left"><font color="#9900FF"><%=userBean.getRegTime()%></font>
 			</td>
 		</tr>
-		
 		
 		<tr align="center">
 			<td colspan="2"><input type="submit" value=" 保 存 "></td>
@@ -57,4 +56,3 @@
 <p align="center">
 <%@ include file="foot.jsp" %>
 </p>
-
