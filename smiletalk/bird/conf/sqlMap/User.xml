@@ -4,11 +4,6 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap>
-	<select id="loginUser" parameterClass="com.bird.domain.UserBean" resultClass="com.bird.domain.UserBean">
-		<![CDATA[
-select * from user where userName = #userName# and password = #password#
-		]]>
-	</select>
 	<select id="findUserByName" parameterClass="com.bird.domain.UserBean" resultClass="com.bird.domain.UserBean">
 		<![CDATA[
 select * from user where userName = #userName#
@@ -36,8 +31,26 @@ update user set validateCode = #validateCode# where userName = #userName#
 		]]>
 	</update>
 	<update id="updateSettingsInfo" parameterClass="com.bird.domain.UserBean">
+		<![CDATA[ update user ]]>
+		<dynamic prepend="set">
+			<isNotNull property="userName" prepend="," removeFirstPrepend="true">
+				<![CDATA[userName = #userName#]]>
+			</isNotNull>
+			<isNotNull property="photoPath" prepend="," removeFirstPrepend="true">
+				<![CDATA[photoPath = #photoPath#]]>
+			</isNotNull>
+			<isNotNull property="birthday" prepend="," removeFirstPrepend="true">
+				<![CDATA[birthday = #birthday#]]>
+			</isNotNull>
+			<isNotNull property="sex" prepend="," removeFirstPrepend="true">
+				<![CDATA[sex = #sex#]]>
+			</isNotNull>
+			<isNotNull property="region" prepend="," removeFirstPrepend="true">
+				<![CDATA[region = #region#]]>
+			</isNotNull>
+		</dynamic>
 		<![CDATA[
-update user set photoPath=#photoPath#,birthday=#birthday#,sex=#sex#,region=#region# where userId = #userId#
+			where userId = #userId#
 		]]>
 	</update>
 	
