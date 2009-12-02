@@ -1,5 +1,6 @@
 <%@ page language="java"  import="java.util.*,com.bird.domain.*,com.bird.util.*" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="top.jsp"/>
 <style>
 .style1 {
@@ -22,7 +23,6 @@
 	}
 	else{
 	%>
-qq
 <% 
    }
  %>
@@ -41,10 +41,11 @@ qq
 		<tr align="center">
 			<td><input type="button" onclick="justTalk()" value="  Talk  " > </td>
 		</tr>
-		<c:forEach var="topicBean" items="${topicList}" >
+		
+		<c:forEach var="topicBean" items="${topicList}">
 		<tr align="center" >
 			<td align="left">
-				<span class="style1">${topicBean.userName}</span>  <font color="#9900FF">${topicBean.topicTime}</font>
+				<span class="style1">${topicBean.userName}</span><font color="#9900FF">${topicBean.topicTime}</font>
 			</td>
 		</tr>
 		<tr>
@@ -53,6 +54,7 @@ qq
 			</td>
 		</tr>
 		</c:forEach>
+		 
 	</table>
 	<input type="hidden" name="clientToken" value="<%=clientToken%>" />
 </form>
