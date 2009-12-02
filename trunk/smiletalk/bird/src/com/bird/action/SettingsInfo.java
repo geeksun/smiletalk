@@ -69,6 +69,10 @@ public class SettingsInfo extends ActionSupport implements ModelDriven<UserBean>
 		this.savePath = value;
 	}
 
+	/**
+	 * @return 可以换另一个取路径的方法  
+	 * @throws Exception
+	 */
 	public String getSavePath() throws Exception {
 		return ServletActionContext.getRequest().getRealPath("/") + savePath;
 	}
