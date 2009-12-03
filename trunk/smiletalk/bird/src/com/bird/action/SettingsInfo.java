@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 /**
- *  保存用户个人信息
+ *  保存用户个人信息（图片用绝对路径,用squid加速）
  *  @author 姜志强 
  *  2009-11-30
  */
@@ -31,7 +31,7 @@ public class SettingsInfo extends ActionSupport implements ModelDriven<UserBean>
 	private File upload;
 	private String uploadFileName;
 	private String uploadContentType;
-	private String savePath;
+	private String savePath;	//图片的保存路径,要先用绝对路径
 
 	public String getTitle() {
 		return title;
@@ -75,14 +75,10 @@ public class SettingsInfo extends ActionSupport implements ModelDriven<UserBean>
 	 */
 	public String getSavePath() throws Exception {
 		//return ServletActionContext.getRequest().getRealPath("/") + savePath;
-		return savePath;
+		return  savePath;
 	}
 
 	public String execute() throws Exception {
-		/*if(session==null&&session.size()==0){
-			session = (Map<String, Object>) ServletActionContext.getRequest().getSession();
-			session.put("x", "x");
-		}*/
 		if(uploadFileName!=null){
 			String path = getSavePath() + "\\" + getUploadFileName();
 			FileOutputStream fos = new FileOutputStream(path);			

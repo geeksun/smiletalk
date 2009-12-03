@@ -28,11 +28,10 @@ public class SettingsTalk extends ActionSupport implements SessionAware, Servlet
 			userBean.setUserId(userId);
 			userBean = userService.getUserById(userBean);
 			//String phothPath = userBean.getPhotoPath();
-			/*if(phothPath!=null){		//可以直接在页面显示
+			/*if(phothPath!=null){
 				userBean.setPhotoPath(request.getContextPath()+phothPath);
 			}*/
 			//对要在前台显示的userBean的属性为null的值处理,如果是null,转换成""
-			
 			
 			return SUCCESS;	
 		}else{
