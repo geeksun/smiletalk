@@ -199,8 +199,11 @@
 		</td>
 	</tr>
 	<tr align="center">
-		<td colspan="3">
-			<input type="button" value="×¢²á iTalk"  onclick="register()" />
+		<td colspan="2" align="right">
+			<input type="button" value=" ·µ  »Ø " onclick="javascript:history.back(1)">
+		</td>
+		<td colspan="2" align="left">
+			&nbsp;<input type="button" value="×¢²á iTalk"  onclick="register()" />
 		</td>
 	</tr>
   </table>
