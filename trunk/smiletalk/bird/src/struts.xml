@@ -4,9 +4,14 @@
 <struts>
     <include file="struts-default.xml"/>
     <package name="package1" extends="struts-default">
+    	<!-- global-results需放在每个package的内部 -->
+	    <global-results>
+			<result name="error">/error.jsp</result>
+			<!-- <result name="login" type="redirect-action">Logon!input</result> -->
+			<result name="login" type="dispatcher">login.jsp</result>
+		</global-results> 
         <action name="newTalk" class="newTalk">
             <result name="success">/frame/iTalk.jsp</result>
-            <result name="login">login.jsp</result>
             <result name="error">error.jsp</result>
         </action>
         <action name="talkRegister" class="talkRegister">
@@ -15,40 +20,33 @@
             <!-- <result type="redirect-action">Menu</result> -->
         </action>
         <action name="talkLogin" class="talkLogin">
-            <result name="success">/frame/iTalk.jsp</result>
-            <result name="login">login.jsp</result>
+        	<!-- <result name="success" type="chain">homeTalk</result> -->
+            <result name="success" type="dispatcher">/frame/iTalk.jsp</result>
         </action>
         <action name="homeTalk" class="homeTalk">
             <result name="success">/frame/iTalk.jsp</result>
-            <result name="login">login.jsp</result>
         </action>
         <action name="storageTalk" class="storageTalk">
             <result name="success">/frame/storageTalk.jsp</result>
-            <result name="login">login.jsp</result>
         </action>
         <action name="settingsTalk" class="settingsTalk">
         	<result name="success">/frame/settingsInfo.jsp</result>
-            <result name="login">login.jsp</result>
         </action>
         <action name="settingsInfo" class="settingsInfo">
-        	<param name="savePath">/photo</param>
-        	<!-- start 
-            <interceptor-ref name ="fileUpload"> 
-                <param name ="allowedTypes"> 
-                    image/bmp,image/PNG,image/gif,image/JPEG,image/JPG,image/jpg,image/jpeg
+        	<param name="savePath">D:/photo_bird</param>
+        	<!--
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes"> 
+                    image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/JPG,image/JPEG
                 </param> 
-                <param name="maximumSize">
-					1024000
-				</param>
             </interceptor-ref>
-            <interceptor-ref name ="defaultStack"/>-->
-            <!-- end -->
+             <interceptor-ref name ="defaultStack"/> -->
+            
         	<result name="success" type="chain">settingsTalk</result>
-            <result name="login">login.jsp</result>
+        	<result name="input">/frame/settingsInfo.jsp</result>
         </action>
         
         <action name="exitTalk" class="exitTalk">
-            <result name="login">login.jsp</result>
         </action>
         
         <action name="checkUserName" class="checkUserName">
@@ -57,5 +55,5 @@
         </action>
     </package>
     
-    
+
 </struts>
