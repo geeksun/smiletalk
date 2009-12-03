@@ -16,6 +16,7 @@ import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
 import com.bird.service.UserService;
+import com.bird.util.ConstantUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -88,7 +89,7 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 					response.addCookie(pwdCookie);
 				}
 				
-				session.put("userName", userName);
+				session.put(ConstantUtil.USERNAME, userName);
 				Long userId = userBean.getUserId();
 				Long followUserId = userBean.getFollowUserId();
 				Follow follow = new Follow();
@@ -96,14 +97,13 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				List<Long> userIdList = userService.getUserIdList(follow);
 				
 				userIdList.add(userId);
-				session.put("userId", userId);
+				session.put(ConstantUtil.USERID, userId);
 				topicBean = new TopicBean();
 				topicBean.setUserId(userId);
 				topicBean.setFollowUserId(followUserId);
 				topicBean.setUserIdList(userIdList);
 				topicList = topicService.getObjectList(topicBean); 	//16
 				
-				//request.setAttribute("topicList", topicList);
 				return SUCCESS;	
 			}else{
 				userBean.setErrorMessage("用户名或密码错误");
@@ -135,6 +135,14 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 
 	public void setTopicList(List<TopicBean> topicList) {
 		this.topicList = topicList;
+	}
+
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 	
 }
