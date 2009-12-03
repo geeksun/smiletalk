@@ -74,10 +74,15 @@ public class SettingsInfo extends ActionSupport implements ModelDriven<UserBean>
 	 * @throws Exception
 	 */
 	public String getSavePath() throws Exception {
-		return ServletActionContext.getRequest().getRealPath("/") + savePath;
+		//return ServletActionContext.getRequest().getRealPath("/") + savePath;
+		return savePath;
 	}
 
 	public String execute() throws Exception {
+		/*if(session==null&&session.size()==0){
+			session = (Map<String, Object>) ServletActionContext.getRequest().getSession();
+			session.put("x", "x");
+		}*/
 		if(uploadFileName!=null){
 			String path = getSavePath() + "\\" + getUploadFileName();
 			FileOutputStream fos = new FileOutputStream(path);			

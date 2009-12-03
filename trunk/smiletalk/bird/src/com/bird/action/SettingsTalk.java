@@ -1,7 +1,6 @@
 package com.bird.action;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -28,14 +27,12 @@ public class SettingsTalk extends ActionSupport implements SessionAware, Servlet
 			userBean = new UserBean();
 			userBean.setUserId(userId);
 			userBean = userService.getUserById(userBean);
-			String phothPath = userBean.getPhotoPath();
-			if(phothPath!=null){
+			//String phothPath = userBean.getPhotoPath();
+			/*if(phothPath!=null){		//可以直接在页面显示
 				userBean.setPhotoPath(request.getContextPath()+phothPath);
-			}
+			}*/
 			//对要在前台显示的userBean的属性为null的值处理,如果是null,转换成""
 			
-			
-			//request.setAttribute("userBean", userBean);
 			
 			return SUCCESS;	
 		}else{
