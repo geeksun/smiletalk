@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bird.util.ConstantUtil;
+
 
 /**
  * @author jzq
@@ -43,7 +45,7 @@ public class AccessPurviewFilter extends HttpServlet implements Filter {
          HttpSession session = request.getSession();   
    
          // 如果回话中的用户名为空,页面重新定向到登陆页面   
-         if (session.getAttribute("userName") == null) {
+         if (session.getAttribute(ConstantUtil.USERNAME) == null) {
     	 	 //鉴定cookie是否存在
     		/* Cookie cookies[] = request.getCookies(); 
     		 Cookie cookie = null; 
