@@ -1,5 +1,6 @@
 package com.bird.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,11 +98,31 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				List<Long> userIdList = userService.getUserIdList(follow);
 				
 				userIdList.add(userId);
+				
+				//处理italk主页面的前面显示的图片路径
+				Map<String, String> photoPathMap = new HashMap<String, String>();
+				for(long usrId:userIdList){
+					//UserBean usrBean = new UserBean();
+					userBean.setUserId(usrId);
+					userBean = userService.getUserById(userBean);
+					String usrName = userBean.getUserName();
+					String photoPath = userBean.getPhotoPath();
+					photoPathMap.put(usrName, photoPath);
+				}
+				
 				topicBean = new TopicBean();
 				topicBean.setUserId(userId);
 				topicBean.setFollowUserId(followUserId);
 				topicBean.setUserIdList(userIdList);
 				topicList = topicService.getObjectList(topicBean); 	//16
+				//将italk主页面的前面显示的图片路径set进topicBean
+				for(TopicBean topic:topicList){
+					String usrName = topic.getUserName();
+					if(photoPathMap.containsKey(usrName)){
+						String photoPath = photoPathMap.get(usrName);
+						topic.setPhotoPath(photoPath);
+					}
+				}
 				
 				return SUCCESS;	
 			}else{

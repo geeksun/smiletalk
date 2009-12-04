@@ -16,6 +16,10 @@ public interface UserService {
 	public UserBean loginUser(UserBean userVo);
 	public void sendActivateEmail(UserBean user) throws MessagingException;
 	public UserBean getUserById(UserBean userBean);
+	
+	/**
+	 *  返回用户的关注者的ID列表
+	 */
 	public List<Long> getUserIdList(Follow follow);
 	public int updateSettingsInfo(UserBean userBean);
 	

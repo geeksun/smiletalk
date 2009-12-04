@@ -21,7 +21,7 @@
   <tr>
     <td><img src="<%=path%>/images/beta/logo.JPG" alt="logo" width="212" height="65" /><br><%=guest%>£¬»¶Ó­ÄúÊ¹ÓÃ iTalk</td>
     <td valign="bottom" width="75%" align="right">
-        <a href="homeTalk.action">Home</a>&nbsp;<a href="storageTalk.action">Profile</a>&nbsp;<a href="findPeople.jsp">Find People</a>&nbsp;<a href="settingsTalk.action">Settings</a>&nbsp;<a href="">Help</a>&nbsp;<%if(guest!="guest"){%><a href="exitTalk.action">Sign out</a><%}else{%><a href="<%=path%>/login.jsp">Sign in</a><%}%>
+        <a href="homeTalk.action">Home</a>&nbsp;<a href="storageTalk.action">Profile</a>&nbsp;<a href="findPeople.jsp">Find People</a>&nbsp;<a href="settingsTalk.action">Settings</a>&nbsp;<a href="#">Help</a>&nbsp;<%if(guest!="guest"){%><a href="exitTalk.action">Sign out</a><%}else{%><a href="<%=path%>/login.jsp">Sign in</a><%}%>
     </td>
   </tr>
 </table>
