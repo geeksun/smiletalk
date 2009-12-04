@@ -89,7 +89,7 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 					response.addCookie(pwdCookie);
 				}
 				
-				session.put(ConstantUtil.USERNAME, userName);
+				session.put(ConstantUtil.USER, userBean);
 				Long userId = userBean.getUserId();
 				Long followUserId = userBean.getFollowUserId();
 				Follow follow = new Follow();
@@ -97,7 +97,6 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				List<Long> userIdList = userService.getUserIdList(follow);
 				
 				userIdList.add(userId);
-				session.put(ConstantUtil.USERID, userId);
 				topicBean = new TopicBean();
 				topicBean.setUserId(userId);
 				topicBean.setFollowUserId(followUserId);

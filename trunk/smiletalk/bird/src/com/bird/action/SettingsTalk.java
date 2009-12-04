@@ -8,10 +8,11 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.bird.domain.UserBean;
 import com.bird.service.UserService;
+import com.bird.util.ConstantUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * talker信息预览、设置
+ * talker信息预览、设置: 不用查数据库
  * @author 姜志强
  * 2009-11-30
  */
@@ -23,10 +24,12 @@ public class SettingsTalk extends ActionSupport implements SessionAware, Servlet
 	
 	public String execute() throws Exception {
 		if(session!=null&&session.size()>0){
-			Long userId = (Long) session.get("userId");
+			userBean = (UserBean) session.get(ConstantUtil.USER);
+			
+			/*Long userId = (Long) session.get("userId");
 			userBean = new UserBean();
 			userBean.setUserId(userId);
-			userBean = userService.getUserById(userBean);
+			userBean = userService.getUserById(userBean);*/
 			//String phothPath = userBean.getPhotoPath();
 			/*if(phothPath!=null){
 				userBean.setPhotoPath(request.getContextPath()+phothPath);

@@ -27,6 +27,12 @@ public class UserBean  implements Serializable{
 	private String sex;
 	private String region;		//µØÇø
 	
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 	public String getBirthday() {
 		return birthday;
 	}
@@ -63,12 +69,7 @@ public class UserBean  implements Serializable{
 	public void setValidateCode(String validateCode) {
 		this.validateCode = validateCode;
 	}
-	public long getUserId() {
-		return userId;
-	}
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+
 	public String getUserName() {
 		return userName;
 	}

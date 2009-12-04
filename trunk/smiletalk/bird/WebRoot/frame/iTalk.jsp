@@ -1,4 +1,4 @@
-<%@ page language="java"  import="java.util.*,com.bird.domain.*" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
+<%@ page language="java" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="top.jsp"/>
@@ -73,7 +73,7 @@
                     <td width="52" valign="top"><img src="${userBean.photoPath}" width="52" height="53" /></td>
                     <td valign="top"><table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
                         <tr>
-                          <td height="18" colspan="2" bgcolor="#CCFFCC" class="STYLE3"><span class="STYLE2"><strong>${topicBean.userName}</strong></span></td>
+                          <td height="18" colspan="2" bgcolor="#EAF3FA" class="STYLE3"><span class="STYLE2"><strong>${topicBean.userName}</strong></span></td>
                         </tr>
                         <tr>
                           <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" height="5">
@@ -88,7 +88,7 @@
                               </table>
                             <table width="95%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                  <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by；</span><span class="STYLE8">${topicBean.userName}</span></td>
+                                  <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
                                 </tr>
                             </table></td>
                           <td width="69"><img src="${userBean.photoPath}" width="69" height="69" /></td>
