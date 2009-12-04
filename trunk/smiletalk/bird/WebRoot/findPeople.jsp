@@ -7,7 +7,7 @@
 	<form action="" name="" method="post">
 		<table>
 			<tr>
-				<td>要搜索的名称:</td><td><input type="text" name="userName" ></td>
+				<td>要搜索的人的名字:</td><td><input type="text" name="userName" ></td>
 			</tr>
 			
 		</table>

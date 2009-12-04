@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
+<%@ page language="java"  import="java.util.*,com.bird.domain.*" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="top.jsp"/>
@@ -20,7 +20,7 @@
 	font-weight: bold;
 }
 .STYLE8 {color: #0066FF; font-size: 12px; }
---> 
+-->
 </style>
 
 <p align=center>
@@ -66,11 +66,11 @@
               
               <c:forEach var="topicBean" items="${topicList}">
                 <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                	<tr>
+		           <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
+		      </tr>
                   <tr>
-		            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
-		          </tr>
-                  <tr>
-                    <td width="52" valign="top"><img src="${userBean.photoPath}" width="52" height="53" /></td>
+                    <td width="52" valign="top"><img src="${topicBean.photoPath}" width="52" height="53" /></td>
                     <td valign="top"><table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
                         <tr>
                           <td height="18" colspan="2" bgcolor="#EAF3FA" class="STYLE3"><span class="STYLE2"><strong>${topicBean.userName}</strong></span></td>
@@ -106,7 +106,10 @@
         </table>
         </td>
         </tr>
-        </table>
+        <tr>
+            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
+        </tr>
+      </table>
    </p>       
           
 <script>

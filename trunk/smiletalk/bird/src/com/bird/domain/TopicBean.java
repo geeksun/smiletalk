@@ -21,7 +21,14 @@ public class TopicBean implements Serializable{
 	private String topicTime;
 	//	用户ID和关注者的List
 	private List<Long> userIdList;
+	private String photoPath;	//头像地址
 	
+	public String getPhotoPath() {
+		return photoPath;
+	}
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
 	public Long getUserId() {
 		return userId;
 	}

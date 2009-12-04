@@ -1,6 +1,7 @@
 package com.bird.action;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 /**
+ * 代码还可以优化
  * 主talk内容页面：包括自己的talk和follow者的talk
  * 登录成功后到此页
  * @author 姜志强
@@ -49,16 +51,35 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 			String clientToken = request.getParameter("clientToken");
 			String sessionToken = (String) session.get("token");
 			
-			if(clientToken==null){	//点击home链接时clientToken==null
-				topicBean = new TopicBean();
-				topicBean.setUserId(userId);
+			if(clientToken==null){				//点击home链接时clientToken==null
 				Follow follow = new Follow();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
 				
 				userIdList.add(userId);
+				
+				//处理italk主页面的前面显示的图片路径
+				Map<String, String> photoPathMap = new HashMap<String, String>();
+				for(long usrId:userIdList){
+					userBean.setUserId(usrId);
+					userBean = userService.getUserById(userBean);
+					String usrName = userBean.getUserName();
+					String photoPath = userBean.getPhotoPath();
+					photoPathMap.put(usrName, photoPath);
+				}
+				
+				topicBean = new TopicBean();
+				topicBean.setUserId(userId);
 				topicBean.setUserIdList(userIdList);
-				List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
+				List<TopicBean> topicList = topicService.getObjectList(topicBean); 		
+				for(TopicBean topic:topicList){
+					String usrName = topic.getUserName();
+					if(photoPathMap.containsKey(usrName)){
+						String photoPath = photoPathMap.get(usrName);
+						topic.setPhotoPath(photoPath);
+					}
+				}				
+				
 				request.setAttribute("topicList", topicList);
 				//生成新令牌
 				String token = TokenUtil.generateToken(request);
@@ -67,8 +88,32 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				session.put("token", token);
 				return SUCCESS;	
 			} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
+				Follow follow = new Follow();
+				follow.setUserId(userId);
+				List<Long> userIdList = userService.getUserIdList(follow);
+				
+				userIdList.add(userId);
+				//处理italk主页面的前面显示的图片路径
+				Map<String, String> photoPathMap = new HashMap<String, String>();
+				for(long usrId:userIdList){
+					userBean.setUserId(usrId);
+					userBean = userService.getUserById(userBean);
+					String usrName = userBean.getUserName();
+					String photoPath = userBean.getPhotoPath();
+					photoPathMap.put(usrName, photoPath);
+				}
+				
 				topicBean.setUserId(userId);
 				List<TopicBean> topicList = topicService.getObjectList(topicBean);
+				//将italk主页面的前面显示的图片路径set进topicBean
+				for(TopicBean topic:topicList){
+					String usrName = topic.getUserName();
+					if(photoPathMap.containsKey(usrName)){
+						String photoPath = photoPathMap.get(usrName);
+						topic.setPhotoPath(photoPath);
+					}
+				}
+				
 				//生成新令牌
 				String token = TokenUtil.generateToken(request);
 				request.setAttribute("clientToken", token);
@@ -76,7 +121,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				session.put("token", token);
 				request.setAttribute("topicList", topicList);
 				return SUCCESS;
-			}else{
+			}else{					// 正常提交
 		    	String userName = userBean.getUserName();
 		    	topicBean.setUserId(userId);
 		    	topicBean.setUserName(userName);
@@ -89,9 +134,29 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					Follow follow = new Follow();
 					follow.setUserId(userId);
 					List<Long> userIdList = userService.getUserIdList(follow);
+					
 					userIdList.add(userId);
+					
+					//处理italk主页面的前面显示的图片路径
+					Map<String, String> photoPathMap = new HashMap<String, String>();
+					for(long usrId:userIdList){
+						userBean.setUserId(usrId);
+						userBean = userService.getUserById(userBean);
+						String usrName = userBean.getUserName();
+						String photoPath = userBean.getPhotoPath();
+						photoPathMap.put(usrName, photoPath);
+					}
+					
 					topicBean.setUserIdList(userIdList);
 					List<TopicBean> topicList = topicService.getObjectList(topicBean);
+					for(TopicBean topic:topicList){
+						String usrName = topic.getUserName();
+						if(photoPathMap.containsKey(usrName)){
+							String photoPath = photoPathMap.get(usrName);
+							topic.setPhotoPath(photoPath);
+						}
+					}
+					
 					//生成新令牌
 					String token = TokenUtil.generateToken(request);
 					request.setAttribute("clientToken", token);
