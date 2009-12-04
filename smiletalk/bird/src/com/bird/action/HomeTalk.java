@@ -41,58 +41,33 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 	public String execute() throws Exception {
 		request.setCharacterEncoding("GBK");
 		
-		Long userId = (Long) session.get(ConstantUtil.USERID);
-		String clientToken = request.getParameter("clientToken");
-		String sessionToken = (String) session.get("token");
-		
 		if(session==null||session.size()==0){
 			return LOGIN;
-		} else if(clientToken==null){	//点击home链接时clientToken==null
-			topicBean = new TopicBean();
-			topicBean.setUserId(userId);
-			Follow follow = new Follow();
-			follow.setUserId(userId);
-			List<Long> userIdList = userService.getUserIdList(follow);
-			
-			userIdList.add(userId);
-			topicBean.setUserIdList(userIdList);
-			List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
-			request.setAttribute("topicList", topicList);
-			//生成新令牌
-			String token = TokenUtil.generateToken(request);
-			request.setAttribute("clientToken", token);
-			//替换旧令牌
-			session.put("token", token);
-			return SUCCESS;	
-		} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
-			topicBean.setUserId(userId);
-			List<TopicBean> topicList = topicService.getObjectList(topicBean);
-			//生成新令牌
-			String token = TokenUtil.generateToken(request);
-			request.setAttribute("clientToken", token);
-			//替换旧令牌
-			session.put("token", token);
-			request.setAttribute("topicList", topicList);
-			return SUCCESS;
 		}else{
-	    	String userName = (String) session.get(ConstantUtil.USERNAME);
-	    	userBean = new UserBean();
-	    	userBean.setUserId(userId);
-	    	userBean = userService.getUserById(userBean);
-	    	
-	    	topicBean.setUserId(userId);
-	    	topicBean.setUserName(userName);
-			Date now = new Date();
-			String topicTime = DateUtil.getDateString(now);
-			topicBean.setTopicTime(topicTime);
-			//未对topicContent,userName,userId进行验证
-			int result = topicService.insertObject(topicBean);
-			if(result>0){
+			userBean = (UserBean) session.get(ConstantUtil.USER);
+			Long userId = userBean.getUserId();
+			String clientToken = request.getParameter("clientToken");
+			String sessionToken = (String) session.get("token");
+			
+			if(clientToken==null){	//点击home链接时clientToken==null
+				topicBean = new TopicBean();
+				topicBean.setUserId(userId);
 				Follow follow = new Follow();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
+				
 				userIdList.add(userId);
 				topicBean.setUserIdList(userIdList);
+				List<TopicBean> topicList = topicService.getObjectList(topicBean); 			
+				request.setAttribute("topicList", topicList);
+				//生成新令牌
+				String token = TokenUtil.generateToken(request);
+				request.setAttribute("clientToken", token);
+				//替换旧令牌
+				session.put("token", token);
+				return SUCCESS;	
+			} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
+				topicBean.setUserId(userId);
 				List<TopicBean> topicList = topicService.getObjectList(topicBean);
 				//生成新令牌
 				String token = TokenUtil.generateToken(request);
@@ -102,7 +77,31 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				request.setAttribute("topicList", topicList);
 				return SUCCESS;
 			}else{
-				return ERROR;
+		    	String userName = userBean.getUserName();
+		    	topicBean.setUserId(userId);
+		    	topicBean.setUserName(userName);
+				Date now = new Date();
+				String topicTime = DateUtil.getDateString(now);
+				topicBean.setTopicTime(topicTime);
+				//未对topicContent,userName,userId进行验证
+				int result = topicService.insertObject(topicBean);
+				if(result>0){
+					Follow follow = new Follow();
+					follow.setUserId(userId);
+					List<Long> userIdList = userService.getUserIdList(follow);
+					userIdList.add(userId);
+					topicBean.setUserIdList(userIdList);
+					List<TopicBean> topicList = topicService.getObjectList(topicBean);
+					//生成新令牌
+					String token = TokenUtil.generateToken(request);
+					request.setAttribute("clientToken", token);
+					//替换旧令牌
+					session.put("token", token);
+					request.setAttribute("topicList", topicList);
+					return SUCCESS;
+				}else{
+					return ERROR;
+				}
 			}
 		}
 		
