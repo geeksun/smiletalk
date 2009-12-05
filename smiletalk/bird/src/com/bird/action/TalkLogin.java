@@ -102,11 +102,11 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				//处理italk主页面的前面显示的图片路径
 				Map<String, String> photoPathMap = new HashMap<String, String>();
 				for(long usrId:userIdList){
-					//UserBean usrBean = new UserBean();
-					userBean.setUserId(usrId);
-					userBean = userService.getUserById(userBean);
-					String usrName = userBean.getUserName();
-					String photoPath = userBean.getPhotoPath();
+					UserBean usrBean = new UserBean();
+					usrBean.setUserId(usrId);
+					usrBean = userService.getUserById(usrBean);
+					String usrName = usrBean.getUserName();
+					String photoPath = usrBean.getPhotoPath();
 					photoPathMap.put(usrName, photoPath);
 				}
 				
