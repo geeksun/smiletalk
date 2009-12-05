@@ -24,6 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class StorageTalk extends ActionSupport implements SessionAware,ServletRequestAware  {
 	private UserBean userBean;
 	private TopicService topicService;
+	private List<TopicBean> topicList;
 	Map<String, Object> session;
 	HttpServletRequest request;
 	
@@ -35,8 +36,12 @@ public class StorageTalk extends ActionSupport implements SessionAware,ServletRe
 			List<Long> userIdList = new ArrayList<Long>();
 			userIdList.add(userId);
 			topicBean.setUserIdList(userIdList);
-			List<TopicBean> topicList = topicService.getObjectList(topicBean); 		
-			request.setAttribute("topicList", topicList);
+			topicList = topicService.getObjectList(topicBean); 		
+			String photoPath = userBean.getPhotoPath();
+			for(TopicBean topic:topicList){
+				topic.setPhotoPath(photoPath);
+			}
+			//request.setAttribute("topicList", topicList);
 			
 			return SUCCESS;	
 		}else{
@@ -56,12 +61,12 @@ public class StorageTalk extends ActionSupport implements SessionAware,ServletRe
 		this.topicService = topicService;
 	}
 
-	public UserBean getUserBean() {
-		return userBean;
+	public List<TopicBean> getTopicList() {
+		return topicList;
 	}
 
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
+	public void setTopicList(List<TopicBean> topicList) {
+		this.topicList = topicList;
 	}
 
 }

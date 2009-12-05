@@ -31,6 +31,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, SessionAware, ServletRequestAware {
 	private TopicBean topicBean = new TopicBean();
 	private UserBean userBean;
+	private List<TopicBean> topicList;
 	private UserService userService;
 	private TopicService topicService;
 	Map<String, Object> session;
@@ -61,17 +62,18 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				//处理italk主页面的前面显示的图片路径
 				Map<String, String> photoPathMap = new HashMap<String, String>();
 				for(long usrId:userIdList){
-					userBean.setUserId(usrId);
-					userBean = userService.getUserById(userBean);
-					String usrName = userBean.getUserName();
-					String photoPath = userBean.getPhotoPath();
+					UserBean usrBean = new UserBean();
+					usrBean.setUserId(usrId);
+					usrBean = userService.getUserById(usrBean);
+					String usrName = usrBean.getUserName();
+					String photoPath = usrBean.getPhotoPath();
 					photoPathMap.put(usrName, photoPath);
 				}
 				
 				topicBean = new TopicBean();
 				topicBean.setUserId(userId);
 				topicBean.setUserIdList(userIdList);
-				List<TopicBean> topicList = topicService.getObjectList(topicBean); 		
+				topicList = topicService.getObjectList(topicBean); 		
 				for(TopicBean topic:topicList){
 					String usrName = topic.getUserName();
 					if(photoPathMap.containsKey(usrName)){
@@ -80,7 +82,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					}
 				}				
 				
-				request.setAttribute("topicList", topicList);
+				//request.setAttribute("topicList", topicList);
 				//生成新令牌
 				String token = TokenUtil.generateToken(request);
 				request.setAttribute("clientToken", token);
@@ -96,15 +98,17 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				//处理italk主页面的前面显示的图片路径
 				Map<String, String> photoPathMap = new HashMap<String, String>();
 				for(long usrId:userIdList){
-					userBean.setUserId(usrId);
-					userBean = userService.getUserById(userBean);
-					String usrName = userBean.getUserName();
-					String photoPath = userBean.getPhotoPath();
+					UserBean usrBean = new UserBean();
+					usrBean.setUserId(usrId);
+					usrBean = userService.getUserById(usrBean);
+					String usrName = usrBean.getUserName();
+					String photoPath = usrBean.getPhotoPath();
 					photoPathMap.put(usrName, photoPath);
 				}
 				
 				topicBean.setUserId(userId);
-				List<TopicBean> topicList = topicService.getObjectList(topicBean);
+				topicBean.setUserIdList(userIdList);
+				topicList = topicService.getObjectList(topicBean);
 				//将italk主页面的前面显示的图片路径set进topicBean
 				for(TopicBean topic:topicList){
 					String usrName = topic.getUserName();
@@ -119,7 +123,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				request.setAttribute("clientToken", token);
 				//替换旧令牌
 				session.put("token", token);
-				request.setAttribute("topicList", topicList);
+				//request.setAttribute("topicList", topicList);
 				return SUCCESS;
 			}else{					// 正常提交
 		    	String userName = userBean.getUserName();
@@ -140,15 +144,16 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					//处理italk主页面的前面显示的图片路径
 					Map<String, String> photoPathMap = new HashMap<String, String>();
 					for(long usrId:userIdList){
-						userBean.setUserId(usrId);
-						userBean = userService.getUserById(userBean);
-						String usrName = userBean.getUserName();
-						String photoPath = userBean.getPhotoPath();
+						UserBean usrBean = new UserBean();
+						usrBean.setUserId(usrId);
+						usrBean = userService.getUserById(usrBean);
+						String usrName = usrBean.getUserName();
+						String photoPath = usrBean.getPhotoPath();
 						photoPathMap.put(usrName, photoPath);
 					}
 					
 					topicBean.setUserIdList(userIdList);
-					List<TopicBean> topicList = topicService.getObjectList(topicBean);
+					topicList = topicService.getObjectList(topicBean);
 					for(TopicBean topic:topicList){
 						String usrName = topic.getUserName();
 						if(photoPathMap.containsKey(usrName)){
@@ -162,7 +167,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					request.setAttribute("clientToken", token);
 					//替换旧令牌
 					session.put("token", token);
-					request.setAttribute("topicList", topicList);
+					//request.setAttribute("topicList", topicList);
 					return SUCCESS;
 				}else{
 					return ERROR;
@@ -194,6 +199,14 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
+	}
+
+	public List<TopicBean> getTopicList() {
+		return topicList;
+	}
+
+	public void setTopicList(List<TopicBean> topicList) {
+		this.topicList = topicList;
 	}
 	
 	
