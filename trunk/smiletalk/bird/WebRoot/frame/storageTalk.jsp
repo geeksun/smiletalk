@@ -38,7 +38,7 @@
 		           <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
 		      </tr>
                   <tr>
-                    <td width="52" valign="top"><img src="${userBean.photoPath}" width="52" height="53" /></td>
+                    <td width="52" valign="top"><img src="${topicBean.photoPath}" width="52" height="53" /></td>
                     <td valign="top"><table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
                         <tr>
                           <td height="18" colspan="2" bgcolor="#EAF3FA" class="STYLE3"><span class="STYLE2"><strong>${topicBean.userName}</strong></span></td>
