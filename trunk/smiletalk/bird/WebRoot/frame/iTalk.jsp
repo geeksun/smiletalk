@@ -1,4 +1,4 @@
-<%@ page language="java"  import="java.util.*,com.bird.domain.*" pageEncoding="gbk" contentType="text/html; charset=gbk"%>
+<%@ page language="java"  pageEncoding="gbk" contentType="text/html; charset=gbk"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="top.jsp"/>
@@ -91,7 +91,7 @@
                                   <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
                                 </tr>
                                 <tr>
-                                	<td align="center"><a href="#">关注</a>&nbsp;<a href="#">取消关注</a></td>
+                                	<td align="center"><a href="#">关注</a>&nbsp;<a href="#">抛弃</a></td>
                                 </tr>
                             </table></td>
                           <td width="69"><img src="${userBean.photoPath}" width="69" height="69" /></td>
@@ -128,7 +128,7 @@
 		var a = document.iTalk.topicContent;
 		str = a.value.replace(/\s+/g,"");
 		if(str==''){
-			alert("输入不可为空!");
+			//alert("输入不可为空!");
 			a.value = '';
 			a.focus();
 		   	return false;

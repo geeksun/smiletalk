@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=gbk" %> 
+<%@ page contentType="text/html; charset=gbk"  import="java.util.*,com.bird.domain.*" %> 
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -12,16 +12,16 @@
 	<body>
 		<%
 			String path = request.getContextPath();
-			String guest = (String)session.getAttribute("userName");
-			guest = guest == null?"guest":guest;
+			UserBean userBean = (UserBean)session.getAttribute("user");
+			String userName = userBean.getUserName();
 		 %>
 		
 		<p align=center>
 <table width="90%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><img src="<%=path%>/images/beta/logo.JPG" alt="logo" width="212" height="65" /><br><%=guest%>，欢迎您使用 iTalk</td>
+    <td><img src="<%=path%>/images/beta/logo.JPG" alt="logo" width="212" height="65" /><br><%=userName%>，欢迎您使用 iTalk</td>
     <td valign="bottom" width="75%" align="right">
-        <a href="homeTalk.action">Home</a>&nbsp;<a href="storageTalk.action">Profile</a>&nbsp;<a href="findPeople.jsp">Find People</a>&nbsp;<a href="settingsTalk.action">Settings</a>&nbsp;<a href="#">Help</a>&nbsp;<%if(guest!="guest"){%><a href="exitTalk.action">Sign out</a><%}else{%><a href="<%=path%>/login.jsp">Sign in</a><%}%>
+        <a href="homeTalk.action">Home</a>&nbsp;<a href="storageTalk.action">Profile</a>&nbsp;<a href="findPeople.jsp">Find People</a>&nbsp;<a href="settingsTalk.action">Settings</a>&nbsp;<a href="#">Help</a>&nbsp;<%if(userName!=null){%><a href="exitTalk.action">Sign out</a><%}else{%><a href="<%=path%>/login.jsp">Sign in</a><%}%>
     </td>
   </tr>
 </table>
