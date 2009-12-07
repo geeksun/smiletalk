@@ -10,7 +10,6 @@ import java.sql.*;
 public abstract class DaoKu {
 	
 	public static void main(String[] args) {
-		
 		Connection con1 = null;		
 		Connection con2 = null;
 		PreparedStatement stmt1 = null;
@@ -19,17 +18,14 @@ public abstract class DaoKu {
 		int temp = 0;
 		try {
 			//Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
-			
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
 			/*con1 = java.sql.DriverManager.getConnection("jdbc:oracle:oci8:@sdjsm","scott","tiger");*/
 		    //mysql -uroot -proot -h 203.134.242.60 -P 23306 -Dsms  sms_accept
 			con1 = java.sql.DriverManager.getConnection("jdbc:mysql://203.134.242.60:3306/sms","root","root");
-			
 			con2 = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/italk","root","geeksun");			
 			
 			stmt1 = con1.prepareStatement("select * from sms_accept s where s.bookstatus=0 and lower(s.msg) like 'mic%'");			
-			
 			stmt2 = con2.prepareStatement("insert italk (topicContent,userid,topicTime,bookstatus) values (?,?,?,?)");			
 			   		
 		    int i = 1;
@@ -57,8 +53,7 @@ public abstract class DaoKu {
 		//关闭连接、释放资源
 		/*EMP表
 		 * stmt2 = con2.prepareStatement("insert into emp values(?,?,?,?,?,?,?,?)");
-		
-		while(rs.next()){		    	
+		 while(rs.next()){		    	
 	    	stmt2.setInt(1, rs.getInt(1));
 	    	stmt2.setString(2, rs.getString(2));
 	    	stmt2.setString(3, rs.getString(3));
