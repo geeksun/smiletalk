@@ -2,6 +2,11 @@ package com.bird.common;
 
 import java.sql.*;
 
+/**
+ * 两个库之间导数据
+ * @author jzq
+ * 2009-12-7
+ */
 public abstract class DaoKu {
 	
 	public static void main(String[] args) {
