@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -44,8 +45,67 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 	public String execute() throws Exception {
 		request.setCharacterEncoding("GBK");
 		
-		if(session==null||session.size()==0){
-			return LOGIN;
+		if(session==null||session.size()==0){		// 首页
+			String userName = null,password = null;
+			//判断cookie信息
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (int i = 0; i < cookies.length; i++) {
+					if (cookies[i].getName().equals("usrCookie")) {
+						userName = cookies[i].getValue();
+					}else if(cookies[i].getName().equals("pwdCookie")){
+						password = cookies[i].getValue();
+					}
+				}
+				userBean = new UserBean();
+				userBean.setUserName(userName);
+				userBean.setPassword(password);
+				userBean = userService.loginUser(userBean);	
+				if(userBean!=null){
+					session.put(ConstantUtil.USER, userBean);
+					Long userId = userBean.getUserId();
+					Follow follow = new Follow();
+					follow.setUserId(userId);
+					List<Long> userIdList = userService.getUserIdList(follow);
+					
+					userIdList.add(userId);
+					
+					//处理italk主页面的前面显示的图片路径
+					Map<String, String> photoPathMap = new HashMap<String, String>();
+					for(long usrId:userIdList){
+						UserBean usrBean = new UserBean();
+						usrBean.setUserId(usrId);
+						usrBean = userService.getUserById(usrBean);
+						String usrName = usrBean.getUserName();
+						String photoPath = usrBean.getPhotoPath();
+						photoPathMap.put(usrName, photoPath);
+					}
+					
+					topicBean = new TopicBean();
+					topicBean.setUserId(userId);
+					topicBean.setUserIdList(userIdList);
+					topicList = topicService.getObjectList(topicBean); 		
+					for(TopicBean topic:topicList){
+						String usrName = topic.getUserName();
+						if(photoPathMap.containsKey(usrName)){
+							String photoPath = photoPathMap.get(usrName);
+							topic.setPhotoPath(photoPath);
+						}
+					}				
+					
+					//request.setAttribute("topicList", topicList);
+					//生成新令牌
+					String token = TokenUtil.generateToken(request);
+					request.setAttribute("clientToken", token);
+					//替换旧令牌
+					session.put("token", token);
+					return SUCCESS;	
+				}else{
+					return LOGIN;
+				}
+			}else{
+				return LOGIN;
+			}
 		}else{
 			userBean = (UserBean) session.get(ConstantUtil.USER);
 			Long userId = userBean.getUserId();
