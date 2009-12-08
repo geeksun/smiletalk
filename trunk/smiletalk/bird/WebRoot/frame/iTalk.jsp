@@ -91,7 +91,7 @@
                                   <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
                                 </tr>
                                 <tr>
-                                	<td align="center"><a href="#">关注</a>&nbsp;<a href="#">抛弃</a></td>
+                                	<td align="right"><a href="#">回复</a>&nbsp;<a href="#">转发</a></td>
                                 </tr>
                             </table></td>
                           <td width="69"><img src="${userBean.photoPath}" width="69" height="69" /></td>
