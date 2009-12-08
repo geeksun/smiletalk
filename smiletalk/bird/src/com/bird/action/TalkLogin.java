@@ -1,6 +1,5 @@
 package com.bird.action;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +11,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.bird.domain.Follow;
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
-import com.bird.service.TopicService;
 import com.bird.service.UserService;
 import com.bird.util.ConstantUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,9 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
  */
 public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,SessionAware,ServletRequestAware,ServletResponseAware {
 	private UserService userService;
-	private TopicService topicService;
 	private UserBean userBean = new UserBean();
-	private TopicBean topicBean;
 	private List<TopicBean> topicList;
 	Map<String, Object> session;
 	HttpServletRequest request;
@@ -40,10 +35,6 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 		this.userService = userService;
 	}
 
-	public void setTopicService(TopicService topicService) {
-		this.topicService = topicService;
-	}
-	
 	public String execute() throws Exception {
 		String userName = userBean.getUserName();
 		String password = userBean.getPassword();
@@ -59,7 +50,7 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 			return LOGIN;
 		}
 		else
-		{	
+		{
 			userBean = userService.loginUser(userBean);		//1000因为初始化连接池需要时间时间
 			if(userBean!=null){
 				String cookieFlag = null;
@@ -91,39 +82,8 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				}
 				
 				session.put(ConstantUtil.USER, userBean);
-				Long userId = userBean.getUserId();
-				Long followUserId = userBean.getFollowUserId();
-				Follow follow = new Follow();
-				follow.setUserId(userId);
-				List<Long> userIdList = userService.getUserIdList(follow);
 				
-				userIdList.add(userId);
-				
-				//处理italk主页面的前面显示的图片路径
-				Map<String, String> photoPathMap = new HashMap<String, String>();
-				for(long usrId:userIdList){
-					UserBean usrBean = new UserBean();
-					usrBean.setUserId(usrId);
-					usrBean = userService.getUserById(usrBean);
-					String usrName = usrBean.getUserName();
-					String photoPath = usrBean.getPhotoPath();
-					photoPathMap.put(usrName, photoPath);
-				}
-				
-				topicBean = new TopicBean();
-				topicBean.setUserId(userId);
-				topicBean.setFollowUserId(followUserId);
-				topicBean.setUserIdList(userIdList);
-				topicList = topicService.getObjectList(topicBean); 	//16
-				//将italk主页面的前面显示的图片路径set进topicBean
-				for(TopicBean topic:topicList){
-					String usrName = topic.getUserName();
-					if(photoPathMap.containsKey(usrName)){
-						String photoPath = photoPathMap.get(usrName);
-						topic.setPhotoPath(photoPath);
-					}
-				}
-				
+				//跳转到 homeTalk 进行处理
 				return SUCCESS;	
 			}else{
 				userBean.setErrorMessage("用户名或密码错误");
