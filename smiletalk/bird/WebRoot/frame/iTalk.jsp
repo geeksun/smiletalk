@@ -131,6 +131,7 @@
 			//alert("输入不可为空!");
 			a.value = '';
 			a.focus();
+			document.getElementById("validNum").innerHTML = 140;
 		   	return false;
 		}
         if(a.value.length > 140)
