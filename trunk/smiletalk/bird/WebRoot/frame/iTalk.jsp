@@ -94,14 +94,14 @@
                                 	<td align="right"><a href="#">»Ø¸´</a>&nbsp;<a href="#">×ª·¢</a></td>
                                 </tr>
                             </table></td>
-                          <td width="69"><img src="${userBean.photoPath}" width="69" height="69" /></td>
+                          <td width="69"><img src="${topicBean.photoPath}" width="69" height="69" /></td>
                         </tr>
                     </table>
                     </td>
                   </tr>
               </table>
             </c:forEach>
-              </td>
+            </td>
           </tr>
         </table>
         </td>
