@@ -20,8 +20,9 @@
             <!-- <result type="redirect-action">Menu</result> -->
         </action>
         <action name="talkLogin" class="talkLogin">
-        	<!-- <result name="success" type="chain">homeTalk</result> -->
-            <result name="success" type="dispatcher">/frame/iTalk.jsp</result>
+        	<result name="success" type="redirect">homeTalk.action</result>
+        	<!-- <result name="success" type="redirect">/displayCart.action?userId=${userId}</result> -->
+            <!-- <result name="success" type="dispatcher">/frame/iTalk.jsp</result> -->
         </action>
         <action name="homeTalk" class="homeTalk">
             <result name="success">/frame/iTalk.jsp</result>
@@ -33,6 +34,7 @@
         	<result name="success">/frame/settingsInfo.jsp</result>
         </action>
         <action name="settingsInfo" class="settingsInfo">
+        	<!-- 图片保存路径 -->
         	<param name="savePath">D:/photo_bird</param>
         	<!--
             <interceptor-ref name="fileUpload">

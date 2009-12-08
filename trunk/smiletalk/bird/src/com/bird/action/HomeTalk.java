@@ -45,7 +45,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 	public String execute() throws Exception {
 		request.setCharacterEncoding("GBK");
 		
-		if(session==null||session.size()==0){		// 首页
+		if(session==null||session.size()==0) {		// 首页直接登陆
 			String userName = null,password = null;
 			//判断cookie信息
 			Cookie[] cookies = request.getCookies();
@@ -99,6 +99,9 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					request.setAttribute("clientToken", token);
 					//替换旧令牌
 					session.put("token", token);
+					// 标记gc
+					userBean = null;
+					
 					return SUCCESS;	
 				}else{
 					return LOGIN;
@@ -106,13 +109,13 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 			}else{
 				return LOGIN;
 			}
-		}else{
+		} else {
 			userBean = (UserBean) session.get(ConstantUtil.USER);
 			Long userId = userBean.getUserId();
 			String clientToken = request.getParameter("clientToken");
 			String sessionToken = (String) session.get("token");
 			
-			if(clientToken==null){				//点击home链接时clientToken==null
+			if(clientToken==null){				//点击home链接或从登陆链接过来, clientToken==null
 				Follow follow = new Follow();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
