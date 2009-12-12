@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.bird.dao.UserDao;
+import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -53,9 +54,22 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	/**
+	 * @see com.bird.dao.UserDao#getObjectList(java.lang.Object)
+	 * 根据用户名找出用户的列表：模糊查询
+	 */
 	public List<UserBean> getObjectList(Object o) {
-		
-		return null;
+		if(o==null){
+			return null;
+		}
+		UserBean userBean = (UserBean) o;
+		try {
+			List<UserBean> userList = (List<UserBean>)sqlMapClient.queryForList("findUserListByName", userBean);
+			return userList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;	
 	}
 
 	/**

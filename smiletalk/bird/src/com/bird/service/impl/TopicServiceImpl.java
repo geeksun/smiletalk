@@ -33,6 +33,10 @@ public class TopicServiceImpl extends SuperService implements TopicService{
 		List<TopicBean> topicBeanList = topicDao.getObjectList(topicBean);
 		return topicBeanList;
 	}
+
+	public List<TopicBean> getRandomBrowseList() {
+		return topicDao.getRandomBrowseList();
+	}
 	
 	
 }

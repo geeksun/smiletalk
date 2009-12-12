@@ -1,9 +1,5 @@
 package com.bird.dao.impl;
 
-import javax.sql.DataSource;
-
-import com.bird.db.DBConnection;
-
 /**
  * @author jzq
  *  dao ≥¨¿‡

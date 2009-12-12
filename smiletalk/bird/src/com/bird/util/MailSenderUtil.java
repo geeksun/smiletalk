@@ -20,29 +20,10 @@ import com.bird.po.MailInfo;
  *  2009-11-17
  */
 public class MailSenderUtil {
+	
+	
+	public static void main(String[] args) {
 
-	/**
-	 * 发送用户激活邮件
-	 * @param userBean
-	 * @throws MessagingException
-	 */
-	public static int sendActivateEmail(UserBean userBean)
-			throws MessagingException {
-		if(userBean==null){
-			return 0;
-		}
-		MailInfo mailInfo = new MailInfo();
-		mailInfo.setUserName("jiangzhiqiang@madeinchina-inc.com");
-		mailInfo.setPassword("123456");
-		String email = userBean.getEmail();
-		mailInfo.setContent(userBean.getUserName() + "，你好，用户注册邮件测试" + userBean.getValidateCode());
-		mailInfo.setFromAddress("jiangzhiqiang@madeinchina-inc.com");
-		mailInfo.setSubject("用户注册邮件测试");
-		mailInfo.setToAddress(email);
-		mailInfo.setValidate(true);
-		mailInfo.setMailServerHost("mail.madeinchina-inc.com");
-		
-		return sendMail(mailInfo);
 	}
 
 	/**
@@ -86,12 +67,49 @@ public class MailSenderUtil {
 		}
 		return 0;
 	}
+	
 
 	/**
-	 * @param args
+	 * 发送用户激活邮件
 	 */
-	public static void main(String[] args) {
+	public static int sendActivateEmail(UserBean userBean)
+			throws MessagingException {
+		if(userBean==null){
+			return 0;
+		}
+		MailInfo mailInfo = new MailInfo();
+		mailInfo.setUserName("jiangzhiqiang@madeinchina-inc.com");
+		mailInfo.setPassword("123456");
+		String email = userBean.getEmail();
+		mailInfo.setContent(userBean.getUserName() + "，你好，用户注册邮件测试" + userBean.getValidateCode());
+		mailInfo.setFromAddress("jiangzhiqiang@madeinchina-inc.com");
+		mailInfo.setSubject("用户注册邮件测试");
+		mailInfo.setToAddress(email);
+		mailInfo.setValidate(true);
+		mailInfo.setMailServerHost("mail.madeinchina-inc.com");
+		
+		return sendMail(mailInfo);
+	}
 
+	/**
+	 *  发送用户找回密码邮件
+	 */
+	public static int sendForgetDisposeEmail(UserBean userBean) {
+		if(userBean==null){
+			return 0;
+		}
+		MailInfo mailInfo = new MailInfo();
+		mailInfo.setUserName("jiangzhiqiang@madeinchina-inc.com");
+		mailInfo.setPassword("123456");
+		String email = userBean.getEmail();
+		mailInfo.setContent(userBean.getUserName() + "，你好，您的密码是：" + userBean.getPassword() + "，请妥善保存。");
+		mailInfo.setFromAddress("jiangzhiqiang@madeinchina-inc.com");
+		mailInfo.setSubject("用户找回密码邮件测试");
+		mailInfo.setToAddress(email);
+		mailInfo.setValidate(true);
+		mailInfo.setMailServerHost("mail.madeinchina-inc.com");
+		
+		return sendMail(mailInfo);
 	}
 
 }
