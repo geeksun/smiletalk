@@ -100,7 +100,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					//ÃÊªªæ…¡Ó≈∆
 					session.put("token", token);
 					// ±Íº«gc
-					userBean = null;
+					//userBean = null;
 					
 					return SUCCESS;	
 				}else{
