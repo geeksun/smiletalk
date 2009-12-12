@@ -22,5 +22,6 @@ public interface UserService {
 	 */
 	public List<Long> getUserIdList(Follow follow);
 	public int updateSettingsInfo(UserBean userBean);
+	public void sendForgetDisposeEmail(UserBean userBean);
 	
 }

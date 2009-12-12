@@ -10,6 +10,7 @@ public interface TopicDao {
 	public List<TopicBean> getObjectList(TopicBean o);
 	public Object getObject();
 	public int deleteObject(Object o);
+	public List<TopicBean> getRandomBrowseList();
 	
 	
 }

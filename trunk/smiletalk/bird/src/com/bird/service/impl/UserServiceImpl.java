@@ -42,8 +42,12 @@ public class UserServiceImpl extends SuperService implements UserService {
 		return userDao.getUserByEamil(o);
 	}
 
+	/**
+	 * @see com.bird.dao.UserDao#getObjectList(java.lang.Object)
+	 * 根据用户名找出用户的列表：模糊查询
+	 */
 	public List<UserBean> getObjectList(Object o) {
-		return null;
+		return userDao.getObjectList(o);
 	}
 
 	public int insertObject(Object o) {
@@ -58,19 +62,6 @@ public class UserServiceImpl extends SuperService implements UserService {
 			return null;
 		}
 		return userDao.loginUser(userBean);
-	}
-
-	/**
-	 *  发送用户激活邮件
-	 */
-	public void sendActivateEmail(UserBean userBean) throws MessagingException {
-		if(userBean==null){
-			return;
-		}
-		int flag = MailSenderUtil.sendActivateEmail(userBean);
-		if(flag>0){
-			userDao.updateObject(userBean);
-		}
 	}
 
 	public UserBean getUserById(UserBean userBean) {
@@ -98,6 +89,32 @@ public class UserServiceImpl extends SuperService implements UserService {
 			return 0;
 		int result = userDao.updateSettingsInfo(userBean);
 		return result;
+	}
+
+	/**
+	 *  发送用户激活邮件
+	 */
+	public void sendActivateEmail(UserBean userBean) throws MessagingException {
+		if(userBean==null){
+			return;
+		}
+		int flag = MailSenderUtil.sendActivateEmail(userBean);
+		if(flag>0){
+			userDao.updateObject(userBean);
+		}
+	}
+
+	/**
+	 *  发送用户找回密码邮件
+	 */
+	public void sendForgetDisposeEmail(UserBean userBean) {
+		if(userBean==null){
+			return;
+		}
+		int flag = MailSenderUtil.sendForgetDisposeEmail(userBean);
+		if(flag>0){
+			userDao.updateObject(userBean);
+		}
 	}
 	
 	

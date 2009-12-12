@@ -10,6 +10,7 @@ public interface TopicService {
 	public List<TopicBean> getObjectList(TopicBean o);
 	public Object getObject(Object o);
 	public int deleteObject(Object o);
+	public List<TopicBean> getRandomBrowseList();
 	
 	
 }
