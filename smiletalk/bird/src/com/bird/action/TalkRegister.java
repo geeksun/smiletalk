@@ -3,7 +3,6 @@ package com.bird.action;
 import java.util.Date;
 import java.util.Map;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -11,20 +10,18 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.bird.domain.UserBean;
 import com.bird.service.UserService;
-import com.bird.service.impl.UserServiceImpl;
 import com.bird.util.DateUtil;
 import com.bird.util.GuidUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 /**
- * register new italk user
- * @author jzq
+ * 新用户注册italk
+ * @author 姜志强
  * @version beta0.1
  * 2009-11-16
  */
 public class TalkRegister extends ActionSupport implements ModelDriven<UserBean>,SessionAware,ServletRequestAware {
-	private static String REGISTER = "register";
 	private UserService userService;
 	private UserBean userBean = new UserBean();
 	Map<String, Object> session;
@@ -53,11 +50,8 @@ public class TalkRegister extends ActionSupport implements ModelDriven<UserBean>
 		}else{}*/
 			userService.insertObject(userBean);
 			//发邮件验证用户,激活码
-			try {
-				userService.sendActivateEmail(userBean);
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			}
+			userService.sendActivateEmail(userBean);
+			
 			return SUCCESS;
 		
 	}

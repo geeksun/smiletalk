@@ -10,10 +10,10 @@
 			<!-- <result name="login" type="redirect-action">Logon!input</result> -->
 			<result name="login" type="dispatcher">login.jsp</result>
 		</global-results> 
-        <action name="newTalk" class="newTalk">
+        <!--<action name="newTalk" class="newTalk">
             <result name="success">/frame/iTalk.jsp</result>
             <result name="error">error.jsp</result>
-        </action>
+        </action>-->
         <action name="talkRegister" class="talkRegister">
             <result name="success">/frame/iTalk.jsp</result>
             <result name="register">register.jsp</result>
@@ -33,6 +33,9 @@
         <action name="settingsTalk" class="settingsTalk">
         	<result name="success">/frame/settingsInfo.jsp</result>
         </action>
+        <action name="randomBrowse" class="randomBrowse">
+        	<result name="success">/frame/randomBrowse.jsp</result>
+        </action>
         <action name="settingsInfo" class="settingsInfo">
         	<!-- 图片保存路径 -->
         	<param name="savePath">D:/photo_bird</param>
@@ -43,10 +46,18 @@
                 </param> 
             </interceptor-ref>
              <interceptor-ref name ="defaultStack"/> -->
-            
         	<result name="success" type="chain">settingsTalk</result>
         	<result name="input">/frame/settingsInfo.jsp</result>
         </action>
+        <action name="forgetPwd" class="forgetPwd">
+        	<result name="success">forgetDispose.jsp</result>
+        	<result name="input" type="redirect">forgetPwd.jsp</result>
+        </action>
+        <action name="findPeople" class="findPeople">
+        	<result name="success">findPeopleResult.jsp</result>
+        	<result name="input" type="redirect">findPeople.jsp</result>
+        </action>
+        
         
         <action name="exitTalk" class="exitTalk">
         </action>

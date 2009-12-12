@@ -9,6 +9,11 @@
 select * from user where userName = #userName#
 		]]>
 	</select>
+	<select id="findUserListByName" parameterClass="com.bird.domain.UserBean" resultClass="com.bird.domain.UserBean">
+		<![CDATA[
+select * from user where userName like #userName#
+		]]>
+	</select>
 	<select id="findUserByEmail" parameterClass="com.bird.domain.UserBean" resultClass="com.bird.domain.UserBean">
 		<![CDATA[
 select * from user where email = #email#
