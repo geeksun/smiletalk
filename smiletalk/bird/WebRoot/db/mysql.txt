@@ -1,2 +1,2 @@
 1. now(): current time.
-2. 
+2. Ä£ºý²éÑ¯£ºselect * from user where userName like '%$userName$%'
