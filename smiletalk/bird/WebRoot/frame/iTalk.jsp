@@ -91,7 +91,12 @@
                                   <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
                                 </tr>
                                 <tr>
-                                	<td align="right"><a href="#">回复</a>&nbsp;<a href="#">转发</a></td>
+                                	<td align="right">
+                                	<c:if test="${topicBean.userName!=userBean.userName}">
+                                	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
+                                	</c:if>
+                                	
+                                	</td>
                                 </tr>
                             </table></td>
                           <td width="69"><img src="${topicBean.photoPath}" width="69" height="69" /></td>
@@ -134,7 +139,7 @@
 			document.getElementById("validNum").innerHTML = 140;
 		   	return false;
 		}
-        if(a.value.length > 140)
+        	if(a.value.length > 140)
 		{
 		   	alert("输入的长度不能超过140个字符!");
 		   	a.focus();
@@ -146,6 +151,16 @@
 		if(checkTalk()){
 			document.iTalk.submit();
 		}
+	}
+	function reply(element){
+		var topicContent = document.getElementById("topicContent");
+		topicContent.value = "RT " + element + ":";
+		topicContent.focus();
+	}
+	function transmit(element){
+		var topicContent = document.getElementById("topicContent");
+		topicContent.value = "ZT " + element + ":";
+		topicContent.focus();
 	}
 </script>         
 <p align="center">
