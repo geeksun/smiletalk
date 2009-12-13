@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.bird.dao.UserDao;
+import com.bird.domain.FollowBean;
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -147,6 +148,8 @@ public class UserDaoImpl implements UserDao {
 		}
 		return 0;
 	}
+
+
 
 	
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.bird.domain.Follow;
+import com.bird.domain.FollowBean;
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
@@ -64,7 +64,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				if(userBean!=null){
 					session.put(ConstantUtil.USER, userBean);
 					Long userId = userBean.getUserId();
-					Follow follow = new Follow();
+					FollowBean follow = new FollowBean();
 					follow.setUserId(userId);
 					List<Long> userIdList = userService.getUserIdList(follow);
 					
@@ -116,7 +116,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 			String sessionToken = (String) session.get("token");
 			
 			if(clientToken==null){				//点击home链接或从登陆链接过来, clientToken==null
-				Follow follow = new Follow();
+				FollowBean follow = new FollowBean();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
 				
@@ -153,7 +153,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				session.put("token", token);
 				return SUCCESS;	
 			} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
-				Follow follow = new Follow();
+				FollowBean follow = new FollowBean();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
 				
@@ -198,7 +198,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				//未对topicContent,userName,userId进行验证
 				int result = topicService.insertObject(topicBean);
 				if(result>0){
-					Follow follow = new Follow();
+					FollowBean follow = new FollowBean();
 					follow.setUserId(userId);
 					List<Long> userIdList = userService.getUserIdList(follow);
 					

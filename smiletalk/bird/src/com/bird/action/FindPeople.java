@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
+import com.bird.service.TopicService;
 import com.bird.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -15,7 +16,9 @@ import com.opensymphony.xwork2.ModelDriven;
  */
 public class FindPeople extends ActionSupport implements ModelDriven<UserBean>{
 	private UserBean userBean = new UserBean();
+	private TopicBean topicBean;
 	private UserService userService;
+	private TopicService topicService;
 	private List<UserBean> userList;
 	
 	public UserBean getUserBean() {
@@ -40,8 +43,16 @@ public class FindPeople extends ActionSupport implements ModelDriven<UserBean>{
 			userList = userService.getObjectList(userBean);
 			if(userList.size()==0){
 				userList = null;
+			}else{
+				for(UserBean usrBean:userList){		//取用户的最新一条talk记录
+					long userId = usrBean.getUserId();
+					topicBean = new TopicBean();
+					topicBean.setUserId(userId);
+					topicBean = topicService.getRecentTopic(topicBean);
+					usrBean.setTopicBean(topicBean);
+				}
+				
 			}
-			
 			
 			return SUCCESS;
 		}else{
@@ -60,6 +71,14 @@ public class FindPeople extends ActionSupport implements ModelDriven<UserBean>{
 
 	public UserBean getModel() {
 		return userBean;
+	}
+
+	public TopicService getTopicService() {
+		return topicService;
+	}
+
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
 	}
 
 }

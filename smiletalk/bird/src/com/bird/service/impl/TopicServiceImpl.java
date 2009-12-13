@@ -22,8 +22,14 @@ public class TopicServiceImpl extends SuperService implements TopicService{
 		return topicDao.insertObject(o);
 	}
 
-	public Object getObject(Object o) {
-		return null;
+	/**
+	 *  用户的最新发言记录
+	 */
+	public TopicBean getRecentTopic(TopicBean o) {
+		if(o==null){
+			return null;
+		}
+		return topicDao.getRecentTopic(o);
 	}
 
 	public List<TopicBean> getObjectList(TopicBean topicBean) {

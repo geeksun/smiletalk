@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.bird.domain.Follow;
+import com.bird.domain.FollowBean;
 import com.bird.domain.TopicBean;
 import com.bird.service.TopicService;
 import com.bird.service.UserService;
@@ -70,7 +70,7 @@ public class NewTalk extends ActionSupport implements ModelDriven<TopicBean>, Se
 			//未对topicContent,userName,userId进行验证
 			int result = topicService.insertObject(topicBean);
 			if(result>0){
-				Follow follow = new Follow();
+				FollowBean follow = new FollowBean();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
 				userIdList.add(userId);

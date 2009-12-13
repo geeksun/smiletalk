@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
-import com.bird.domain.Follow;
+import com.bird.domain.FollowBean;
 import com.bird.domain.UserBean;
 
 public interface UserService {
@@ -20,8 +20,9 @@ public interface UserService {
 	/**
 	 *  返回用户的关注者的ID列表
 	 */
-	public List<Long> getUserIdList(Follow follow);
+	public List<Long> getUserIdList(FollowBean follow);
 	public int updateSettingsInfo(UserBean userBean);
 	public void sendForgetDisposeEmail(UserBean userBean);
+	public int insertFollow(FollowBean followBean);
 	
 }
