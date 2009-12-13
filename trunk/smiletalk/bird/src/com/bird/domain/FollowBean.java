@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author ½ªÖ¾Ç¿
  * 2009-11-30
  */
-public class Follow implements Serializable {
+public class FollowBean implements Serializable {
 
 	/**
 	 * 

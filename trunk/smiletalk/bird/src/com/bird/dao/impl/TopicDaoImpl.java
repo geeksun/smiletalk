@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bird.dao.TopicDao;
 import com.bird.domain.TopicBean;
+import com.bird.domain.UserBean;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 /**
@@ -25,8 +26,16 @@ public class TopicDaoImpl  implements TopicDao {
 		return 0;
 	}
 
-	public Object getObject() {
-		
+	/**
+	 *  用户的最新发言记录
+	 */
+	public TopicBean getRecentTopic(TopicBean o) {
+		try {
+			TopicBean topicBean = (TopicBean)sqlMapClient.queryForObject("findUserRecentTopic", o);
+			return topicBean;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

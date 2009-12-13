@@ -6,7 +6,7 @@ import javax.mail.MessagingException;
 
 import com.bird.dao.FollowDao;
 import com.bird.dao.UserDao;
-import com.bird.domain.Follow;
+import com.bird.domain.FollowBean;
 import com.bird.domain.UserBean;
 import com.bird.service.SuperService;
 import com.bird.service.UserService;
@@ -74,7 +74,7 @@ public class UserServiceImpl extends SuperService implements UserService {
 	/**
 	 *  返回用户的关注者的ID列表
 	 */
-	public List<Long> getUserIdList(Follow follow) {
+	public List<Long> getUserIdList(FollowBean follow) {
 		if(follow==null){
 			return null;
 		}
@@ -115,6 +115,16 @@ public class UserServiceImpl extends SuperService implements UserService {
 		if(flag>0){
 			userDao.updateObject(userBean);
 		}
+	}
+
+	/**
+	 *  增加follow记录
+	 */
+	public int insertFollow(FollowBean followBean) {
+		if(followBean==null){
+			return 0;
+		}
+		return followDao.insertFollow(followBean);
 	}
 	
 	

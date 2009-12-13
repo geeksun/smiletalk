@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.bird.dao.FollowDao;
-import com.bird.domain.Follow;
+import com.bird.domain.FollowBean;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class FollowDaoImpl implements FollowDao{
@@ -17,7 +17,7 @@ public class FollowDaoImpl implements FollowDao{
 	/**
 	 *  返回用户ID和关注者的ID列表
 	 */
-	public List<Long> getUserIdList(Follow follow) {
+	public List<Long> getUserIdList(FollowBean follow) {
 		try {
 			List<Long> userIdList = (List<Long>) sqlMapClient.queryForList("findUserIdList", follow);
 			return userIdList;
@@ -27,5 +27,17 @@ public class FollowDaoImpl implements FollowDao{
 		return null;
 	}
 	
+	/**
+	 *  增加follow记录
+	 */
+	public int insertFollow(FollowBean followBean) {
+		try {
+        	sqlMapClient.insert("insertFollow", followBean);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 }

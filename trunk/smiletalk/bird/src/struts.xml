@@ -58,7 +58,8 @@
         	<result name="input" type="redirect">findPeople.jsp</result>
         </action>
         
-        
+        <action name="followUser" class="followUser">
+        </action>
         <action name="exitTalk" class="exitTalk">
         </action>
         

@@ -2,6 +2,7 @@ package com.bird.dao;
 
 import java.util.List;
 
+import com.bird.domain.FollowBean;
 import com.bird.domain.UserBean;
 
 public interface UserDao {
@@ -14,6 +15,7 @@ public interface UserDao {
 	public void updateObject(UserBean userBean);
 	public UserBean getUserById(UserBean userBean);
 	public int updateSettingsInfo(UserBean userBean);
+
 	
 	
 	

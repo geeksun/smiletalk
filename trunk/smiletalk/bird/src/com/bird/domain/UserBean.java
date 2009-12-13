@@ -1,6 +1,7 @@
 package com.bird.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author jzq
@@ -18,15 +19,31 @@ public class UserBean  implements Serializable{
 	private String userName;
 	private String password;
 	private String email;
-	private String isActive;	//激活状态-0:未激活1：激活
+	private String isActive;	// 激活状态-0:未激活1：激活
 	private String validateCode;
 	private String regTime;
 	private String errorMessage;
-	private String photoPath;	//头像地址
+	private String photoPath;	// 头像地址
 	private String birthday;
 	private String sex;
-	private String region;		//地区
+	private String region;		// 地区
 	
+	/*private List<TopicBean> topicList;	// 用户对应的topic列表, 一对多*/
+	private TopicBean topicBean;	// 用户对应的最新发言记录
+	
+	
+	public TopicBean getTopicBean() {
+		return topicBean;
+	}
+	public void setTopicBean(TopicBean topicBean) {
+		this.topicBean = topicBean;
+	}
+	/*public List<TopicBean> getTopicBean() {
+		return topicList;
+	}
+	public void setTopicBean(List<TopicBean> topicList) {
+		this.topicList = topicList;
+	}*/
 	public long getUserId() {
 		return userId;
 	}
