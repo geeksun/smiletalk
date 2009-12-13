@@ -14,6 +14,9 @@ select * from topic where userId in
 	<select id="findRandomTopicList" resultClass="com.bird.domain.TopicBean">
 select * from topic order by topicTime desc limit 0,20
 	</select>
+	<select id="findUserRecentTopic" parameterClass="com.bird.domain.TopicBean" resultClass="com.bird.domain.TopicBean">
+select * from topic where userId = #userId# order by topicTime desc limit 0,1
+	</select>
 	
 	<insert id="insertTopic" parameterClass="com.bird.domain.TopicBean">
 insert into topic (userName,topicContent,userId,topicTime) values (#userName#,#topicContent#,#userId#,#topicTime#)
