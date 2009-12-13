@@ -1,6 +1,9 @@
 <%@ page language="java"  pageEncoding="gbk" contentType="text/html; charset=gbk"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+	String path = request.getContextPath();
+%>
+<script src="<%=path%>/js/prototype140.js"></script> 
 <jsp:include page="frame/top.jsp"/>
 
 <style type="text/css">
@@ -53,14 +56,20 @@
                             </table>
                               <table width="95%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                  <td class="STYLE2">${userBean.userName}</td>
+                                  <td class="STYLE2">${userBean.topicBean.topicContent}</td>
                                 </tr>
                               </table>
                             <table width="95%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                  <td><span class="STYLE7">${userBean.userName}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${userBean.userName}</span></td>
+                                  <td><span class="STYLE7">${userBean.topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${userBean.userName}</span></td>
                                 </tr>
-                            </table></td>
+                                <tr>
+                                	<td align="right">
+                                	<a href="javascript:attention('${userBean.userId}')">关注</a>
+                                	</td>
+                                </tr>
+                            </table>
+                          </td>
                         </tr>
                     </table>
                     </td>
@@ -84,3 +93,18 @@
 <p align="center">
 <%@ include file="frame/foot.jsp" %>
 </p>
+
+<script>
+	function attention(element){
+		var url = "<%=path%>/followUser.action";
+		var pars = "followId=" + element;
+		new Ajax.Request(url,{
+			method:'post',
+			parameters:pars,
+			onSuccess:function(transport){
+				
+			}
+		});
+	}
+	
+</script>

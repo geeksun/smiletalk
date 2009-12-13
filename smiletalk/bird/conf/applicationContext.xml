@@ -67,6 +67,9 @@
 		<property name="userService">
 			<ref local="userService"/>
 		</property>
+		<property name="topicService">
+			<ref local="topicService"/>
+		</property>
 	</bean>
 	<bean id="randomBrowse" class="com.bird.action.RandomBrowse">
 		<property name="userService">
@@ -94,7 +97,11 @@
 	
 	<bean id="exitTalk" class="com.bird.action.ExitTalk">
 	</bean>
-	
+	<bean id="followUser" class="com.bird.action.FollowUser">
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
+	</bean>
 	<bean id="checkUserName" class="com.bird.action.CheckUserName">
 		<property name="userService">
 			<ref local="userService"/>
