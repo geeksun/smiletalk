@@ -116,13 +116,5 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 	public void setTopicList(List<TopicBean> topicList) {
 		this.topicList = topicList;
 	}
-
-	public UserBean getUserBean() {
-		return userBean;
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
-	}
 	
 }
