@@ -9,17 +9,17 @@
 	Cookie cookies[] = request.getCookies(); 
 	Cookie cookie = null; 
 	String cookieName = null; 
-	String iTalkName = "";
-	String iTalkpwd = ""; 
+	String userName = "";
+	String password = ""; 
 	if(cookies!=null){
 		for(int i=0;i<cookies.length;i++){
 			cookie = cookies[i]; 
 			cookieName = cookie.getName();
 			if(cookieName.equals("usrCookie")){
-				iTalkName = cookie.getValue();
+				userName = cookie.getValue();
 			}
 			else if(cookieName.equals("pwdCookie")){
-				iTalkpwd = cookie.getValue();
+				password = cookie.getValue();
 			}
 		}	
 	}
@@ -36,7 +36,7 @@
 					ÓÃ»§Ãû£º
 				</td>
 				<td>
-					<input type="text" name="userName" id="iTalkName" value="<%=iTalkName%>" size="12">
+					<input type="text" name="userName" id="userName" value="<%=userName%>" size="12">
 				</td>
 			</tr>
 			<tr>
@@ -44,7 +44,7 @@
 					ÃÜ Âë£º
 				</td>
 				<td>
-					<input type="password" name="password" id="iTalkpwd" value="<%=iTalkpwd%>" size="12">
+					<input type="password" name="password" id="password" value="<%=password%>" size="12">
 				</td>
 			</tr>
 			<tr>

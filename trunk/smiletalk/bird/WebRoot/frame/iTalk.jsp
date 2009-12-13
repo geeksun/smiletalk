@@ -37,22 +37,22 @@
           <tr>
           	<td colspan="2" >
           		<form action="homeTalk.action" name="iTalk" method="post">
-					<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-						<tr align="center" >
-							<td>What are you doing?record here↓                     还可以输入<span id="validNum">140</span>字</td>
-						</tr>
-						<tr  align="center">
-							<td>
-								<textarea name="topicContent" id="topicContent" rows="4" cols="60" maxlength='140' onKeyDown="checkLength()"
-								 onKeyUp="checkLength()" onPaste="checkLength()" style="overflow:hidden"></textarea>
-							</td>
-						</tr>
-						<tr align="center">
-							<td><input type="button" onclick="justTalk()" value="  Talk  " > </td>
-						</tr>
-					</table>
-					<input type="hidden" name="clientToken" value="<%=clientToken%>" />
-				</form>
+				<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+					<tr align="center" >
+						<td>What are you doing?record here↓                     还可以输入<span id="validNum">140</span>字</td>
+					</tr>
+					<tr  align="center">
+						<td>
+							<textarea name="topicContent" id="topicContent" rows="4" cols="60" maxlength='140' onKeyDown="checkLength()"
+							 onKeyUp="checkLength()" onPaste="checkLength()" style="overflow:hidden"></textarea>
+						</td>
+					</tr>
+					<tr align="center">
+						<td><input type="button" onclick="justTalk()" value="  Talk  " > </td>
+					</tr>
+				</table>
+				<input type="hidden" name="clientToken" value="<%=clientToken%>" />
+			</form>
           	</td>
           </tr>
           
@@ -81,11 +81,11 @@
                                 <td></td>
                               </tr>
                             </table>
-                              <table width="95%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
+                            <table width="95%" border="0" cellspacing="0" cellpadding="0">
+                               <tr>
                                   <td class="STYLE2">${topicBean.topicContent}</td>
-                                </tr>
-                              </table>
+                               </tr>
+                            </table>
                             <table width="95%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                   <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
@@ -95,7 +95,6 @@
                                 	<c:if test="${topicBean.userName!=userBean.userName}">
                                 	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
                                 	</c:if>
-                                	
                                 	</td>
                                 </tr>
                             </table></td>
