@@ -1,16 +1,11 @@
 <%@ page contentType="text/html; charset=gbk"  import="java.util.*,com.bird.domain.*" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title></title>
 		<style type="text/css">
 		<!--
 		.STYLE2 {font-size: 12px}
 		-->
 		</style>
-	</head>
-	<body>
+
 		<%
 			String userName = null;
 			String path = request.getContextPath();
@@ -39,9 +34,6 @@
   </tr>
 </table>
 </p>
-		
-	</body>
-</html>
 
 
 
