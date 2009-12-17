@@ -2,7 +2,6 @@ package com.bird.dao;
 
 import java.util.List;
 
-import com.bird.domain.FollowBean;
 import com.bird.domain.UserBean;
 
 public interface UserDao {
