@@ -152,7 +152,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				//替换旧令牌
 				session.put("token", token);
 				return SUCCESS;	
-			} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){		//struts2防重复提交
+			} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){			// 重复提交处理
 				FollowBean follow = new FollowBean();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
@@ -188,7 +188,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				session.put("token", token);
 				//request.setAttribute("topicList", topicList);
 				return SUCCESS;
-			}else{					// 正常提交
+			}else{										// 正常提交的处理
 		    	String userName = userBean.getUserName();
 		    	topicBean.setUserId(userId);
 		    	topicBean.setUserName(userName);
