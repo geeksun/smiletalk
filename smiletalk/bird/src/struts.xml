@@ -37,8 +37,10 @@
         	<result name="success">/frame/randomBrowse.jsp</result>
         </action>
         <action name="settingsInfo" class="settingsInfo">
-        	<!-- 图片保存路径 -->
+        	<!-- 图片保存路径
         	<param name="savePath">D:/photo_bird</param>
+        	 -->
+        	<param name="savePath">/server/italk/photo_bird</param>
         	<!--
             <interceptor-ref name="fileUpload">
                 <param name="allowedTypes"> 
