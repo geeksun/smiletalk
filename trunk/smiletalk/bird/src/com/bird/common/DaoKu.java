@@ -22,7 +22,7 @@ public abstract class DaoKu {
 			
 			/*con1 = java.sql.DriverManager.getConnection("jdbc:oracle:oci8:@sdjsm","scott","tiger");*/
 		    //mysql -uroot -proot -h 203.134.242.60 -P 23306 -Dsms  sms_accept
-			con1 = java.sql.DriverManager.getConnection("jdbc:mysql://203.134.242.60:3306/sms","root","root");
+			con1 = java.sql.DriverManager.getConnection("jdbc:mysql://203.134.242.60:23306/sms","root","root");
 			con2 = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/italk","root","geeksun");			
 			
 			stmt1 = con1.prepareStatement("select * from sms_accept s where s.bookstatus=0 and lower(s.msg) like 'mic%'");			
