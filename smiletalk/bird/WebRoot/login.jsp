@@ -1,4 +1,5 @@
 <%@ page language="java" import="javax.servlet.http.Cookie" contentType="text/html; charset=gbk" pageEncoding="gbk"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title>µÇÂ¼ - iTalk</title>
@@ -31,6 +32,9 @@
 	</p>
 	<form action="talkLogin.action" method="post" name="iTalkLogin">
 		<table align="center">
+			<tr>
+				<td colspan=2 align="center"><font color="red">${userBean.errorMessage}</font></td>
+			</tr>
 			<tr>
 				<td>
 					ÓÃ»§Ãû£º
