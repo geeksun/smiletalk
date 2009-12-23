@@ -16,16 +16,17 @@ import com.bird.domain.UserBean;
 import com.bird.service.UserService;
 import com.bird.util.ConstantUtil;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 /**
  * @author jzq
  *  italk  登录
  *  2009-11-16
  */
-public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,SessionAware,ServletRequestAware,ServletResponseAware {
+public class TalkLogin extends ActionSupport implements SessionAware,ServletRequestAware,ServletResponseAware {
+	String userName;
+	String password;
 	private UserService userService;
-	private UserBean userBean = new UserBean();
+	private UserBean userBean;
 	private List<TopicBean> topicList;
 	Map<String, Object> session;
 	HttpServletRequest request;
@@ -36,21 +37,19 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 	}
 
 	public String execute() throws Exception {
-		String userName = userBean.getUserName();
-		String password = userBean.getPassword();
-		
+		userBean = new UserBean();
 		if(userName==null||userName.equals("")){
-			userBean.setErrorMessage("请输入用户名");                // jsp 文件用 //userVo.setErrormessage()
-			//this.addActionError("用户名不能为空!");
+			userBean.setErrorMessage("请输入用户名");              
 			return LOGIN;
 		}
 		else if(password==null||password.equals("")){
 			userBean.setErrorMessage("请输入密码");
-			// this.addActionError("密码不能为空!");
 			return LOGIN;
 		}
 		else
 		{
+			userBean.setUserName(userName);
+			userBean.setPassword(password);
 			userBean = userService.loginUser(userBean);		//1000因为初始化连接池需要时间时间
 			if(userBean!=null){
 				String cookieFlag = null;
@@ -86,16 +85,11 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 				//跳转到 homeTalk 进行处理
 				return SUCCESS;	
 			}else{
-				//userBean.setErrorMessage("用户名或密码错误");
-				// this.addActionError("用户名或密码错误");
+				userBean.setErrorMessage("用户名或密码错误");
 				return LOGIN;
 			}
 		}	
 	}	
-	
-	public UserBean getModel() {
-		return userBean;
-	}
 	
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;		
@@ -115,6 +109,22 @@ public class TalkLogin extends ActionSupport implements ModelDriven<UserBean>,Se
 
 	public void setTopicList(List<TopicBean> topicList) {
 		this.topicList = topicList;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 	
 }
