@@ -7,9 +7,15 @@
 		<!-- 
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/italk?useUnicode=true&amp;characterEncoding=gbk" />
 		<property name="jdbcUrl" value="jdbc:mysql://203.134.242.60:23306/italk?useUnicode=true&amp;characterEncoding=gbk" />
-		 -->
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:23306/italk?useUnicode=true&amp;characterEncoding=gbk" />
+		-->
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:23306/italk?useUnicode=true&amp;characterEncoding=gbk" />
 		<property name="user" value="root" />
+		<!-- 
+		<property name="password" value="" />
+		<property name="password" value="root" />
+		<property name="password" value="geeksun" />
+		 -->
 		<property name="password" value="root" />
 		<!--连接池中保留的最小连接数。Default: 3 --> 
 		<property name="minPoolSize" value="10" />
@@ -58,7 +64,8 @@
            <props>
               <prop key="insert*">PROPAGATION_REQUIRED</prop>
 	    	  <prop key="update*">PROPAGATION_REQUIRED</prop>
-	    	  <prop key="find*">PROPAGATION_REQUIRED</prop>
+	    	  <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+	    	  <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
 	    	  <prop key="delete*">PROPAGATION_REQUIRED</prop>
 	    	  <prop key="*">PROPAGATION_REQUIRED,readOnly,-Exception</prop>	
            </props>
