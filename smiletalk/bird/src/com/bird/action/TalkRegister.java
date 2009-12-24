@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.bird.domain.UserBean;
 import com.bird.service.UserService;
+import com.bird.util.ConstantUtil;
 import com.bird.util.DateUtil;
 import com.bird.util.GuidUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -48,9 +49,11 @@ public class TalkRegister extends ActionSupport implements ModelDriven<UserBean>
 			request.setAttribute("validate", "fail");
 			return REGISTER;
 		}else{}*/
-			userService.insertObject(userBean);
-			//发邮件验证用户,激活码
-			userService.sendActivateEmail(userBean);
+		
+		userService.insertObject(userBean);
+		//发邮件验证用户,激活码
+		userService.sendActivateEmail(userBean);
+		session.put(ConstantUtil.USER, userBean);
 			
 			return SUCCESS;
 		
