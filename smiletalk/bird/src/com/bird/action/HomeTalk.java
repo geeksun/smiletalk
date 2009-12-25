@@ -29,8 +29,9 @@ import com.opensymphony.xwork2.ModelDriven;
  * @author 姜志强
  * 2009-11-30
  */
-public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, SessionAware, ServletRequestAware {
-	private TopicBean topicBean = new TopicBean();
+public class HomeTalk extends ActionSupport  implements SessionAware, ServletRequestAware {
+	private String topicContent;
+	private TopicBean topicBean;
 	private UserBean userBean;
 	private List<TopicBean> topicList;
 	private UserService userService;
@@ -70,7 +71,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					
 					userIdList.add(userId);
 					
-					//处理italk主页面的前面显示的图片路径
+					//处理显示的图片路径
 					Map<String, String> photoPathMap = new HashMap<String, String>();
 					for(long usrId:userIdList){
 						UserBean usrBean = new UserBean();
@@ -93,14 +94,11 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 						}
 					}				
 					
-					//request.setAttribute("topicList", topicList);
 					//生成新令牌
 					String token = TokenUtil.generateToken(request);
 					request.setAttribute("clientToken", token);
 					//替换旧令牌
 					session.put("token", token);
-					// 标记gc
-					//userBean = null;
 					
 					return SUCCESS;	
 				}else{
@@ -145,7 +143,6 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					}
 				}				
 				
-				//request.setAttribute("topicList", topicList);
 				//生成新令牌
 				String token = TokenUtil.generateToken(request);
 				request.setAttribute("clientToken", token);
@@ -168,7 +165,7 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					String photoPath = usrBean.getPhotoPath();
 					photoPathMap.put(usrName, photoPath);
 				}
-				
+				topicBean = new TopicBean();
 				topicBean.setUserId(userId);
 				topicBean.setUserIdList(userIdList);
 				topicList = topicService.getObjectList(topicBean);
@@ -190,12 +187,14 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 				return SUCCESS;
 			}else{										// 正常提交的处理
 		    	String userName = userBean.getUserName();
+		    	topicBean = new TopicBean();
 		    	topicBean.setUserId(userId);
 		    	topicBean.setUserName(userName);
+		    	topicBean.setTopicContent(topicContent);
 				Date now = new Date();
 				String topicTime = DateUtil.getDateString(now);
 				topicBean.setTopicTime(topicTime);
-				//未对topicContent,userName,userId进行验证
+
 				int result = topicService.insertObject(topicBean);
 				if(result>0){
 					FollowBean follow = new FollowBean();
@@ -230,7 +229,6 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 					request.setAttribute("clientToken", token);
 					//替换旧令牌
 					session.put("token", token);
-					//request.setAttribute("topicList", topicList);
 					return SUCCESS;
 				}else{
 					return ERROR;
@@ -252,10 +250,6 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 		this.userService = userService;
 	}
 
-	public TopicBean getModel() {
-		return topicBean;
-	}
-
 	public UserBean getUserBean() {
 		return userBean;
 	}
@@ -270,6 +264,14 @@ public class HomeTalk extends ActionSupport  implements ModelDriven<TopicBean>, 
 
 	public void setTopicList(List<TopicBean> topicList) {
 		this.topicList = topicList;
+	}
+
+	public String getTopicContent() {
+		return topicContent;
+	}
+
+	public void setTopicContent(String topicContent) {
+		this.topicContent = topicContent;
 	}
 	
 	
