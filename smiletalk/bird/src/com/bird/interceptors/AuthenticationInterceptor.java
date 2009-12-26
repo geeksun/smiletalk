@@ -1,5 +1,6 @@
 package com.bird.interceptors;
 
+import com.bird.domain.UserBean;
 import com.bird.util.ConstantUtil;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -13,7 +14,6 @@ import java.util.Map;
  *  2009-12-3
  */
 public class AuthenticationInterceptor implements Interceptor {
-	//public static final String USERNAME = "userName";
 
 	/**
 	 * 
@@ -28,11 +28,13 @@ public class AuthenticationInterceptor implements Interceptor {
 
 	}
 
+	/**
+	 *  研究下 ActionInvocation 用途
+	 */
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		Map session = actionInvocation.getInvocationContext().getSession();
-		//UserBean user = (UserBean) session.get(ConstantUtil.USERNAME);
-		String userName = (String) session.get(ConstantUtil.USERNAME);
-		if (userName == null) {
+		UserBean userBean = (UserBean) session.get(ConstantUtil.USERNAME);
+		if (userBean == null) {
 			return Action.LOGIN;
 		} else {
 			Action action = (Action) actionInvocation.getAction();
