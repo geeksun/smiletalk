@@ -24,7 +24,8 @@ CREATE TABLE `follow` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `userId` bigint(20) DEFAULT NULL,
   `followId` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `index_follow_userId` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gbk;
 
 /*Table structure for table `topic` */
@@ -39,8 +40,9 @@ CREATE TABLE `topic` (
   `topicTime` varchar(20) DEFAULT NULL,
   `remark` varchar(100) DEFAULT NULL,
   `topicStatus` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`topicId`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=gbk;
+  PRIMARY KEY (`topicId`),
+  KEY `index_topic_userId` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=gbk;
 
 /*Table structure for table `user` */
 
@@ -59,7 +61,9 @@ CREATE TABLE `user` (
   `sex` varchar(2) DEFAULT NULL COMMENT '性别',
   `birthday` varchar(20) DEFAULT NULL COMMENT '生日',
   `region` varchar(40) DEFAULT NULL COMMENT '地区',
-  PRIMARY KEY (`userId`)
+  PRIMARY KEY (`userId`),
+  KEY `index_user_username` (`userName`),
+  KEY `index_user_email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=gbk;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
