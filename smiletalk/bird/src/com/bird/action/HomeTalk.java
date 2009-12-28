@@ -18,9 +18,9 @@ import com.bird.service.TopicService;
 import com.bird.service.UserService;
 import com.bird.util.ConstantUtil;
 import com.bird.util.DateUtil;
+import com.bird.util.StringUtil;
 import com.bird.util.TokenUtil;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 /**
  * 代码还可以优化
@@ -195,7 +195,7 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 		    	topicBean = new TopicBean();
 		    	topicBean.setUserId(userId);
 		    	topicBean.setUserName(userName);
-		    	if(topicContent.contains("<")){
+		    	/*if(topicContent.contains("<")){
 		    		topicContent = topicContent.replaceAll("<", "&lt;");
 		    	}
 		    	if(topicContent.contains(">")){
@@ -209,7 +209,8 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 		    	}
 		    	if(topicContent.contains("&")){
 		    		topicContent = topicContent.replaceAll("&", "&amp;");
-		    	}
+		    	}*/
+		    	topicContent = StringUtil.htmlencode(topicContent);
 		    	topicBean.setTopicContent(topicContent);
 				Date now = new Date();
 				String topicTime = DateUtil.getDateString(now);
