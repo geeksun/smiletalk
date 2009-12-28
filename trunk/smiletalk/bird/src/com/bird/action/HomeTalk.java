@@ -88,10 +88,15 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 					topicList = topicService.getObjectList(topicBean); 		
 					for(TopicBean topic:topicList){
 						String usrName = topic.getUserName();
+						//String topicContent = topic.getTopicContent();
 						if(photoPathMap.containsKey(usrName)){
 							String photoPath = photoPathMap.get(usrName);
 							topic.setPhotoPath(photoPath);
 						}
+						/*if(topicContent.contains("&lt;")){
+							topicContent = topicContent.replaceAll("&lt;", replacement);						
+						}*/
+						
 					}				
 					
 					//Éú³ÉÐÂÁîÅÆ
@@ -190,6 +195,21 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 		    	topicBean = new TopicBean();
 		    	topicBean.setUserId(userId);
 		    	topicBean.setUserName(userName);
+		    	if(topicContent.contains("<")){
+		    		topicContent = topicContent.replaceAll("<", "&lt;");
+		    	}
+		    	if(topicContent.contains(">")){
+		    		topicContent = topicContent.replaceAll(">", "&gt;");
+		    	}
+		    	if(topicContent.contains("\"")){
+		    		topicContent = topicContent.replaceAll("\"", "&quot;");
+		    	}
+		    	if(topicContent.contains("'")){
+		    		topicContent = topicContent.replaceAll("'", "&#39;");
+		    	}
+		    	if(topicContent.contains("&")){
+		    		topicContent = topicContent.replaceAll("&", "&amp;");
+		    	}
 		    	topicBean.setTopicContent(topicContent);
 				Date now = new Date();
 				String topicTime = DateUtil.getDateString(now);
