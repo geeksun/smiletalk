@@ -130,7 +130,10 @@
 	}	 
 	function checkTalk(){
 		var a = document.iTalk.topicContent;
-		str = a.value.replace(/\s+/g,"");
+		str = a.value.replace(/\s+/g,"");	//是否为空
+		//str = a.value.replace(/<.*>/g, "");	//去掉尖括号
+		//str = toTxt(str);
+		//str = a.value.replace(/</g, "&lt;");
 		if(str==''){
 			//alert("输入不可为空!");
 			a.value = '';
@@ -138,7 +141,7 @@
 			document.getElementById("validNum").innerHTML = 140;
 		   	return false;
 		}
-        	if(a.value.length > 140)
+        if(a.value.length > 140)
 		{
 		   	alert("输入的长度不能超过140个字符!");
 		   	a.focus();
@@ -161,6 +164,33 @@
 		topicContent.value = "ZT " + element + ":";
 		topicContent.focus();
 	}
+	function toTxt(str){    
+	    var RexStr = /\<|\>|\"|\'|\&/g;
+	    str = str.replace(RexStr,   
+	        function(MatchStr){   
+	            switch(MatchStr){   
+	                case "<":   
+	                    return "&lt;";   
+	                    break;   
+	                case ">":   
+	                    return "&gt;";   
+	                    break;   
+	                case "\"":   
+	                    return "&quot;";   
+	                    break;   
+	                case "'":   
+	                    return "&#39;";   
+	                    break;   
+	                case "&":   
+	                    return "&amp;";   
+	                    break;   
+	                default :   
+	                    break;   
+	            }   
+	        }   
+	    )   
+	    return str;   
+	}    
 </script>         
 <p align="center">
 <%@ include file="foot.jsp" %>
