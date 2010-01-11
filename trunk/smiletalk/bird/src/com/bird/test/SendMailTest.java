@@ -29,13 +29,20 @@ public class SendMailTest {
         Session session = Session.getInstance(props);
         session.setDebug(true);
         Message msg = new MimeMessage(session);
-        msg.setText("user，你好，用户注册邮件测试");	//邮件内容
-        msg.setFrom(new InternetAddress("jiangzhiqiang@madeinchina-inc.com"));	//发送邮件地址
+        msg.setText("user，你好，163 pop服务器邮件测试");	//邮件内容
+       /* msg.setFrom(new InternetAddress("jiangzhiqiang@madeinchina-inc.com"));	//发送邮件地址
         msg.setRecipient(Message.RecipientType.TO, new InternetAddress("jzq9899@163.com"));	//接受邮件地址
         msg.setSubject("用户注册邮件测试");  //邮件主题
         Transport transport = session.getTransport();
         transport.connect("mail.madeinchina-inc.com", 25, "jiangzhiqiang@madeinchina-inc.com", "123456");//邮件服务器
         transport.sendMessage(msg, new Address[] { new InternetAddress("jzq9899@163.com")});
+        transport.close();*/
+        msg.setFrom(new InternetAddress("geeksun@163.com"));	//发送邮件地址
+        msg.setRecipient(Message.RecipientType.TO, new InternetAddress("jzq1999@gmail.com"));	//接受邮件地址
+        msg.setSubject("用户注册邮件测试");  //邮件主题
+        Transport transport = session.getTransport();
+        transport.connect("smtp.163.com", 25, "geeksun@163.com", "pretty");//邮件服务器
+        transport.sendMessage(msg, new Address[] { new InternetAddress("jzq1999@gmail.com")});
         transport.close();
 	}
 	
