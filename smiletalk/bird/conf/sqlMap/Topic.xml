@@ -8,8 +8,8 @@
 select * from topic where userId in 
 		<iterate open="(" close=")" conjunction=",">   
                #userIdList[]#
-             </iterate>
-             order by topicTime desc
+        </iterate>
+        order by topicTime desc
 	</select>
 	<select id="findRandomTopicList" resultClass="com.bird.domain.TopicBean">
 select * from topic order by topicTime desc limit 0,20
