@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+    <select id="getArticleCount" parameterClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleCondition"
+        resultClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleVo">
+        <![CDATA[
+select count(0)
+from TD_CMS_ARTICLE a, td_cms_template ct, td_cms_articlecat ac
+where a.articlecatid=ac.articlecatid and a.templateid=ct.templateid
+		]]>
+        <dynamic>
+            <isNotEmpty property="articleId" prepend="and">
+                <![CDATA[ articleId = #articleId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleCatId" prepend="and">
+                <![CDATA[ articleCatId = #articleCatId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="templateId" prepend="and">
+                <![CDATA[ templateId = #templateId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleCode" prepend="and">
+                <![CDATA[ articleCode = #articleCode# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleLanguage" prepend="and">
+            	<isEqual property="articleLanguage" compareValue="0">
+            		<![CDATA[ ac.articleLanguage='0' ]]>
+            	</isEqual>
+            	<isEqual property="articleLanguage" compareValue="1">
+            		<![CDATA[ ac.articleLanguage='1' ]]>
+            	</isEqual>
+            </isNotEmpty>
+            <isNotEmpty property="templateName" prepend="and">
+            	<isEqual property="templateName" compareValue="0">
+            		<![CDATA[ ct.templanguage='0' ]]>
+            	</isEqual>
+            	<isEqual property="templateName" compareValue="1">
+            		<![CDATA[ ct.templanguage='1' ]]>
+            	</isEqual>
+            </isNotEmpty>
+            <isNotEmpty property="articleTitle" prepend="and">
+                <![CDATA[ articleTitle = #articleTitle# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="createId" prepend="and">
+                <![CDATA[ createId = #createId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="operaterId" prepend="and">
+                <![CDATA[ operaterId = #operaterId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="state" prepend="and">
+                <![CDATA[ state = #state# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="templateName" prepend="and">
+                <![CDATA[ a.templateName = #templateName# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="categoryName" prepend="and">
+                <![CDATA[ a.categoryName = #categoryName# ]]>
+            </isNotEmpty>
+            <!-- 日期查询类型：1-创建日期，2-修改日期 -->
+            <isNotEmpty property="dateType">
+                <isEqual property="dateType" compareValue="1">
+                    <isNotNull property="startDate" prepend="and">
+                        <![CDATA[ createDate >= #startDate# ]]>
+                    </isNotNull>
+                    <isNotNull property="endDate" prepend="and">
+                        <![CDATA[ createDate <= #endDate# ]]>
+                    </isNotNull>
+                </isEqual>
+                <isEqual property="dateType" compareValue="2">
+                    <isNotNull property="startDate" prepend="and">
+                        <![CDATA[ operateDate >= #startDate# ]]>
+                    </isNotNull>
+                    <isNotNull property="endDate" prepend="and">
+                        <![CDATA[ operateDate <= #endDate# ]]>
+                    </isNotNull>
+                </isEqual>
+            </isNotEmpty>
+        </dynamic>
+    </select>
+
+    <select id="getArticle" parameterClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleCondition"
+        resultClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleVo">
+        <dynamic>
+            <isNotNull property="pageInfo">
+                <![CDATA[
+select * from (select rownum num, tt.* from (
+                ]]>
+            </isNotNull>
+        </dynamic>
+		<![CDATA[
+select
+  a.articleId,
+  a.articleCatId,
+  a.templateId,
+  a.articleCode,
+  a.articleTitle,
+  a.summary,
+  a.keywords,
+  a.imgUrl,
+  a.content,
+  a.createId,
+  a.createDate,
+  a.operaterId,
+  a.operateDate,
+  a.state,
+  a.delId,
+  a.delDate,
+  ac.articleCatName,
+  ct.templateName,
+  ac.articlelanguage
+from TD_CMS_ARTICLE a, td_cms_template ct, td_cms_articlecat ac
+where a.articlecatid=ac.articlecatid and a.templateid=ct.templateid
+		]]>
+        <dynamic>
+            <isNotEmpty property="articleId" prepend="and">
+                <![CDATA[ a.articleId = #articleId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleCatId" prepend="and">
+                <![CDATA[ a.articleCatId = #articleCatId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="templateId" prepend="and">
+                <![CDATA[ a.templateId = #templateId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleCode" prepend="and">
+                <![CDATA[ a.articleCode = #articleCode# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleLanguage" prepend="and">
+            	
+                <![CDATA[ a.articleLanguage = #articleLanguage# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleTitle" prepend="and">
+                <![CDATA[ a.articleTitle = #articleTitle# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="createId" prepend="and">
+                <![CDATA[ a.createId = #createId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="operaterId" prepend="and">
+                <![CDATA[ a.operaterId = #operaterId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="templateName" prepend="and">
+                <![CDATA[ a.templateName = #templateName# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="categoryName" prepend="and">
+                <![CDATA[ a.categoryName = #categoryName# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="state" prepend="and">
+                <![CDATA[ a.state = #state# ]]>
+            </isNotEmpty>
+            <!-- 日期查询类型：1-创建日期，2-修改日期 -->
+            <isNotEmpty property="dateType">
+                <isEqual property="dateType" compareValue="1">
+                    <isNotNull property="startDate" prepend="and">
+                        <![CDATA[ a.createDate >= #startDate# ]]>
+                    </isNotNull>
+                    <isNotNull property="endDate" prepend="and">
+                        <![CDATA[ a.createDate <= #endDate# ]]>
+                    </isNotNull>
+                </isEqual>
+                <isEqual property="dateType" compareValue="2">
+                    <isNotNull property="startDate" prepend="and">
+                        <![CDATA[ a.operateDate >= #startDate# ]]>
+                    </isNotNull>
+                    <isNotNull property="endDate" prepend="and">
+                        <![CDATA[ a.operateDate <= #endDate# ]]>
+                    </isNotNull>
+                </isEqual>
+            </isNotEmpty>
+        </dynamic>
+        <!-- 排序类型：1-文章编号，2-语言，3-标题，4-文章分类，5-创建日期，6-修改日期，7-创建人，8-修改人 -->
+        <dynamic prepend="order by">
+            <isEqual property="orderByType" compareValue="1">
+                <![CDATA[ a.articleCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="2">
+                <![CDATA[ ac.articlelanguage #orderBy#, a.articleCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="3">
+                <![CDATA[ a.articleTitle #orderBy#, a.articleCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="4">
+                <![CDATA[ a.articleCatId #orderBy#, a.articleCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="5">
+                <![CDATA[ a.createDate #orderBy#, a.articleCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="6">
+                <![CDATA[ a.operateDate #orderBy#, a.articleCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="7">
+                <![CDATA[ a.createId #orderBy#, a.articleCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="8">
+                <![CDATA[ a.operaterId #orderBy#, a.articleCode  #orderBy#]]>
+            </isEqual>
+        </dynamic>
+        <dynamic>
+            <isNotNull property="pageInfo">
+                <![CDATA[
+) tt ) where num > #pageInfo.beginRowNum# and num <= #pageInfo.endRowNum#
+                ]]>
+            </isNotNull>
+        </dynamic>
+	</select>
+    
+    <insert id="insertArticle" parameterClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleVo">
+        <![CDATA[
+insert into TD_CMS_ARTICLE(
+      articleId, articleCatId, templateId, articleCode, articleTitle, 
+      summary, keywords, imgUrl, content, createId, createDate, state)
+values(#articleId#, #articleCatId#, #templateId#, #articleCode#, #articleTitle#, 
+      #summary#, #keywords#, #imgUrl#, #content#, #createId#, sysdate, '0' )
+        ]]>
+    </insert>
+    
+    <update id="updateArticle" parameterClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleVo">
+        <![CDATA[
+update TD_CMS_ARTICLE 
+        ]]>
+        <dynamic prepend="set">
+            <isNotEmpty property="articleCatId" prepend="," removeFirstPrepend="true">
+                <![CDATA[articleCatId = #articleCatId#]]>
+            </isNotEmpty>
+            <isNotEmpty property="templateId" prepend="," removeFirstPrepend="true">
+                <![CDATA[templateId = #templateId#]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleCode" prepend="," removeFirstPrepend="true">
+                <![CDATA[articleCode = #articleCode#]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleTitle" prepend="," removeFirstPrepend="true">
+                <![CDATA[articleTitle = #articleTitle#]]>
+            </isNotEmpty>
+            <isNotEmpty property="summary" prepend="," removeFirstPrepend="true">
+                <![CDATA[summary = #summary#]]>
+            </isNotEmpty>
+            <isNotEmpty property="keywords" prepend="," removeFirstPrepend="true">
+                <![CDATA[keywords = #keywords#]]>
+            </isNotEmpty>
+            <isNotEmpty property="imgUrl" prepend="," removeFirstPrepend="true">
+                <![CDATA[imgUrl = #imgUrl#]]>
+            </isNotEmpty>
+            <isNotEmpty property="content" prepend="," removeFirstPrepend="true">
+                <![CDATA[content = #content#]]>
+            </isNotEmpty>
+            <isNotNull property="createId" prepend="," removeFirstPrepend="true">
+                <![CDATA[createId = #createId#]]>
+            </isNotNull>
+            <isNotNull property="createDate" prepend="," removeFirstPrepend="true">
+                <![CDATA[createDate = #createDate#]]>
+            </isNotNull>
+            <isNotNull property="operaterId" prepend="," removeFirstPrepend="true">
+                <![CDATA[operaterId = #operaterId#]]>
+            </isNotNull>
+            <isNotNull property="operateDate" prepend="," removeFirstPrepend="true">
+                <![CDATA[operateDate = #operateDate#]]>
+            </isNotNull>
+            <isNotEmpty property="state" prepend="," removeFirstPrepend="true">
+                <![CDATA[state = #state#]]>
+            </isNotEmpty>
+            <isNotNull property="delId" prepend="," removeFirstPrepend="true">
+                <![CDATA[delId = #delId#]]>
+            </isNotNull>
+            <isNotNull property="delDate" prepend="," removeFirstPrepend="true">
+                <![CDATA[delDate = #delDate#]]>
+            </isNotNull>            
+        </dynamic>
+        <![CDATA[
+where articleId = #articleId#
+        ]]>
+    </update>
+</sqlMap>
