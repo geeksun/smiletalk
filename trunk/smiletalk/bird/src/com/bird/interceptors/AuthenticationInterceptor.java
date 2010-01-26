@@ -15,17 +15,14 @@ import java.util.Map;
  */
 public class AuthenticationInterceptor implements Interceptor {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5632216855718494698L;
-
+	
 	public void destroy() {
-
+		
 	}
 
 	public void init() {
-
+		
 	}
 
 	/**
