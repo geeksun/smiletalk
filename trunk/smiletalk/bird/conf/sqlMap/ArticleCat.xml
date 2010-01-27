@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+    <select id="getArticleCategoryCount" parameterClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleCatCondition"
+        resultClass="java.lang.Integer">
+        <![CDATA[
+select count(0)
+from Td_CMS_articlecat 
+		]]>
+        <dynamic prepend="where">
+            <isNotEmpty property="articlecatId" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ articlecatId = #articlecatId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articlecatCode" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ articlecatCode = #articlecatCode# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleLanguage">
+            	<isEqual property="articleLanguage" compareValue="0">
+            		<isNotNull property="articleLanguage" prepend="and">
+            			<![CDATA[ articleLanguage=#articleLanguage# ]]>
+            		</isNotNull>
+            	</isEqual>
+            	<isEqual property="articleLanguage" compareValue="1">
+            		<isNotNull property="articleLanguage" prepend="and">
+            			<![CDATA[ articleLanguage=#articleLanguage# ]]>
+            		</isNotNull>
+            	</isEqual>
+            </isNotEmpty>
+            <isNotEmpty property="articleCatName" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ articleCatName = #articleCatName# ]]>
+            </isNotEmpty>
+            <isNotNull property="startDate" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ createDate >= #startDate# ]]>
+            </isNotNull>
+            <isNotNull property="endDate" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ createDate <= #endDate# + 1 ]]>
+            </isNotNull>
+            <isNotNull property="operateId" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ operateId = #operateId# ]]>
+            </isNotNull>
+        </dynamic>
+    </select>
+
+    <select id="getArticleCategory" parameterClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleCatCondition"
+        resultClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleCategoryVo">
+        <dynamic>
+            <isNotNull property="pageInfo">
+                <![CDATA[
+select * from (select rownum num, tt.* from (
+                ]]>
+            </isNotNull>
+        </dynamic>
+		<![CDATA[
+select
+  articlecatId,
+  articlecatCode,
+  articleLanguage,
+  articleCatName,
+  createDate,
+  operateId,
+  operateDate,
+  state
+from Td_CMS_articlecat 
+		]]>
+        <dynamic prepend="where">
+            <isNotEmpty property="articlecatId" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ articlecatId = #articlecatId# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articlecatCode" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ articlecatCode = #articlecatCode# ]]>
+            </isNotEmpty>
+            <isNotEmpty property="articleLanguage">
+            	<isEqual property="articleLanguage" compareValue="0">
+            		<isNotNull property="articleLanguage" prepend="and">
+            			<![CDATA[ articleLanguage=#articleLanguage# ]]>
+            		</isNotNull>
+            	</isEqual>
+            	<isEqual property="articleLanguage" compareValue="1">
+            		<isNotNull property="articleLanguage" prepend="and">
+            			<![CDATA[ articleLanguage=#articleLanguage# ]]>
+            		</isNotNull>
+            	</isEqual>
+            </isNotEmpty>
+            <isNotEmpty property="articleCatName" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ articleCatName = #articleCatName# ]]>
+            </isNotEmpty>
+            <isNotNull property="startDate" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ createDate >= #startDate# ]]>
+            </isNotNull>
+            <isNotNull property="endDate" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ createDate <= #endDate# + 1 ]]>
+            </isNotNull>
+            <isNotNull property="operateId" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ operateId = #operateId# ]]>
+            </isNotNull>
+            <isNotNull property="state" prepend="and" removeFirstPrepend="true">
+                <![CDATA[ state = #state# ]]>
+            </isNotNull>
+        </dynamic>
+        <!-- 排序类型：1-分类ID，2-分类名称，3-创建时间，4-操作人 -->
+        <dynamic prepend="order by">
+            <isEqual property="orderByType" compareValue="1">
+                <![CDATA[ articlecatCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="2">
+                <![CDATA[ articleCatName #orderBy#, articlecatCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="3">
+                <![CDATA[ createDate #orderBy#, articlecatCode  #orderBy#]]>
+            </isEqual>
+            <isEqual property="orderByType" compareValue="4">
+                <![CDATA[ operateId #orderBy#, articlecatCode  #orderBy#]]>
+            </isEqual>
+        </dynamic>
+        <dynamic>
+            <isNotNull property="pageInfo">
+                <![CDATA[
+) tt ) where num > #pageInfo.beginRowNum# and num <= #pageInfo.endRowNum#
+                ]]>
+            </isNotNull>
+        </dynamic>
+	</select>
+	<select id="getArticleCats" resultClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleCategoryVo">
+		<![CDATA[
+			select * from Td_CMS_articlecat
+		]]>
+	</select>
+	<insert id="insertArticleCategory" parameterClass="com.mic.escrow.trader.bean.vo.cmsissue.article.ArticleCategoryVo">
+		<selectKey keyProperty="articlecatId" resultClass="java.lang.String">
+            <![CDATA[select sys_guid() from dual]]>
+        </selectKey>
+		<![CDATA[
+		insert into Td_CMS_articlecat (ARTICLECATID,ARTICLELANGUAGE,ARTICLECATNAME,CREATEDATE,OPERATEID,OPERATEDATE) values 
+		(#articlecatId#,#articleLanguage#,#articleCatName#,sysdate,#operateId#,sysdate)
+		]]>
+	</insert>
+	
+</sqlMap>
