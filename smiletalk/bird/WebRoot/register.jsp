@@ -150,7 +150,8 @@
 </head>
 <body>
 	<p align="center">
-		注册italk<%=validate%>
+		注册italk<%=validate%><br><br>
+		注册过程需要花费您一点时间，请谅解，对于注册过程如果有好的建议，请发送邮件到<a href="mailto:geeksun@163.com">geeksun@163.com</a>。
 	</p>
 	<form action="talkRegister.action" method="post" name="iTalkRegister">
 	<table align="center">
