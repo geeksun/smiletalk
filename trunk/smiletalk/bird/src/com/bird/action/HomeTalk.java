@@ -195,21 +195,6 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 		    	topicBean = new TopicBean();
 		    	topicBean.setUserId(userId);
 		    	topicBean.setUserName(userName);
-		    	/*if(topicContent.contains("<")){
-		    		topicContent = topicContent.replaceAll("<", "&lt;");
-		    	}
-		    	if(topicContent.contains(">")){
-		    		topicContent = topicContent.replaceAll(">", "&gt;");
-		    	}
-		    	if(topicContent.contains("\"")){
-		    		topicContent = topicContent.replaceAll("\"", "&quot;");
-		    	}
-		    	if(topicContent.contains("'")){
-		    		topicContent = topicContent.replaceAll("'", "&#39;");
-		    	}
-		    	if(topicContent.contains("&")){
-		    		topicContent = topicContent.replaceAll("&", "&amp;");
-		    	}*/
 		    	topicContent = StringUtil.htmlencode(topicContent);
 		    	topicBean.setTopicContent(topicContent);
 				Date now = new Date();
