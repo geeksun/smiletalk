@@ -56,7 +56,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" name="iTalksub" value="µÇÂ¼ iTalk" >
+					<input type="submit" name="iTalksub" value=" µÇ   Â¼ " >
 					<a href="register.jsp">×¢²á iTalk</a>
 				</td>
 			</tr>
