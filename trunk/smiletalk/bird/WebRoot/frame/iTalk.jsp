@@ -9,7 +9,7 @@
 	String path = request.getContextPath();
  %>
 
-<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery-1.3.1.js"></script>
 <style type="text/css">
 <!--
 .STYLE2 {font-size: 12px}
@@ -156,8 +156,23 @@
 			jQuery.ajax({
 		         url:"<%=path%>/newTalk.action",
 		         data:{content:content},
-		         error:function(){
-		         	alert("error occured!!!");
+		         cache:false,
+				 method:'post',
+		         error:function(xhr, ajaxOptions, thrownError){
+		         	alert(xhr.status);
+		         	if(xhr.status == 404) {
+		         		alert('404');
+					    // 404 error
+					  }
+					  else if(xhr.status == 403) {
+					  	alert('403');
+					    // 403 error
+					  }
+					  else {
+					    // default error
+					    alert(thrownError);
+					    alert("error occured!!!");
+					  } 
 		         },
 		         success:function(data){
 		          if(data=="1"){
