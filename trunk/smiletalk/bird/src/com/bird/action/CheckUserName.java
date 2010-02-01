@@ -10,7 +10,6 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bird.domain.UserBean;
 import com.bird.service.UserService;
-import com.bird.service.impl.UserServiceImpl;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**

@@ -42,14 +42,11 @@
 			<ref local="userService"/>
 		</property>
 	</bean>
-	<!--<bean id="newTalk" class="com.bird.action.NewTalk">
-		<property name="userService">
-			<ref local="userService"/>
-		</property>
+	<bean id="newTalk" class="com.bird.action.NewTalk">
 		<property name="topicService">
 			<ref local="topicService"/>
 		</property>
-	</bean>-->
+	</bean>
 	<bean id="homeTalk" class="com.bird.action.HomeTalk">
 		<property name="userService">
 			<ref local="userService"/>

@@ -9,6 +9,7 @@
 	String path = request.getContextPath();
  %>
 
+<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 <style type="text/css">
 <!--
 .STYLE2 {font-size: 12px}
@@ -36,7 +37,7 @@
           </tr>
           <tr>
           	<td colspan="2" >
-          		<form action="homeTalk.action" name="iTalk" method="post">
+          		<form action="" name="iTalk" method="post">
 				<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
 					<tr align="center" >
 						<td>What are you doing?record here↓                     还可以输入<span id="validNum">140</span>字</td>
@@ -65,10 +66,10 @@
           </table>
               
               <c:forEach var="topicBean" items="${topicList}">
-                <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                	<tr>
-		           <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
-		      </tr>
+                <table id="talkShow" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tr>
+		            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
+		      	  </tr>
                   <tr>
                     <td width="52" valign="top"><img src="${topicBean.photoPath}" width="52" height="53" /></td>
                     <td valign="top"><table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
@@ -151,7 +152,21 @@
 	}
 	function justTalk(){
 		if(checkTalk()){
-			document.iTalk.submit();
+			var content = jQuery("#topicContent").val();
+			jQuery.ajax({
+		         url:"<%=path%>/newTalk.action",
+		         data:{content:content},
+		         error:function(){
+		         	alert("error occured!!!");
+		         },
+		         success:function(data){
+		          if(data=="1"){
+		          	alert("发帖成功");	
+		          }else{
+		          	alert("发帖失败");
+		          }
+		         }
+		    });
 		}
 	}
 	function reply(element){
