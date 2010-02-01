@@ -55,7 +55,7 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 		topicBean.setTopicTime(topicTime);
 		
 		request.setCharacterEncoding("GBK");
-		response.setContentType("text/xml;charset=GBK");
+		response.setContentType("text/html;charset=GBK");
 		response.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = response.getWriter();
 		int result = topicService.insertObject(topicBean);
