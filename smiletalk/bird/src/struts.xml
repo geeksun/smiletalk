@@ -10,10 +10,6 @@
 			<!-- <result name="login" type="redirect-action">Logon!input</result> -->
 			<result name="login" type="dispatcher">login.jsp</result>
 		</global-results> 
-        <!--<action name="newTalk" class="newTalk">
-            <result name="success">/frame/iTalk.jsp</result>
-            <result name="error">error.jsp</result>
-        </action>-->
         <action name="talkRegister" class="talkRegister">
             <result name="success">/frame/iTalk.jsp</result>
             <result name="register">register.jsp</result>
@@ -61,6 +57,8 @@
         	<result name="input" type="redirect">findPeople.jsp</result>
         </action>
         
+        <action name="newTalk" class="newTalk">
+        </action>
         <action name="followUser" class="followUser">
         </action>
         <action name="exitTalk" class="exitTalk">
