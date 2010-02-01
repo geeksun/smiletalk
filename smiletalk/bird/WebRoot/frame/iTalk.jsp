@@ -157,22 +157,22 @@
 		         url:"<%=path%>/newTalk.action",
 		         data:{content:content},
 		         cache:false,
-				 method:'post',
-		         error:function(xhr, ajaxOptions, thrownError){
+			   method:'post',
+		         error:function(XMLHttpRequest, textStatus, errorThrown){
 		         	alert(xhr.status);
-		         	if(xhr.status == 404) {
-		         		alert('404');
-					    // 404 error
-					  }
-					  else if(xhr.status == 403) {
-					  	alert('403');
-					    // 403 error
-					  }
-					  else {
-					    // default error
-					    alert(thrownError);
-					    alert("error occured!!!");
-					  } 
+		         	if(XMLHttpRequest.status == 404) {
+		         	    alert('404');
+				    // 404 error
+				}
+				else if(XMLHttpRequest.status == 403) {
+				    alert('403');
+				    // 403 error
+				}
+				else {
+				    // default error
+				    alert(textStatus);
+				    alert("error occured!!!");
+				  } 
 		         },
 		         success:function(data){
 		          if(data=="1"){
