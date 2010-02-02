@@ -13,6 +13,7 @@ public class TopicBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 3210689259419767229L;
+	private Long topicId;
 	private Long userId;
 	// ¹Ø×¢ÕßID
 	private Long followUserId;
@@ -64,6 +65,12 @@ public class TopicBean implements Serializable{
 	}
 	public void setUserIdList(List<Long> userIdList) {
 		this.userIdList = userIdList;
+	}
+	public Long getTopicId() {
+		return topicId;
+	}
+	public void setTopicId(Long topicId) {
+		this.topicId = topicId;
 	}
 	
 	
