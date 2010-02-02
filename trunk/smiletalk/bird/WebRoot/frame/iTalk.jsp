@@ -64,9 +64,11 @@
                   <td height="5"></td>
                 </tr>
           </table>
-              
+          <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+          </table>
+            
               <c:forEach var="topicBean" items="${topicList}">
-                <table id="talkShow" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
 		            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
 		      	  </tr>
@@ -171,12 +173,13 @@
 				else {
 				    // default error
 				    alert(textStatus);
-				    alert("error occured!!!");
-				  } 
+				    //alert("error occured!!!");
+				} 
 		         },
 		         success:function(data){
 		          if(data=="1"){
-		          	alert("·¢Ìû³É¹¦");	
+		          	//alert("·¢Ìû³É¹¦");
+		          	addTable();
 		          }else{
 		          	alert("·¢ÌûÊ§°Ü");
 		          }
@@ -194,7 +197,7 @@
 		topicContent.value = "ZT " + element + ":";
 		topicContent.focus();
 	}
-	function toTxt(str){    
+	function toTxt(str){  
 	    var RexStr = /\<|\>|\"|\'|\&/g;
 	    str = str.replace(RexStr,   
 	        function(MatchStr){   
@@ -220,7 +223,14 @@
 	        }   
 	    )   
 	    return str;   
-	}    
+	}
+	function addTable(){
+		var row1 = dynamic.insertRow(); 
+		var cell1=row1.insertCell();
+		var cell2=row1.insertCell();
+		cell1.innerText="»Ò¶¹±¦±¦";
+		cell2.innerText="³¬¼¶´ó±¿ÀÇ"
+	}
 </script>         
 <p align="center">
 <%@ include file="foot.jsp" %>
