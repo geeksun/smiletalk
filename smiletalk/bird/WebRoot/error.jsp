@@ -10,7 +10,7 @@
   	<div><p><br></p><br><p><br></p></div>
   	<p align="center">
   		<font color="red">
-  			服务器出现异常
+  			服务器出现异常,  <a href="mailto:geeksun@163.com">请联系我们</a>
   		</font>
   	<p align="center">
       <input type="button" value="后退" onClick="history.back()">

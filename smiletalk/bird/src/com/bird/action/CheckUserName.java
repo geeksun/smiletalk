@@ -23,7 +23,7 @@ public class CheckUserName extends ActionSupport implements ServletRequestAware,
 	HttpServletRequest request;
 	HttpServletResponse response;
 	
-	public String execute() throws Exception {	
+	public String execute() throws Exception {
 		request.setCharacterEncoding("GBK");
 		response.setContentType("text/xml;charset=GBK");
 		response.setHeader("Cache-Control", "no-cache");
