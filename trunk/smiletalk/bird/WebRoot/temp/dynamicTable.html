@@ -1,0 +1,28 @@
+<SCRIPT>
+function addTable(){
+	var tb1 = document.createElement("table");
+	tb1.border="1px";
+	var row1 = tb1.insertRow(); 
+	var cell1=row1.insertCell();
+	var cell2=row1.insertCell();
+	mydiv.appendChild(tb1);
+	cell1.innerText="wanghr100";
+	cell2.innerText="panyuguang962"
+}
+</SCRIPT>
+<BODY>
+<div id=mydiv style="width:400;height:300;"></div>
+<INPUT TYPE = "button" VALUE = "AddTable" onclick = "addTable()"> 
+
+
+<table id=tb1></table>
+<SCRIPT>
+function addTable2(){
+	var row1 = tb1.insertRow(); 
+	var cell1=row1.insertCell();
+	var cell2=row1.insertCell();
+	cell1.innerText="»Ò¶¹±¦±¦";
+	cell2.innerText="³¬¼¶´ó±¿ÀÇ"
+}
+</SCRIPT> 
+<INPUT TYPE = "button" VALUE = "AddTable2" onclick = "addTable2()">
