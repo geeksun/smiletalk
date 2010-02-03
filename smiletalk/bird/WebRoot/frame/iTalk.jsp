@@ -72,17 +72,18 @@
 			var cell1=row1.insertCell();
 			cell1.colspan=2;
 			cell1. height=2;
-			cell1.innerText="<hr size='1' noshade='noshade" style='border:1px #cccccc dotted;'>";
+			cell1.innerHtml="<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'>";
 			var row2 = dynamic.insertRow();
 			var cell2=row2.insertCell();
 			cell2.width=52;
 			cell2.valign=top;
-			cell2.innerText=""
+			var photoPath = ;
+			cell2.innerText="<img src='${topicBean.photoPath}' width='52' height='53' />";
 			
 			
 			
 			
-		}
+	}
      </script>   
               <c:forEach var="topicBean" items="${topicList}">
                 <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -118,7 +119,7 @@
                                 	</td>
                                 </tr>
                             </table></td>
-                          <td width="69"><img src="${topicBean.photoPath}" width="69" height="69" /></td>
+                          <!-- <td width="69"><img src="${topicBean.photoPath}" width="69" height="69" /></td>  -->
                         </tr>
                     </table>
                     </td>
