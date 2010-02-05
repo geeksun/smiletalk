@@ -96,14 +96,13 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 						/*if(topicContent.contains("&lt;")){
 							topicContent = topicContent.replaceAll("&lt;", replacement);						
 						}*/
-						
-					}				
+					}
 					
 					//生成新令牌
-					String token = TokenUtil.generateToken(request);
-					request.setAttribute("clientToken", token);
+					/*String token = TokenUtil.generateToken(request);
+					request.setAttribute("clientToken", token);*/
 					//替换旧令牌
-					session.put("token", token);
+					//session.put("token", token);
 					
 					return SUCCESS;	
 				}else{
@@ -115,10 +114,10 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 		} else {
 			userBean = (UserBean) session.get(ConstantUtil.USER);
 			Long userId = userBean.getUserId();
-			String clientToken = request.getParameter("clientToken");
-			String sessionToken = (String) session.get("token");
+			//String clientToken = request.getParameter("clientToken");
+			//String sessionToken = (String) session.get("token");
 			
-			if(clientToken==null){				//点击home链接或从登陆链接过来, clientToken==null
+			//if(clientToken==null){				//点击home链接或从登陆链接过来, clientToken==null
 				FollowBean follow = new FollowBean();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
@@ -147,15 +146,16 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 						topic.setPhotoPath(photoPath);
 					}
 				}				
-				
+				request.setAttribute("photoPath", userBean.getPhotoPath());
+				return SUCCESS;
 				//生成新令牌
-				String token = TokenUtil.generateToken(request);
+				/*String token = TokenUtil.generateToken(request);
 				request.setAttribute("clientToken", token);
 				//替换旧令牌
 				session.put("token", token);
-				return SUCCESS;	
-			} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){			// 重复提交处理
-				FollowBean follow = new FollowBean();
+				return SUCCESS;	*/
+			//} else if(sessionToken!=null&&!clientToken.equals(sessionToken)){			// 重复提交处理
+				/*FollowBean follow = new FollowBean();
 				follow.setUserId(userId);
 				List<Long> userIdList = userService.getUserIdList(follow);
 				
@@ -181,17 +181,17 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 						String photoPath = photoPathMap.get(usrName);
 						topic.setPhotoPath(photoPath);
 					}
-				}
+				}*/
 				
 				//生成新令牌
-				String token = TokenUtil.generateToken(request);
+				/*String token = TokenUtil.generateToken(request);
 				request.setAttribute("clientToken", token);
 				//替换旧令牌
-				session.put("token", token);
+				session.put("token", token);*/
 				//request.setAttribute("topicList", topicList);
-				return SUCCESS;
-			}else{										// 正常提交的处理
-		    	String userName = userBean.getUserName();
+				/*return SUCCESS;*/
+			//}else{										// 正常提交的处理
+		    	/*String userName = userBean.getUserName();
 		    	topicBean = new TopicBean();
 		    	topicBean.setUserId(userId);
 		    	topicBean.setUserName(userName);
@@ -238,8 +238,8 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 					return SUCCESS;
 				}else{
 					return ERROR;
-				}
-			}
+				}*/
+			//}
 		}
 		
 	}
