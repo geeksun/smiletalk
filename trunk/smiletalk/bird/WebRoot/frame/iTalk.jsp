@@ -4,9 +4,8 @@
 <jsp:include page="top.jsp"/>
 
 <% 
-	String clientToken = (String)request.getAttribute("clientToken");
-	clientToken = clientToken==null?"":clientToken;
 	String path = request.getContextPath();
+	String photoPath = (String)request.getAttribute("photoPath");
  %>
 
 <script type="text/javascript" src="<%=path%>/js/jquery-1.3.1.js"></script>
@@ -52,7 +51,6 @@
 						<td><input type="button" onclick="justTalk()" value="  Talk  " > </td>
 					</tr>
 				</table>
-				<input type="hidden" name="clientToken" value="<%=clientToken%>" />
 			</form>
           	</td>
           </tr>
@@ -77,10 +75,9 @@
 			var cell2=row2.insertCell();
 			cell2.width=52;
 			cell2.valign=top;
-			var photoPath = ;
-			cell2.innerText="<img src='${topicBean.photoPath}' width='52' height='53' />";
-			
-			
+			cell2.innerText="<img src='<%=photoPath%>' width='52' height='53' />";
+			var cell3=row2.insertCell();
+			cell3.valign=top;
 			
 			
 	}
@@ -92,33 +89,27 @@
 		      	  </tr>
                   <tr>
                     <td width="52" valign="top"><img src="${topicBean.photoPath}" width="52" height="53" /></td>
-                    <td valign="top"><table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
+                    <td valign="top">
+                    <table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
                         <tr>
                           <td height="18" colspan="2" bgcolor="#EAF3FA" class="STYLE3"><span class="STYLE2"><strong>${topicBean.userName}</strong></span></td>
                         </tr>
                         <tr>
-                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" height="5">
-                              <tr>
-                                <td></td>
-                              </tr>
-                            </table>
-                            <table width="95%" border="0" cellspacing="0" cellpadding="0">
-                               <tr>
-                                  <td class="STYLE2">${topicBean.topicContent}</td>
-                               </tr>
-                            </table>
-                            <table width="95%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                  <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
-                                </tr>
-                                <tr>
-                                	<td align="right">
-                                	<c:if test="${topicBean.userName!=userBean.userName}">
-                                	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
-                                	</c:if>
-                                	</td>
-                                </tr>
-                            </table></td>
+                          <td valign="top">
+                           <tr>
+                              <td class="STYLE2">${topicBean.topicContent}</td>
+                           </tr>
+                            <tr>
+                              <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
+                            </tr>
+                            <tr>
+                            	<td align="right">
+                            	<c:if test="${topicBean.userName!=userBean.userName}">
+                            	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
+                            	</c:if>
+                            	</td>
+                            </tr>
+                            </td>
                           <!-- <td width="69"><img src="${topicBean.photoPath}" width="69" height="69" /></td>  -->
                         </tr>
                     </table>
