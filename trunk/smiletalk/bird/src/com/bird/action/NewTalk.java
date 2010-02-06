@@ -1,6 +1,7 @@
 package com.bird.action;
 
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.Map;
 
@@ -37,6 +38,8 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 
 	public String execute() throws Exception{
 		request.setCharacterEncoding("GBK");
+		response.setContentType("text/html;charset=GBK");
+		response.setHeader("Cache-Control", "no-cache");
 		
 		if(session==null||session.size()==0){
 			return LOGIN;
@@ -45,6 +48,7 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 		UserBean user = (UserBean) session.get(ConstantUtil.USER);
 		Long userId = user.getUserId();
 		String content = request.getParameter("content");
+		content = URLDecoder.decode(content, "UTF-8");
 		String userName = user.getUserName();
 		topicBean = new TopicBean();
     	topicBean.setUserId(userId);
@@ -54,9 +58,7 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 		String topicTime = DateUtil.getDateString(now);
 		topicBean.setTopicTime(topicTime);
 		
-		request.setCharacterEncoding("GBK");
-		response.setContentType("text/html;charset=GBK");
-		response.setHeader("Cache-Control", "no-cache");
+		
 		PrintWriter out = response.getWriter();
 		int result = topicService.insertObject(topicBean);
 		if(result>0){
