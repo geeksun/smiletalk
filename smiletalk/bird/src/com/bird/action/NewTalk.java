@@ -61,15 +61,11 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 		int result = topicService.insertObject(topicBean);
 		if(result>0){
 			out.print("1");
-			//out.flush();
-			out.close();
-			return null;
 		}else{
 			out.print("0");
-			//out.flush();
-			out.close();
-			return null;
 		}
+		out.close();
+		return null;
 	}
 	
 	public void setSession(Map<String, Object> session) {
