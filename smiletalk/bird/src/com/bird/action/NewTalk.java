@@ -19,7 +19,7 @@ import com.bird.util.DateUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * talk topic-发布话题,有防止重复提交操作
+ * talk topic-发布话题
  * @author jzq
  *  beta 0.1
  *  2009-11-9
