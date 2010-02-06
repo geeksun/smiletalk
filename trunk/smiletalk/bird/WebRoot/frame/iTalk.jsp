@@ -64,54 +64,66 @@
           </table>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
           </table>
+          <table id="inner" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
+          </table>
      <script>
      	function addTable(){
-			var row1 = dynamic.insertRow();
-			var cell1=row1.insertCell();
-			cell1.colspan=2;
-			cell1. height=2;
-			cell1.innerHtml="<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'>";
-			var row2 = dynamic.insertRow();
-			var cell2=row2.insertCell();
-			cell2.width=52;
-			cell2.valign=top;
-			cell2.innerText="<img src='<%=photoPath%>' width='52' height='53' />";
-			var cell3=row2.insertCell();
-			cell3.valign=top;
-			
-			
+		var row1 = dynamic.insertRow();
+		var cell1=row1.insertCell();
+		cell1.colspan=2;
+		cell1. height=2;
+		cell1.innerHtml="<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'>";
+		var row2 = dynamic.insertRow();
+		var cell2=row2.insertCell();
+		cell2.width=52;
+		cell2.valign=top;
+		cell2.innerHtml="<img src='<%=photoPath%>' width='52' height='53' />";
+		var cell3=row2.insertCell();
+		cell3.valign=top;
+		
+		var row3 = inner.insertRow();
+		var cell4=row3.insertCell();
+		cell4.colspan="2";	
+		cell4.height=18;
+		cell4.bgcolor="#EAF3FA";
+		cell4.class="STYLE3";
+		cell4.innerHtml="<span class='STYLE2'><strong>${topicBean.userName}</strong></span>";
+		var cell5=row3.insertCell();
+		cell5.class="STYLE2";
+		cell5.innerHtml="${topicBean.topicContent}";
+		var cell6=row3.insertCell();
+		cell6.class="STYLE7";
+		cell6.innerHtml="<span class='STYLE7'>${topicBean.topicTime}</span> <span class='STYLE8'>生活</span> <span class='STYLE2'>by:</span><span class='STYLE8'>${topicBean.userName}</span>";
+		var cell7=row3.insertCell();
+		cell7.align="right";
+		cell7.innerHtml="<a href='javascript:reply('${topicBean.userName}')'>回复</a>&nbsp;<a href='javascript:transmit('${topicBean.userName}')'>转发</a>";
 	}
      </script>   
               <c:forEach var="topicBean" items="${topicList}">
                 <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
 		            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
-		      	  </tr>
+		      </tr>
                   <tr>
                     <td width="52" valign="top"><img src="${topicBean.photoPath}" width="52" height="53" /></td>
                     <td valign="top">
                     <table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
-                        <tr>
+                       <tr>
                           <td height="18" colspan="2" bgcolor="#EAF3FA" class="STYLE3"><span class="STYLE2"><strong>${topicBean.userName}</strong></span></td>
-                        </tr>
-                        <tr>
-                          <td valign="top">
-                           <tr>
-                              <td class="STYLE2">${topicBean.topicContent}</td>
-                           </tr>
-                            <tr>
-                              <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
-                            </tr>
-                            <tr>
-                            	<td align="right">
-                            	<c:if test="${topicBean.userName!=userBean.userName}">
-                            	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
-                            	</c:if>
-                            	</td>
-                            </tr>
-                            </td>
-                          <!-- <td width="69"><img src="${topicBean.photoPath}" width="69" height="69" /></td>  -->
-                        </tr>
+                       </tr>
+                       <tr>
+                          <td class="STYLE2">${topicBean.topicContent}</td>
+                       </tr>
+                       <tr>
+                          <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
+                       </tr>
+                       <tr>
+                        	<td align="right">
+                        	<c:if test="${topicBean.userName!=userBean.userName}">
+                        	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
+                        	</c:if>
+                        	</td>
+                       </tr>
                     </table>
                     </td>
                   </tr>
