@@ -63,9 +63,10 @@
                 </tr>
           </table>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-          </table>
           <table id="inner" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
           </table>
+          </table>
+          
      <script>
      	function addTable(){
 		var row1 = dynamic.insertRow();
@@ -176,6 +177,7 @@
 	function justTalk(){
 		if(checkTalk()){
 			var content = jQuery("#topicContent").val();
+			content = encodeURI(content);
 			jQuery.ajax({
 		         url:"<%=path%>/newTalk.action",
 		         data:{content:content},
