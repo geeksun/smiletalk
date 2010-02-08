@@ -2,12 +2,12 @@
   <head>  
   <title>   动态表格实例</title>  
   <style>  
-  .curr   {background-color:blue;color:white}  
+  .curr{background-color:blue;color:white}  
   </style>  
   <script   language="JavaScript">  
   var   curRow   =   null;  
    
-  function   setrow(){  
+  function setrow(){  
     var   e   =   event.srcElement;  
     if(e.tagName=="TD"   &&   tab1.contains(e)){  
         curRow   =   e.parentNode;  
@@ -16,7 +16,7 @@
     else   curRow=null;  
   }  
    
-  function   doEdit(bSave){  
+  function doEdit(bSave){
     if(curRow==null)   return;  
     var   i;  
     for(var   i=0;   i<curRow.cells.length;i++){  
@@ -27,7 +27,7 @@
       }  
   }  
    
-  function   doInsert(){  
+  function doInsert(){  
       var   r=tab1.insertRow();  
       for(var   i=0;   i<tab1.rows[0].cells.length;i++){  
           r.insertCell(i).innerText   =   document.getElementsByName("txt")[i].value;  
@@ -35,7 +35,7 @@
       curRow   =   r;  
       updateRow();  
   }  
-  function   doDelete(){  
+  function doDelete(){  
     if(tab1.rows.length<2   ||   !curRow)   return;  
     curRow.removeNode(true);  
     curRow=null;  
