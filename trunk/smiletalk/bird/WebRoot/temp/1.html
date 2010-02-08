@@ -1,0 +1,65 @@
+<html>  
+  <head>  
+  <title>   动态表格实例</title>  
+  <style>  
+  .curr   {background-color:blue;color:white}  
+  </style>  
+  <script   language="JavaScript">  
+  var   curRow   =   null;  
+   
+  function   setrow(){  
+    var   e   =   event.srcElement;  
+    if(e.tagName=="TD"   &&   tab1.contains(e)){  
+        curRow   =   e.parentNode;  
+        updateRow();  
+    }  
+    else   curRow=null;  
+  }  
+   
+  function   doEdit(bSave){  
+    if(curRow==null)   return;  
+    var   i;  
+    for(var   i=0;   i<curRow.cells.length;i++){  
+      if(bSave)  
+      curRow.cells[i].innerText   =   document.getElementsByName("txt")[i].value;  
+      else  
+      document.getElementsByName("txt")[i].value   =   curRow.cells[i].innerText;  
+      }  
+  }  
+   
+  function   doInsert(){  
+      var   r=tab1.insertRow();  
+      for(var   i=0;   i<tab1.rows[0].cells.length;i++){  
+          r.insertCell(i).innerText   =   document.getElementsByName("txt")[i].value;  
+      }  
+      curRow   =   r;  
+      updateRow();  
+  }  
+  function   doDelete(){  
+    if(tab1.rows.length<2   ||   !curRow)   return;  
+    curRow.removeNode(true);  
+    curRow=null;  
+    updateRow();  
+  }  
+  function   updateRow(){  
+      var   rows=tab1.rows;  
+      for(var   i   in   rows)  
+          rows[i].className   =   (curRow==rows[i])   ?   "curr"   :   ""  
+  }  
+  </script>  
+  </head>  
+  <body>  
+  动态表格实例<br>  
+  <table   id=tab1   border=1   width=500   onclick="setrow()">  
+  <tr><td>00</td><td>01</td><td>02</td></tr>  
+  <tr><td>10</td><td>11</td><td>12</td></tr>  
+  <tr><td>20</td><td>21</td><td>22</td></tr>  
+  <tr><td>30</td><td>31</td><td>32</td></tr>  
+  </table>  
+  <input   name=txt><input   name=txt><input   name=txt><br>  
+  <button   onclick="doEdit(false)">Edit</button>  
+  <button   onclick="doEdit(true)">Save</button>  
+  <button   onclick="doInsert()">Insert</button>  
+  <button   onclick="doDelete()">delete</button>  
+  </body>  
+  </html>   
