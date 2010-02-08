@@ -1,0 +1,30 @@
+<HTML>
+ <HEAD>
+ <script language="javascript">
+  var i=-1;
+  function add(){
+     i=i+1;
+     var table=document.getElementById("table");
+	 var row=table.insertRow();
+	 var cell=row.insertCell();
+	 cell.parentElement.id=i;
+	 cell.innerHTML="数据源:<input type=\"text\" value=\""+i+"\"/>&nbsp;数据源:<input type=\"text\" value=\""+i+"\"/><input type=\"button\" value=\"del\" onclick=\"del(this.parentElement.parentElement,this.parentElement.parentElement.id)\"/>";
+  }
+  function del(src,index){
+    var tr=document.getElementById(index);
+ 	tr.parentNode.removeChild(tr);
+  }
+ </script>
+  <TITLE> New Document </TITLE>
+ </HEAD>
+
+ <BODY>
+ <input type="button" onClick="add()" value="add"/>
+
+<table id="table" border="1">
+  <tr>
+    <td>数据项</td>
+  </tr>
+  </table>
+ </BODY>
+</HTML>
