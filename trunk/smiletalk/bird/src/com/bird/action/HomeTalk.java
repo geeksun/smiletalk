@@ -147,6 +147,9 @@ public class HomeTalk extends ActionSupport  implements SessionAware, ServletReq
 					}
 				}				
 				request.setAttribute("photoPath", userBean.getPhotoPath());
+				request.setAttribute("userName", userBean.getUserName());
+				
+				
 				return SUCCESS;
 				//Éú³ÉĞÂÁîÅÆ
 				/*String token = TokenUtil.generateToken(request);
