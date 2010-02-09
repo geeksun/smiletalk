@@ -6,6 +6,7 @@
 <% 
 	String path = request.getContextPath();
 	String photoPath = (String)request.getAttribute("photoPath");
+	String userName = (String)request.getAttribute("userName");
  %>
 
 <script type="text/javascript" src="<%=path%>/js/jquery-1.3.1.js"></script>
@@ -68,7 +69,10 @@
           </table>
           
      <script>
-     	function addTable(){
+     function addTable(var topicTime) {
+     	var content = document.iTalk.topicContent;
+     	alert(topicTime);
+     	
 		var row1 = dynamic.insertRow();
 		var cell1=row1.insertCell();
 		cell1.colspan=2;
@@ -88,18 +92,18 @@
 		cell4.height=18;
 		cell4.bgcolor="#EAF3FA";
 		cell4.class="STYLE3";
-		cell4.innerHtml="<span class='STYLE2'><strong>${topicBean.userName}</strong></span>";
+		cell4.innerHtml="<span class='STYLE2'><strong><%=userName%></strong></span>";
 		var cell5=row3.insertCell();
 		cell5.class="STYLE2";
-		cell5.innerHtml="${topicBean.topicContent}";
+		cell5.innerHtml = content;
 		var cell6=row3.insertCell();
 		cell6.class="STYLE7";
-		cell6.innerHtml="<span class='STYLE7'>${topicBean.topicTime}</span> <span class='STYLE8'>生活</span> <span class='STYLE2'>by:</span><span class='STYLE8'>${topicBean.userName}</span>";
+		cell6.innerHtml="<span class='STYLE7'>topicTime</span> <span class='STYLE8'>生活</span> <span class='STYLE2'>by:</span><span class='STYLE8'><%=userName%></span>";
 		var cell7=row3.insertCell();
 		cell7.align="right";
-		cell7.innerHtml="<a href='javascript:reply('${topicBean.userName}')'>回复</a>&nbsp;<a href='javascript:transmit('${topicBean.userName}')'>转发</a>";
+		cell7.innerHtml="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
 	}
-     </script>   
+     </script>
               <c:forEach var="topicBean" items="${topicList}">
                 <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
