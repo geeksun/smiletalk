@@ -4,11 +4,11 @@
   <style>  
   .curr{background-color:blue;color:white}  
   </style>  
-  <script   language="JavaScript">  
-  var   curRow   =   null;  
+  <script language="JavaScript">  
+  var  curRow   =   null;  
    
   function setrow(){  
-    var   e   =   event.srcElement;  
+    var e = event.srcElement;  
     if(e.tagName=="TD"   &&   tab1.contains(e)){  
         curRow   =   e.parentNode;  
         updateRow();  
@@ -19,12 +19,12 @@
   function doEdit(bSave){
     if(curRow==null)   return;  
     var   i;  
-    for(var   i=0;   i<curRow.cells.length;i++){  
+    for(var   i=0;   i<curRow.cells.length;i++){
       if(bSave)  
       curRow.cells[i].innerText   =   document.getElementsByName("txt")[i].value;  
       else  
       document.getElementsByName("txt")[i].value   =   curRow.cells[i].innerText;  
-      }  
+      }
   }  
    
   function doInsert(){  
