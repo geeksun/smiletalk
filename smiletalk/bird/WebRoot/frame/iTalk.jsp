@@ -64,35 +64,45 @@
                 </tr>
           </table>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-          <table id="inner" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
           </table>
+          <table id="inner" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
           </table>
           
      <script>
      function addTable() {
-     	var content = document.iTalk.topicContent;
+     	var content = document.iTalk.topicContent.value;
      	var time = '먼먼';
+     	alert(content);
+     	alert('1');
      	
 		var row1 = dynamic.insertRow();
 		var cell1=row1.insertCell();
 		cell1.colspan=2;
-		cell1. height=2;
+		cell1.height=2;
 		cell1.innerHtml="<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'>";
 		var row2 = dynamic.insertRow();
 		var cell2=row2.insertCell();
 		cell2.width=52;
 		cell2.valign=top;
+		alert('2');
 		cell2.innerHtml="<img src='<%=photoPath%>' width='52' height='53' />";
 		var cell3=row2.insertCell();
 		cell3.valign=top;
+		alert('3');
 		
+	}
+	
+	function temp() {
+		var time = '먼먼';
 		var row3 = inner.insertRow();
-		var cell4=row3.insertCell();
-		cell4.colspan="2";	
+		var cell4 = row3.insertCell();
+		cell4.colspan=2;	
 		cell4.height=18;
 		cell4.bgcolor="#EAF3FA";
 		cell4.class="STYLE3";
-		cell4.innerHtml="<span class='STYLE2'><strong><%=userName%></strong></span>";
+		alert('4');
+		//cell4.innerHtml="<span class='STYLE2'><strong>"+<%=userName%>+"</strong></span>";
+		alert('5');
 		var cell5=row3.insertCell();
 		cell5.class="STYLE2";
 		cell5.innerHtml = content;
