@@ -69,9 +69,9 @@
           </table>
           
      <script>
-     function addTable(var topicTime) {
+     function addTable() {
      	var content = document.iTalk.topicContent;
-     	alert(topicTime);
+     	var time = '刚刚';
      	
 		var row1 = dynamic.insertRow();
 		var cell1=row1.insertCell();
@@ -98,7 +98,7 @@
 		cell5.innerHtml = content;
 		var cell6=row3.insertCell();
 		cell6.class="STYLE7";
-		cell6.innerHtml="<span class='STYLE7'>topicTime</span> <span class='STYLE8'>生活</span> <span class='STYLE2'>by:</span><span class='STYLE8'><%=userName%></span>";
+		cell6.innerHtml="<span class='STYLE7'>" + time + "</span> <span class='STYLE8'>生活</span> <span class='STYLE2'>by:</span><span class='STYLE8'><%=userName%></span>";
 		var cell7=row3.insertCell();
 		cell7.align="right";
 		cell7.innerHtml="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
@@ -108,7 +108,7 @@
                 <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
 		            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
-		      </tr>
+		      	  </tr>
                   <tr>
                     <td width="52" valign="top"><img src="${topicBean.photoPath}" width="52" height="53" /></td>
                     <td valign="top">
