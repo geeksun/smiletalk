@@ -64,58 +64,50 @@
                 </tr>
           </table>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <table id="nextnode" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
           </table>
-          <table id="inner" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
           </table>
+          
           
      <script>
      function addTable() {
      	var content = document.iTalk.topicContent.value;
-     	var time = '刚刚';
-     	alert(content);
-     	alert('1');
      	
 		var row1 = dynamic.insertRow();
 		var cell1=row1.insertCell();
 		cell1.colspan=2;
 		cell1.height=2;
-		cell1.innerHtml="<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'>";
+		cell1.innerHTML="<hr size=\"1\" noshade=\"noshade\" style=\"border:1px #cccccc dotted;\">";
 		var row2 = dynamic.insertRow();
 		var cell2=row2.insertCell();
 		cell2.width=52;
 		cell2.valign=top;
-		alert('2');
-		cell2.innerHtml="<img src='<%=photoPath%>' width='52' height='53' />";
+		cell2.innerHTML="<img src=\"<%=photoPath%>\" width=\"52\" height=\"53\" />";
 		var cell3=row2.insertCell();
 		cell3.valign=top;
-		alert('3');
 		
-	}
-	
-	function temp() {
 		var time = '刚刚';
-		var row3 = inner.insertRow();
+		var row3 = nextnode.insertRow();
 		var cell4 = row3.insertCell();
 		cell4.colspan=2;	
 		cell4.height=18;
-		cell4.bgcolor="#EAF3FA";
-		cell4.class="STYLE3";
-		alert('4');
-		//cell4.innerHtml="<span class='STYLE2'><strong>"+<%=userName%>+"</strong></span>";
-		alert('5');
+		cell4.bgColor = "#EAF3FA";
+		cell4.className="STYLE3";
+		cell4.innerHTML="<span class=\"STYLE2\"><strong><%=userName%></strong></span>";
 		var cell5=row3.insertCell();
-		cell5.class="STYLE2";
-		cell5.innerHtml = content;
+		cell5.className="STYLE2";
+		cell5.innerHTML = content;
 		var cell6=row3.insertCell();
-		cell6.class="STYLE7";
-		cell6.innerHtml="<span class='STYLE7'>" + time + "</span> <span class='STYLE8'>生活</span> <span class='STYLE2'>by:</span><span class='STYLE8'><%=userName%></span>";
+		cell6.className="STYLE7";
+		cell6.innerHTML="<span class=\"STYLE7\">" + time + "</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span>";
 		var cell7=row3.insertCell();
 		cell7.align="right";
-		cell7.innerHtml="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
+		cell7.innerHTML="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
 	}
+	
      </script>
-              <c:forEach var="topicBean" items="${topicList}">
-                <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <c:forEach var="topicBean" items="${topicList}">
+              <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
 		            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
 		      	  </tr>

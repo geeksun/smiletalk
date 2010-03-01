@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+ </HEAD>
+
+ <BODY>
+ <div id="test"/>
+  <script type="text/javascript">
+		var div = document.getElementById("test");
+		div.style.position="absolute";
+			div.style.width="100%";
+			div.style.height="100%";
+		var table=document.createElement("<table  width=750 cellPadding=0 cellSpacing=0>")
+			div.appendChild(table);
+			table.style.top=100;
+			table.style.left=5;
+			var row = table.insertRow(-1);
+			row.style.align="center";
+			row.style.height="35";
+
+			var td1 = document.createElement("<th align=center width=120 style='font-family: Verdana;font-size: 14px'>");
+			td1.innerText="夜巡人员代号";
+			row.appendChild(td1);
+
+			var td2 = document.createElement("<th align=center width=150 style='font-family: Verdana;font-size: 14px'>");
+			td2.innerText="是否巡查";
+			row.appendChild(td2);
+
+			var td3 = document.createElement("<th align=center width=150 style='font-family: Verdana;font-size: 14px'>");
+			td3.innerText="是否记录巡查时间";
+			row.appendChild(td3);
+
+			var td4 = document.createElement("<th align=center width=150 style='font-family: Verdana;font-size: 14px'>");
+			td4.innerText="第一次巡查时间";
+			row.appendChild(td4);
+
+			var td5 = document.createElement("<th align=center width=150 style='font-family: Verdana;font-size: 14px'>");
+			td5.innerText="第二次巡查时间";
+			row.appendChild(td5);
+  </script>
+ </BODY>
+</HTML>
