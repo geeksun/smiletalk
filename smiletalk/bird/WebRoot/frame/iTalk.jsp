@@ -64,15 +64,14 @@
                 </tr>
           </table>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+          </table>
           <table id="nextnode" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
           </table>
-          </table>
-          
           
      <script>
      function addTable() {
-     	var content = document.iTalk.topicContent.value;
-     	
+	 	var content = document.iTalk.topicContent.value;
+	 	
 		var row1 = dynamic.insertRow();
 		var cell1=row1.insertCell();
 		cell1.colSpan=2;
@@ -85,9 +84,38 @@
 		cell2.innerHTML="<img src=\"<%=photoPath%>\" width=\"52\" height=\"53\" />";
 		var cell3=row2.insertCell();
 		cell3.valign=top;
+		var innerContent = "<table width=\"98%\" border=\"0\" align=\"right\" cellpadding=\"0\" cellspacing=\"0\"><tr>";
+		var a = "<td height=\"18\" colspan=\"2\" bgcolor=\"#EAF3FA\" class=\"STYLE3\"><span class=\"STYLE2\"><strong><%=userName%></strong></span></td>";
+		var b = "</tr><tr><td class=\"STYLE2\">"+content+"</td></tr><tr><td><span class=\"STYLE7\">"+"刚刚"+"</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span></td></tr>";
+		var c = "<tr><td align=\"right\"></td></tr></table>";
+		cell3.innerHTML=innerContent+a+b+c;
 		
+		//cell3.appendChild(table);
+	}
+	function addTable2() {
+	 	var content = document.iTalk.topicContent.value;
+	 	
+		var row1 = dynamic.insertRow();
+		var cell1=row1.insertCell();
+		cell1.colSpan=2;
+		cell1.height=2;
+		cell1.innerHTML="<hr size=\"1\" noshade=\"noshade\" style=\"border:1px #cccccc dotted;\">";
+		var row2 = dynamic.insertRow();
+		var cell2=row2.insertCell();
+		cell2.width=52;
+		cell2.valign=top;
+		cell2.innerHTML="<img src=\"<%=photoPath%>\" width=\"52\" height=\"53\" />";
+		var cell3=row2.insertCell();
+		cell3.valign=top;
+		var innerContent = "<table width=\"98%\" border=\"0\" align=\"right\" cellpadding=\"0\" cellspacing=\"0\"><tr>";
+		var a = "<td height=\"18\" colspan=\"2\" bgcolor=\"#EAF3FA\" class=\"STYLE3\"><span class=\"STYLE2\"><strong><%=userName%></strong></span></td>";
+		var b = "</tr><tr><td class=\"STYLE2\">"+content+"</td></tr><tr><td><span class=\"STYLE7\">"+"刚刚"+"</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span></td></tr>";
+		var c = "<tr><td align=\"right\"></td></tr></table>";
+		cell3.innerHTML=innerContent+a+b+c;
 		
-		
+		//cell3.appendChild(table);
+	}
+	function temp(){
 		var time = '刚刚';
 		var row3 = nextnode.insertRow();
 		var cell4 = row3.insertCell();
@@ -107,13 +135,12 @@
 		//cell7.innerHTML="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
 		//cell3.innerHTML = nextnode.innerHTML;
 	}
-	
      </script>
             <c:forEach var="topicBean" items="${topicList}">
               <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
-		            <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
-		      	  </tr>
+		        <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
+		      </tr>
                   <tr>
                     <td width="52" valign="top"><img src="${topicBean.photoPath}" width="52" height="53" /></td>
                     <td valign="top">
@@ -128,11 +155,11 @@
                           <td><span class="STYLE7">${topicBean.topicTime}</span> <span class="STYLE8">生活</span> <span class="STYLE2">by:</span><span class="STYLE8">${topicBean.userName}</span></td>
                        </tr>
                        <tr>
-                        	<td align="right">
-                        	<c:if test="${topicBean.userName!=userBean.userName}">
-                        	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
-                        	</c:if>
-                        	</td>
+	                    	<td align="right">
+	                    	<c:if test="${topicBean.userName!=userBean.userName}">
+	                    	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
+	                    	</c:if>
+	                    	</td>
                        </tr>
                     </table>
                     </td>
