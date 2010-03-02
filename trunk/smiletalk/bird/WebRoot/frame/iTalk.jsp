@@ -75,7 +75,7 @@
      	
 		var row1 = dynamic.insertRow();
 		var cell1=row1.insertCell();
-		cell1.colspan=2;
+		cell1.colSpan=2;
 		cell1.height=2;
 		cell1.innerHTML="<hr size=\"1\" noshade=\"noshade\" style=\"border:1px #cccccc dotted;\">";
 		var row2 = dynamic.insertRow();
@@ -86,10 +86,12 @@
 		var cell3=row2.insertCell();
 		cell3.valign=top;
 		
+		
+		
 		var time = '刚刚';
 		var row3 = nextnode.insertRow();
 		var cell4 = row3.insertCell();
-		cell4.colspan=2;	
+		cell4.colSpan=2;	
 		cell4.height=18;
 		cell4.bgColor = "#EAF3FA";
 		cell4.className="STYLE3";
@@ -102,7 +104,8 @@
 		cell6.innerHTML="<span class=\"STYLE7\">" + time + "</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span>";
 		var cell7=row3.insertCell();
 		cell7.align="right";
-		cell7.innerHTML="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
+		//cell7.innerHTML="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
+		//cell3.innerHTML = nextnode.innerHTML;
 	}
 	
      </script>
