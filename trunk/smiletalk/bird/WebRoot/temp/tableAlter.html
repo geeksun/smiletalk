@@ -1,0 +1,124 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+
+</head>
+
+<body onLoad="oTable_initialized(oTable);pos.appendChild(oTable)">
+<div id="pos1"></div><br>
+<a href="#" onClick="addRows(oTable,2)">增加行</a>&nbsp;
+<a href="#" onClick="addCols(oTable,2)">增加列</a><br>
+
+<a href="#" onClick="delRows(oTable,2)">删除行</a>&nbsp;
+<a href="#" onClick="delCols(oTable,2)">删除列</a><br>
+</body>
+
+</html>
+
+<script language=javascript>
+<!--
+
+oTable=document.createElement("table");
+function oTable_initialized(oTable)
+{
+	oTable.border=1;
+	oTable.rCount=1;
+	oTable.cCount=1;
+	oTable.cellPadding=0;
+	oTable.cellSpacing=0;
+	oTable.borderColorDark="#ffffff";
+	oTable.borderColorLight="#000000";
+	
+	var oTbody=document.createElement("tbody");
+	oTable.appendChild(oTbody);
+	
+	var oTr=document.createElement("tr");
+	oTbody.appendChild(oTr);
+	
+	var oTd=document.createElement("td");
+	oTd.innerHTML="1";
+	oTr.appendChild(oTd);
+}
+
+pos=document.getElementById("pos1");
+
+
+function addRows(oTable,iCount)
+{	
+	var rCount=oTable.rCount;
+	var cCount=oTable.cCount;
+	oTable.rCount+=iCount;
+//	var oFragment=document.createDocumentFragment();
+	var oTbody=oTable.firstChild;
+	var oTr=oTbody.firstChild;
+	for(var i=rCount;i<oTable.rCount;i++)
+	{
+		var tmpTr = document.createElement("tr");
+		var tmpTd = document.createElement("td");
+		tmpTd.innerHTML = "23";
+		tmpTr.appendChild(tmpTd)
+		oTbody.appendChild(tmpTr);
+	}
+
+	//oTbody.appendChild(oFragment);
+}
+
+
+function delRows(oTable,iCount)
+{	
+	var rCount=oTable.rCount;
+	var cCount=oTable.cCount;
+	oTable.rCount-=iCount;
+
+	var oTbody=oTable.firstChild;
+	for(var i=oTable.rCount;i<rCount;i++)
+	{
+		oTbody.removeChild(oTbody.lastChild);
+	}
+}
+
+
+function addCols(oTable,iCount)
+{	
+	var rCount=oTable.rCount;
+	var cCount=oTable.cCount;
+	oTable.cCount+=iCount;
+	
+	var oTd=document.createElement("td");
+	oTd.innerText=" ";
+			
+	var oTbody=oTable.firstChild;
+	for(var j=0;j<iCount;j++)
+	{
+		for(var i=0;i<rCount;i++)
+		{
+			oTr=oTbody.childNodes[i];
+			
+			oTr.appendChild(oTd.cloneNode(true));
+		}
+	}
+}
+
+function delCols(oTable,iCount)
+{	
+	var rCount=oTable.rCount;
+	var cCount=oTable.cCount;
+	oTable.cCount-=iCount;
+
+	
+	
+	var oTbody=oTable.firstChild;
+	for(var j=0;j<iCount;j++)
+	{
+		for(var i=0;i<rCount;i++)
+		{
+			var oTr=oTbody.childNodes[i];
+			oTr.removeChild(oTr.lastChild);
+		}
+	}
+}
+
+//-->
+</script>
