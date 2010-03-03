@@ -65,11 +65,9 @@
           </table>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
           </table>
-          <table id="nextnode" width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
-          </table>
           
      <script>
-     function addTable() {
+     function addTable2() {
 	 	var content = document.iTalk.topicContent.value;
 	 	
 		var row1 = dynamic.insertRow();
@@ -84,15 +82,14 @@
 		cell2.innerHTML="<img src=\"<%=photoPath%>\" width=\"52\" height=\"53\" />";
 		var cell3=row2.insertCell();
 		cell3.valign=top;
+		
 		var innerContent = "<table width=\"98%\" border=\"0\" align=\"right\" cellpadding=\"0\" cellspacing=\"0\"><tr>";
 		var a = "<td height=\"18\" colspan=\"2\" bgcolor=\"#EAF3FA\" class=\"STYLE3\"><span class=\"STYLE2\"><strong><%=userName%></strong></span></td>";
 		var b = "</tr><tr><td class=\"STYLE2\">"+content+"</td></tr><tr><td><span class=\"STYLE7\">"+"刚刚"+"</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span></td></tr>";
 		var c = "<tr><td align=\"right\"></td></tr></table>";
 		cell3.innerHTML=innerContent+a+b+c;
-		
-		//cell3.appendChild(table);
 	}
-	function addTable2() {
+	function addTable() {
 	 	var content = document.iTalk.topicContent.value;
 	 	
 		var row1 = dynamic.insertRow();
@@ -103,41 +100,52 @@
 		var row2 = dynamic.insertRow();
 		var cell2=row2.insertCell();
 		cell2.width=52;
-		cell2.vAlign=top;
+		cell2.valign=top;
 		cell2.innerHTML="<img src=\"<%=photoPath%>\" width=\"52\" height=\"53\" />";
 		var cell3=row2.insertCell();
 		cell3.valign=top;
-		var innerContent = "<table width=\"98%\" border=\"0\" align=\"right\" cellpadding=\"0\" cellspacing=\"0\"><tr>";
-		var a = "<td height=\"18\" colspan=\"2\" bgcolor=\"#EAF3FA\" class=\"STYLE3\"><span class=\"STYLE2\"><strong><%=userName%></strong></span></td>";
-		var b = "</tr><tr><td class=\"STYLE2\">"+content+"</td></tr><tr><td><span class=\"STYLE7\">"+"刚刚"+"</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span></td></tr>";
-		var c = "<tr><td align=\"right\"></td></tr></table>";
-		cell3.innerHTML=innerContent+a+b+c;
 		
-		//cell3.appendChild(table);
+		var ttable = document.createElement("table");
+		var tbody = document.createElement("tbody");
+		ttable.width = "98%";
+	    ttable.border = 0; 
+		ttable.align="right";
+		ttable.cellPadding=0;
+		ttable.cellSpacing=0;
+		
+		var tr = document.createElement("tr");
+		var td = document.createElement("td");
+		td.height=18;
+		td.colSpan=2;
+		td.bgColor="#EAF3FA";
+		td.className="STYLE3";
+		td.innerHTML="<span class=\"STYLE2\"><strong><%=userName%></strong></span>";
+		tr.appendChild(td);
+		tbody.appendChild(tr); 
+		var tr2 = document.createElement("tr");
+		var td2 = document.createElement("td");
+		td2.className="STYLE2";
+		td2.innerHTML=content;
+		tr2.appendChild(td2);
+		tbody.appendChild(tr2); 
+		var tr3 = document.createElement("tr");
+		var td3 = document.createElement("td");
+		td3.innerHTML="<span class=\"STYLE7\">刚刚</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span>";
+		tr3.appendChild(td3);
+		tbody.appendChild(tr3); 
+		var tr4 = document.createElement("tr");
+		var td4 = document.createElement("td");
+		td4.align="right";
+		tr4.appendChild(td4);
+		tbody.appendChild(tr4); 
+		ttable.appendChild(tbody);
+		
+		cell3.appendChild(ttable);
 	}
-	function temp(){
-		var time = '刚刚';
-		var row3 = nextnode.insertRow();
-		var cell4 = row3.insertCell();
-		cell4.colSpan=2;	
-		cell4.height=18;
-		cell4.bgColor = "#EAF3FA";
-		cell4.className="STYLE3";
-		cell4.innerHTML="<span class=\"STYLE2\"><strong><%=userName%></strong></span>";
-		var cell5=row3.insertCell();
-		cell5.className="STYLE2";
-		cell5.innerHTML = content;
-		var cell6=row3.insertCell();
-		cell6.className="STYLE7";
-		cell6.innerHTML="<span class=\"STYLE7\">" + time + "</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span>";
-		var cell7=row3.insertCell();
-		cell7.align="right";
-		//cell7.innerHTML="<a href='javascript:reply('<%=userName%>')'>回复</a>&nbsp;<a href='javascript:transmit('<%=userName%>')'>转发</a>";
-		//cell3.innerHTML = nextnode.innerHTML;
-	}
+
      </script>
             <c:forEach var="topicBean" items="${topicList}">
-              <table id="talk${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <table id="talk_${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
 		        <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
 		      </tr>
