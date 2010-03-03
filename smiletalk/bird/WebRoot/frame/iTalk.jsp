@@ -103,7 +103,7 @@
 		var row2 = dynamic.insertRow();
 		var cell2=row2.insertCell();
 		cell2.width=52;
-		cell2.valign=top;
+		cell2.vAlign=top;
 		cell2.innerHTML="<img src=\"<%=photoPath%>\" width=\"52\" height=\"53\" />";
 		var cell3=row2.insertCell();
 		cell3.valign=top;
