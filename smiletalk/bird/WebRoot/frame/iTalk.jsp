@@ -63,6 +63,8 @@
                   <td height="5"></td>
                 </tr>
           </table>
+          <table id="basic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+          </table>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
           </table>
           
@@ -88,8 +90,8 @@
 		var b = "</tr><tr><td class=\"STYLE2\">"+content+"</td></tr><tr><td><span class=\"STYLE7\">"+"¸Õ¸Õ"+"</span> <span class=\"STYLE8\">Éú»î</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span></td></tr>";
 		var c = "<tr><td align=\"right\"></td></tr></table>";
 		cell3.innerHTML=innerContent+a+b+c;
-	}
-	function addTable() {
+	 }
+	 function addTable() {
 	 	var content = document.iTalk.topicContent.value;
 	 	
 		var row1 = dynamic.insertRow();
@@ -141,12 +143,17 @@
 		ttable.appendChild(tbody);
 		
 		cell3.appendChild(ttable);
+		var basic = document.getElementById("basic");
+		//var dynamic = document.getElementById("dynamic");
+		var dynamic = document.createElement("dynamic");
+		newNode.innerHTML = "This is a test";
+		basic.insertBefore(dynamic, basic.childNodes[0]);
 	}
 
      </script>
             <c:forEach var="topicBean" items="${topicList}">
               <table id="talk_${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                  <tr>
+              <tr>
 		        <td colspan="2" height="2"><hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"></td>
 		      </tr>
                   <tr>
