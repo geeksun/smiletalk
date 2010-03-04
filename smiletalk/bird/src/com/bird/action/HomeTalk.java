@@ -1,6 +1,5 @@
 package com.bird.action;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +16,6 @@ import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
 import com.bird.service.UserService;
 import com.bird.util.ConstantUtil;
-import com.bird.util.DateUtil;
-import com.bird.util.StringUtil;
-import com.bird.util.TokenUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
