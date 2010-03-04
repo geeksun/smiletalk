@@ -1,0 +1,39 @@
+<script>
+function fnAppend(){
+	var oNewNode = document.createElement("DIV");
+	var oListChilds = oList.getElementsByTagName("div");
+	oNewNode.innerText="List node "+(oListChilds.length+1);
+	oList.appendChild(oNewNode);
+}
+
+function Insert(){
+	var oNewNode = document.createElement("DIV");
+	var oList = document.getElementById("oList");
+	var oListChilds = oList.getElementsByTagName("div");
+	var index = prompt('请输入您要插入的位置,只能是数字,范围 1 <= index <= '+oListChilds.length);
+	try{
+		document.all.oList.insertBefore(oNewNode, oListChilds[index-1]);
+		oNewNode.innerText="List node before node "+index;
+	}catch(e){
+		alert('invalid number!');
+	}
+}
+
+function alertoList(){
+	var temp=oList.getElementsByTagName("div");
+	alert(temp(1).innerHTML);
+}
+</script>
+<body>
+<div id = oList>
+<div>List node 1</div>
+<div>List node 2</div>
+<div>List node 3</div>
+<div id="test">List node 4</div>
+</div>
+<input type = "button" value = "Append Child" onclick = "fnAppend()" /><br />
+<input type = "button" value = "InsertBefore" onclick = "Insert()" /><br />
+<input type = "button" value = "alertoList" onclick = "alertoList()" />
+</body>
+
+
