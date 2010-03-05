@@ -192,7 +192,9 @@
 		tbody.appendChild(tr2); 
 		var tr3 = document.createElement("tr");
 		var td3 = document.createElement("td");
-		td3.innerHTML="<span class=\"STYLE7\">刚刚</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span>";
+	    
+		var current = "刚刚"
+		td3.innerHTML="<span class=\"STYLE7\">"+current+"</span> <span class=\"STYLE8\">生活</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span>";
 		tr3.appendChild(td3);
 		tbody.appendChild(tr3); 
 		var tr4 = document.createElement("tr");
