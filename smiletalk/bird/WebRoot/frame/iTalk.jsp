@@ -63,11 +63,11 @@
                   <td height="5"></td>
                 </tr>
           </table>
-          <table id="basic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-          </table>
+          <div id="basic">
+          <div></div>
+          </div>
           <table id="dynamic" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
           </table>
-          
      <script>
      function addTable2() {
 	 	var content = document.iTalk.topicContent.value;
@@ -91,7 +91,7 @@
 		var c = "<tr><td align=\"right\"></td></tr></table>";
 		cell3.innerHTML=innerContent+a+b+c;
 	 }
-	 function addTable() {
+	 function addTable3() {
 	 	var content = document.iTalk.topicContent.value;
 	 	
 		var row1 = dynamic.insertRow();
@@ -143,13 +143,70 @@
 		ttable.appendChild(tbody);
 		
 		cell3.appendChild(ttable);
-		var basic = document.getElementById("basic");
-		//var dynamic = document.getElementById("dynamic");
-		var dynamic = document.createElement("dynamic");
-		newNode.innerHTML = "This is a test";
-		basic.insertBefore(dynamic, basic.childNodes[0]);
 	}
-
+	function addTable() {
+	 	var content = document.iTalk.topicContent.value;
+	 	
+	 	var table = document.createElement("table");
+	 	table.width="98%";
+	 	table.border=0;
+	 	table.align="center";
+	 	table.cellPadding=0;
+	 	table.cellSpacing=0;
+	 	
+		var row1 = table.insertRow();
+		var cell1=row1.insertCell();
+		cell1.colSpan=2;
+		cell1.height=2;
+		cell1.innerHTML="<hr size=\"1\" noshade=\"noshade\" style=\"border:1px #cccccc dotted;\">";
+		var row2 = table.insertRow();
+		var cell2=row2.insertCell();
+		cell2.width=52;
+		cell2.valign=top;
+		cell2.innerHTML="<img src=\"<%=photoPath%>\" width=\"52\" height=\"53\" />";
+		var cell3=row2.insertCell();
+		cell3.valign=top;
+		
+		var ttable = document.createElement("table");
+		var tbody = document.createElement("tbody");
+		ttable.width = "98%";
+	    ttable.border = 0; 
+		ttable.align="right";
+		ttable.cellPadding=0;
+		ttable.cellSpacing=0;
+		
+		var tr = document.createElement("tr");
+		var td = document.createElement("td");
+		td.height=18;
+		td.colSpan=2;
+		td.bgColor="#EAF3FA";
+		td.className="STYLE3";
+		td.innerHTML="<span class=\"STYLE2\"><strong><%=userName%></strong></span>";
+		tr.appendChild(td);
+		tbody.appendChild(tr); 
+		var tr2 = document.createElement("tr");
+		var td2 = document.createElement("td");
+		td2.className="STYLE2";
+		td2.innerHTML=content;
+		tr2.appendChild(td2);
+		tbody.appendChild(tr2); 
+		var tr3 = document.createElement("tr");
+		var td3 = document.createElement("td");
+		td3.innerHTML="<span class=\"STYLE7\">¸Õ¸Õ</span> <span class=\"STYLE8\">Éú»î</span> <span class=\"STYLE2\">by:</span><span class=\"STYLE8\"><%=userName%></span>";
+		tr3.appendChild(td3);
+		tbody.appendChild(tr3); 
+		var tr4 = document.createElement("tr");
+		var td4 = document.createElement("td");
+		td4.align="right";
+		tr4.appendChild(td4);
+		tbody.appendChild(tr4); 
+		ttable.appendChild(tbody);
+		
+		cell3.appendChild(ttable);
+		
+		var basic = document.getElementById("basic");
+		basic.insertBefore(table, basic.childNodes[0]);
+	}
      </script>
             <c:forEach var="topicBean" items="${topicList}">
               <table id="talk_${topicBean.topicId}" width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
