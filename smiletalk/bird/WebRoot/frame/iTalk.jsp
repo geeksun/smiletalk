@@ -230,9 +230,14 @@
                        </tr>
                        <tr>
 	                    	<td align="right">
-	                    	<c:if test="${topicBean.userName!=userBean.userName}">
+	                    	<c:choose>
+	                    	<c:when test="${topicBean.userName!=userBean.userName}">
 	                    	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
-	                    	</c:if>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    	<a href="javascript:delete('${topicBean.userName}')">删除</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
+	                    	</c:otherwise>
+	                    	</c:choose>
 	                    	</td>
                        </tr>
                     </table>
