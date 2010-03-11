@@ -235,7 +235,7 @@
 	                    	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    	<a href="javascript:delete('${topicBean.userName}')">删除</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
+	                    	<a href="javascript:delete('${topicBean.topicId}')">删除</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
 	                    	</c:otherwise>
 	                    	</c:choose>
 	                    	</td>
@@ -297,7 +297,7 @@
 		         url:"<%=path%>/newTalk.action",
 		         data:{content:content},
 		         cache:false,
-			   method:'post',
+			     method:'post',
 		         error:function(XMLHttpRequest, textStatus, errorThrown){
 		         	alert(xhr.status);
 		         	if(XMLHttpRequest.status == 404) {
@@ -338,8 +338,8 @@
 	function toTxt(str){  
 	    var RexStr = /\<|\>|\"|\'|\&/g;
 	    str = str.replace(RexStr,   
-	        function(MatchStr){   
-	            switch(MatchStr){   
+	        function(MatchStr){
+	            switch(MatchStr){
 	                case "<":   
 	                    return "&lt;";   
 	                    break;   
@@ -358,9 +358,43 @@
 	                default :   
 	                    break;   
 	            }   
-	        }   
-	    )   
-	    return str;   
+	        }
+		)
+	    return str;
+	}
+	function delete(element){
+		var tid = element;
+		alert(tid);
+		jQuery.ajax({
+	         url:"<%=path%>/deleteTalk.action",
+	         data:{tid:tid},
+	         cache:false,
+		     method:'post',
+	         error:function(XMLHttpRequest, textStatus, errorThrown){
+	         	alert(xhr.status);
+	         	if(XMLHttpRequest.status == 404) {
+	         	    alert('404');
+			    // 404 error
+			}
+			else if(XMLHttpRequest.status == 403) {
+			    alert('403');
+			    // 403 error
+			}
+			else {
+			    // default error
+			    alert(textStatus);
+			    //alert("error occured!!!");
+			} 
+	         },
+	         success:function(data){
+	          if(data=="1"){
+	          	//alert("发帖成功");
+	          	addTable();
+	          }else{
+	          	alert("发帖失败");
+	          }
+	         }
+	    });
 	}
 </script>         
 <p align="center">
