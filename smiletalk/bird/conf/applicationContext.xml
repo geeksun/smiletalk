@@ -47,6 +47,11 @@
 			<ref local="topicService"/>
 		</property>
 	</bean>
+	<bean id="deleteTalk" class="com.bird.action.DeleteTalk">
+		<property name="topicService">
+			<ref local="topicService"/>
+		</property>
+	</bean>
 	<bean id="homeTalk" class="com.bird.action.HomeTalk">
 		<property name="userService">
 			<ref local="userService"/>

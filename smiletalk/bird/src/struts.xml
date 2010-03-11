@@ -59,6 +59,8 @@
         
         <action name="newTalk" class="newTalk">
         </action>
+        <action name="deleteTalk" class="deleteTalk">
+        </action>
         <action name="followUser" class="followUser">
         </action>
         <action name="exitTalk" class="exitTalk">
