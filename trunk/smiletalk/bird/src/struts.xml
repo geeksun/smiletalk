@@ -11,7 +11,7 @@
 			<result name="login" type="dispatcher">login.jsp</result>
 		</global-results> 
         <action name="talkRegister" class="talkRegister">
-            <result name="success">/frame/iTalk.jsp</result>
+            <result name="success">/frame/italk.jsp</result>
             <result name="register">register.jsp</result>
             <!-- <result type="redirect-action">Menu</result> -->
         </action>
@@ -21,7 +21,7 @@
             <!-- <result name="success" type="dispatcher">/frame/iTalk.jsp</result> -->
         </action>
         <action name="homeTalk" class="homeTalk">
-            <result name="success">/frame/iTalk.jsp</result>
+            <result name="success">/frame/italk.jsp</result>
         </action>
         <action name="storageTalk" class="storageTalk">
             <result name="success">/frame/storageTalk.jsp</result>
