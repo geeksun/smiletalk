@@ -58,7 +58,6 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 		String topicTime = DateUtil.getDateString(now);
 		topicBean.setTopicTime(topicTime);
 		
-		
 		PrintWriter out = response.getWriter();
 		int result = topicService.insertObject(topicBean);
 		if(result>0){
