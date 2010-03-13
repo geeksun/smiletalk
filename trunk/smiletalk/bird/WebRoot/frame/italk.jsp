@@ -235,7 +235,7 @@
 	                    	<a href="javascript:reply('${topicBean.userName}')">回复</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    	<a href="javascript:delete('${topicBean.topicId}')">删除</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
+	                    	<a href="javascript:delRecord('${topicBean.topicId}')">删除</a>&nbsp;<a href="javascript:transmit('${topicBean.userName}')">转发</a>
 	                    	</c:otherwise>
 	                    	</c:choose>
 	                    	</td>
@@ -275,13 +275,12 @@
 		//str = toTxt(str);
 		//str = a.value.replace(/</g, "&lt;");
 		if(str==''){
-			//alert("输入不可为空!");
 			a.value = '';
 			a.focus();
 			document.getElementById("validNum").innerHTML = 140;
 		   	return false;
 		}
-        if(a.value.length > 140)
+        	if(a.value.length > 140)
 		{
 		   	alert("输入的长度不能超过140个字符!");
 		   	a.focus();
@@ -311,7 +310,6 @@
 				else {
 				    // default error
 				    alert(textStatus);
-				    //alert("error occured!!!");
 				} 
 		         },
 		         success:function(data){
@@ -362,40 +360,36 @@
 		)
 	    return str;
 	}
-	function delete(element){
+	function delRecord(element){
 		var tid = element;
-		alert(tid);
 		jQuery.ajax({
 	         url:"<%=path%>/deleteTalk.action",
 	         data:{tid:tid},
 	         cache:false,
-		     method:'post',
+		   method:'post',
 	         error:function(XMLHttpRequest, textStatus, errorThrown){
 	         	alert(xhr.status);
 	         	if(XMLHttpRequest.status == 404) {
 	         	    alert('404');
-			    // 404 error
 			}
 			else if(XMLHttpRequest.status == 403) {
 			    alert('403');
-			    // 403 error
 			}
 			else {
 			    // default error
 			    alert(textStatus);
-			    //alert("error occured!!!");
 			} 
 	         },
 	         success:function(data){
-	          if(data=="1"){
-	          	//alert("发帖成功");
-	          	addTable();
-	          }else{
-	          	alert("发帖失败");
-	          }
+	            if(data=="w"){
+	          	    alert("删帖成功");
+	            }else{
+	          	    alert("发帖失败");
+	            }
 	         }
 	    });
 	}
+	
 </script>         
 <p align="center">
 <%@ include file="foot.jsp" %>
