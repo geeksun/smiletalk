@@ -26,6 +26,22 @@ public class DateUtil {
 	}
 	
 	/**
+	 * @param d
+	 * @return Date 的字符表示
+	 * yyyy-MM-dd hh:mm:ss   hh小写 12小时制
+	 * @throws ParseException
+	 */
+	public static Date getDate(String source) throws ParseException{
+		if(source==null){
+			return null;
+		}
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//String dateStr = df.format(d);
+		Date date = df.parse(source);
+		return date;
+	}
+	
+	/**
 	 * @param a
 	 * @param b
 	 * @return 时间比较值
@@ -93,6 +109,9 @@ public class DateUtil {
 		System.out.println(i);
 		test();
 		test2();
+		String s = "1999-3-8 0:0:0";
+		Date da= getDate(s);
+		System.out.println(da);
 	}
 
 }
