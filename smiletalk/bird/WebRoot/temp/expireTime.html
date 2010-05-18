@@ -1,5 +1,7 @@
 <html>
-<SCRIPT language="javascript"> 
+ <head>  
+  <title>动态表格实例</title>  
+<script language="javascript"> 
 	var startDate = new Date();
 	var endDate = new Date(2012,11,12,12,25);
 	var spantime = (endDate - startDate)/1000;
@@ -18,11 +20,11 @@
 	}
 	
 	window.onload = function(){
-	    document.getElementById("start_pad").innerHTML = getString(startDate);
-	    document.getElementById("end_pad").innerHTML = getString(endDate);
+	    //document.getElementById("start_pad").innerHTML = getString(startDate);
+	    //document.getElementById("end_pad").innerHTML = getString(endDate);
 	    setInterval(cal, 1000);
 	}
-</SCRIPT>  
+</script>  
 </head>
 <body>
 开始时间：<span id="start_pad"></span><br>
