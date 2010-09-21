@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td align="center" colspan=2><br>
-					<input type="button" height=10 onclick="checkInput()" value="  提   交  ">
+					<input type="button" height=10 onclick="checkInput()" value="  搜 一 下  ">
 				</td>
 			</tr>
 		</table>
