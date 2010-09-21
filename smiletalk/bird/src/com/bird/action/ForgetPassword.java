@@ -3,6 +3,7 @@ package com.bird.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.bird.domain.UserBean;
 import com.bird.service.UserService;
@@ -13,8 +14,9 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author 姜志强
  *  2009-12-11
  */
-public class ForgetPassword extends ActionSupport {
+public class ForgetPassword extends ActionSupport implements ServletRequestAware{
 	private UserService userService;
+	HttpServletRequest request;
 		
 	public UserService getUserService() {
 		return userService;
@@ -38,6 +40,10 @@ public class ForgetPassword extends ActionSupport {
 			userBean = (UserBean) userService.getUserByEamil(userBean);
 			if(userBean!=null){
 				userService.sendForgetDisposeEmail(userBean);
+				int index = email.indexOf("@");
+				String mailSite = email.replace(email.substring(0,index+1), "http://mail."); 
+				request.setAttribute("mailSite", mailSite);
+				request.setAttribute("email", email);
 				return SUCCESS;
 			}else{	// 无此注册邮件用户
 				
@@ -47,6 +53,10 @@ public class ForgetPassword extends ActionSupport {
 			return LOGIN;
 		}
 		
+	}
+
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
 	}
 		
 		
