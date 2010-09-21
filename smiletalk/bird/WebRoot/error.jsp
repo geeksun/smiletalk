@@ -13,7 +13,7 @@
   			服务器出现异常,  <a href="mailto:geeksun@163.com">请联系我们</a>
   		</font>
   	<p align="center">
-      <input type="button" value="后退" onClick="history.back()">
+      <input type="button" value=" 后  退 " onClick="history.back()">
     </p>
 
 </body>
