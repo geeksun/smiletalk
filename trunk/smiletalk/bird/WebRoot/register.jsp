@@ -202,8 +202,11 @@
 		<td colspan="2" align="right">
 			<input type="button" value=" ·µ  »Ø " onclick="javascript:history.back(1)">
 		</td>
-		<td colspan="2" align="left">
-			&nbsp;<input type="button" value="×¢²á iTalk"  onclick="register()" />
+		<td align="center">
+			&nbsp;<input type="button" value=" ×¢  ²á "  onclick="register()" />
+		</td>
+		<td align="left">
+			<input type="reset" value=" ÖØ  ÖÃ ">
 		</td>
 	</tr>
   </table>
