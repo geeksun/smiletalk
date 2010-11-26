@@ -31,8 +31,10 @@ public class RandomBrowse extends ActionSupport {
 			long userId = topic.getUserId();
 			userBean.setUserId(userId);
 			userBean = userService.getUserById(userBean);
-			String photoPath = userBean.getPhotoPath();
-			topic.setPhotoPath(photoPath);
+			if(userBean!=null){
+				String photoPath = userBean.getPhotoPath();
+				topic.setPhotoPath(photoPath);
+			}
 		}
 		userBean = null;
 		return SUCCESS;
