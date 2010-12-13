@@ -10,7 +10,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/classes/applicationContext.xml
+			classpath:application*.xml
 		</param-value>
 	</context-param>
 
@@ -26,7 +26,7 @@
 			org.springframework.web.util.IntrospectorCleanupListener
 		</listener-class>
 	</listener>
-
+	
 	<!-- EncodingFilter要放在struts2的FilterDispatcher前面,先调整字符集，再进入Action -->
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
@@ -40,6 +40,7 @@
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 	<filter>
 		<filter-name>struts-cleanup</filter-name>
 		<filter-class>
@@ -52,8 +53,11 @@
 	</filter-mapping>
 	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>
+		<!-- org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
 			org.apache.struts2.dispatcher.FilterDispatcher
+		 -->
+		<filter-class>
+			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
 		</filter-class>
 	</filter>
 	<filter-mapping>
@@ -61,6 +65,7 @@
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 
+	<!-- 访问权限过滤 -->
 	<filter>
 		<filter-name>AccessPurviewFilter</filter-name>
 		<filter-class>com.bird.filter.AccessPurviewFilter</filter-class>
@@ -73,7 +78,7 @@
 		<filter-name>AccessPurviewFilter</filter-name>
 		<url-pattern>/frame/*</url-pattern>
 	</filter-mapping>
-
+	
 	<servlet>
 		<servlet-name>jqueryAjaxServer</servlet-name>
 		<servlet-class>com.bird.servlet.JqueryAjaxServer</servlet-class>
@@ -82,6 +87,7 @@
 		<servlet-name>jqueryAjaxServer</servlet-name>
 		<url-pattern>/jqueryAjax</url-pattern>
 	</servlet-mapping>
+	
 
 	<session-config>
 		<session-timeout>30</session-timeout>
