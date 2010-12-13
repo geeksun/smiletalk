@@ -208,6 +208,8 @@
 		
 		var basic = document.getElementById("basic");
 		basic.insertBefore(table, basic.childNodes[0]);
+		//document.getElementById("topicContent").value='';
+		document.iTalk.topicContent.value = '';
 	}
      </script>
             <c:forEach var="topicBean" items="${topicList}">
