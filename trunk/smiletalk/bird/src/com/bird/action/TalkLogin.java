@@ -85,6 +85,7 @@ public class TalkLogin extends ActionSupport implements SessionAware,ServletRequ
 				//跳转到 homeTalk 进行处理
 				return SUCCESS;	
 			}else{
+				userBean = new UserBean();
 				userBean.setErrorMessage("用户名或密码错误");
 				return LOGIN;
 			}
