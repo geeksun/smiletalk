@@ -4,14 +4,23 @@
 <struts>
     <include file="struts-default.xml"/>
     <package name="package1" extends="struts-default">
-    	<!-- global-results需放在每个package的内部 -->
+    	<interceptors> 
+            <interceptor name ="log" class ="com.ambow.log.interceptor.LogInterceptor" /> 
+            <interceptor-stack name="myStack">
+	        	<interceptor-ref name="log"/>
+	       		<interceptor-ref name="defaultStack"/>
+	        </interceptor-stack>
+        </interceptors> 
+        <!-- 设置所有Action自动调用的拦截器堆栈 -->
+        <default-interceptor-ref name="myStack"/>
+    	<!-- global-results需放在每个package的内部,配置全局result -->
 	    <global-results>
 			<result name="error">/error.jsp</result>
 			<!-- <result name="login" type="redirect-action">Logon!input</result> -->
 			<result name="login" type="dispatcher">login.jsp</result>
 		</global-results> 
         <action name="talkRegister" class="talkRegister">
-            <result name="success">/frame/italk.jsp</result>
+            <result name="success" type="redirect">/frame/italk.jsp</result>
             <result name="register">register.jsp</result>
             <!-- <result type="redirect-action">Menu</result> -->
         </action>
