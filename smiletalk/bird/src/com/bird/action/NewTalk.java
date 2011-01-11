@@ -12,6 +12,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.ambow.log.timer.LogProcess;
+import com.ambow.log.vo.DataLogVo;
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
@@ -61,6 +63,31 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 		PrintWriter out = response.getWriter();
 		int result = topicService.insertObject(topicBean);
 		if(result>0){
+			// 数据日志代码开始
+			DataLogVo dataLog = new DataLogVo();
+			//模块ID 查ACT_Module表
+			dataLog.setModuleId(11);
+			//操作者ID 用户ID
+			dataLog.setOptId(String.valueOf(userId));
+			//操作类型 自定义,如：新增、修改、删除
+			dataLog.setOptType("发布信息");
+			//操作时间
+			dataLog.setOptTime(new Date());
+			//访问者IP
+			dataLog.setIpAddress(request.getRemoteAddr());
+			//操作的内容
+			dataLog.setOptContent(content);
+			//原始数据
+			dataLog.setOriginalData("");
+			//改动后数据
+			dataLog.setChangesData(content);
+			//对象ID  如新增或编辑用户，ID就是userName
+			dataLog.setObjId("content");
+			//备注（操作的补充信息）
+			dataLog.setRemark("");
+			LogProcess.logList.add(dataLog);
+			// 日志代码结束
+			
 			out.print("1");
 		}else{
 			out.print("0");
