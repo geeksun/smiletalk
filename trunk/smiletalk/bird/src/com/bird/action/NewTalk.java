@@ -75,8 +75,6 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 			dataLog.setOptTime(new Date());
 			//访问者IP
 			dataLog.setIpAddress(request.getRemoteAddr());
-			//操作的内容
-			dataLog.setOptContent(content);
 			//原始数据
 			dataLog.setOriginalData("");
 			//改动后数据

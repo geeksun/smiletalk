@@ -89,7 +89,6 @@ public class LogInterceptor extends AbstractInterceptor {
         		logContent.append("\"");
         		operLog.setOptContent(logContent.toString());
         		operLog.setOptTime(new Date());
-        		operLog.setObjId(parameterStr);
             	operLog.setIpAddress(ip);
             	operLog.setUrl(url);
             	operLog.setModuleId(actionModuleVo.getModuleId());
