@@ -63,6 +63,8 @@
            <props>
               <prop key="insert*">PROPAGATION_REQUIRED</prop>
 	    	  <prop key="update*">PROPAGATION_REQUIRED</prop>
+	    	  <!-- 发送邮件 -->
+	    	  <prop key="send*">PROPAGATION_REQUIRED</prop>
 	    	  <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
 	    	  <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
 	    	  <prop key="delete*">PROPAGATION_REQUIRED</prop>
