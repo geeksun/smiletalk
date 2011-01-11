@@ -55,8 +55,7 @@ public class TalkRegister extends ActionSupport implements ModelDriven<UserBean>
 		userService.sendActivateEmail(userBean);
 		session.put(ConstantUtil.USER, userBean);
 			
-			return SUCCESS;
-		
+		return SUCCESS;
 	}
 
 	public UserBean getModel() {
