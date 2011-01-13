@@ -5,7 +5,7 @@
     <include file="struts-default.xml"/>
     <package name="package1" extends="struts-default">
     	<interceptors> 
-            <interceptor name ="log" class ="com.ambow.log.interceptor.LogInterceptor" /> 
+            <interceptor name ="log" class ="com.bird.interceptor.LogInterceptor" /> 
             <interceptor-stack name="myStack">
 	        	<interceptor-ref name="log"/>
 	       		<interceptor-ref name="defaultStack"/>
