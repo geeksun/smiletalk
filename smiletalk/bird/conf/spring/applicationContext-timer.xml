@@ -66,10 +66,10 @@
 		<property name="mailServerHost" value="mail.ambow.com" />
 		<!-- SQL settings -->
 		<property name="dataLogSqlIns">
-			<value>insert into data_log (ID,MODULE_ID,OPT_TYPE,OPT_ID,OPT_TIME,ORIGINAL_DATA,CHANGES_DATA,OBJ_ID,IP_ADDRESS,REMARK) values (DATA_LOG_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)</value>
+			<value>insert into data_log (MODULE_ID,OPT_TYPE,OPT_ID,OPT_TIME,ORIGINAL_DATA,CHANGES_DATA,OBJ_ID,IP_ADDRESS,REMARK) values (?,?,?,?,?,?,?,?,?)</value>
 		</property>
 		<property name="operateLogSqlIns">
-			<value>insert into operate_log (ID,MODULE_ID,OPT_ID,OPT_TIME,IP_ADDRESS,URL,OPT_CONTENT) values (OPERATE_LOG_SEQ.NEXTVAL,?,?,?,?,?,?)</value>
+			<value>insert into operate_log (MODULE_ID,OPT_ID,OPT_TIME,IP_ADDRESS,URL,OPT_CONTENT) values (?,?,?,?,?,?)</value>
 		</property>
 		<property name="actModuleSqlSel">
 			<value>select * from act_module t where t.url = ?</value>
