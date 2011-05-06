@@ -18,6 +18,10 @@ import com.opensymphony.xwork2.ActionSupport;
  * 2009-11-16
  */
 public class CheckUniqueEmail extends ActionSupport implements ServletRequestAware,ServletResponseAware {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 335291843577167303L;
 	private UserService userService;
 	private UserBean userBean;
 	HttpServletRequest request;
