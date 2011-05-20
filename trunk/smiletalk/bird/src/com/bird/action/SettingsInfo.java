@@ -22,6 +22,10 @@ import com.opensymphony.xwork2.ModelDriven;
  *  2009-11-30
  */
 public class SettingsInfo extends ActionSupport implements ModelDriven<UserBean>, SessionAware, ServletRequestAware {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2372318632457129379L;
 	private UserService userService;
 	UserBean userBean = new UserBean();
 	Map<String, Object> session;
