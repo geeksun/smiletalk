@@ -17,6 +17,10 @@ import com.opensymphony.xwork2.ActionSupport;
  * 2009-11-30
  */
 public class SettingsTalk extends ActionSupport implements SessionAware, ServletRequestAware {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7314559947426153161L;
 	private UserService userService;
 	private UserBean userBean;
 	Map<String, Object> session;
