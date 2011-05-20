@@ -43,17 +43,17 @@ public class LogInterceptor extends AbstractInterceptor {
         		sb_key.append(key);
         		sb_key.append("£¬");
             	
-        		if(entry.getValue() instanceof String){
-        			System.out.println("entry.getValue():"+entry.getValue());
-        			sb_value.append(entry.getValue());
-            		sb_value.append("£¬");
-        		}else{
+        		if(entry.getValue() instanceof String[]){
         			String[] values = (String[]) entry.getValue();
                 	//sb.append("value:");
                 	for(String value:values){
                 		sb_value.append(value);
                 		sb_value.append("£¬");
                 	}
+        		}else{
+                	System.out.println("entry.getValue():"+entry.getValue());
+        			sb_value.append(entry.getValue());
+            		sb_value.append("£¬");
         		}
         	}
         }
