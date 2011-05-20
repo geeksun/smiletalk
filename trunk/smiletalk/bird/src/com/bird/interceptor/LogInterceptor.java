@@ -45,6 +45,8 @@ public class LogInterceptor extends AbstractInterceptor {
             	
         		if(entry.getValue() instanceof String){
         			System.out.println("entry.getValue():"+entry.getValue());
+        			sb_value.append(entry.getValue());
+            		sb_value.append("£¬");
         		}else{
         			String[] values = (String[]) entry.getValue();
                 	//sb.append("value:");
