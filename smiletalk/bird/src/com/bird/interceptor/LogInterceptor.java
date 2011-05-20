@@ -23,6 +23,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 public class LogInterceptor extends AbstractInterceptor {
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public String intercept(ActionInvocation invocation) throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String method = invocation.getProxy().getMethod();
@@ -42,12 +43,16 @@ public class LogInterceptor extends AbstractInterceptor {
         		sb_key.append(key);
         		sb_key.append("£¬");
             	
-            	String[] values = (String[]) entry.getValue();
-            	//sb.append("value:");
-            	for(String value:values){
-            		sb_value.append(value);
-            		sb_value.append("£¬");
-            	}
+        		if(entry.getValue() instanceof String){
+        			System.out.println("entry.getValue():"+entry.getValue());
+        		}else{
+        			String[] values = (String[]) entry.getValue();
+                	//sb.append("value:");
+                	for(String value:values){
+                		sb_value.append(value);
+                		sb_value.append("£¬");
+                	}
+        		}
         	}
         }
 	    String parameterStr = sb_key.toString();
