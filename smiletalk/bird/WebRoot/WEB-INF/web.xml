@@ -87,7 +87,15 @@
 		<servlet-name>jqueryAjaxServer</servlet-name>
 		<url-pattern>/jqueryAjax</url-pattern>
 	</servlet-mapping>
-	
+	<servlet>
+		<servlet-name>concurrentTest</servlet-name>
+		<servlet-class>com.bird.servlet.ConcurrentTest</servlet-class>
+	</servlet>
+	<!-- 测试线程安全性 -->
+	<servlet-mapping>
+		<servlet-name>concurrentTest</servlet-name>
+		<url-pattern>/concurrentT</url-pattern>
+	</servlet-mapping>
 
 	<session-config>
 		<session-timeout>30</session-timeout>
