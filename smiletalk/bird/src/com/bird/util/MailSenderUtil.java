@@ -96,7 +96,7 @@ public class MailSenderUtil {
 		mailInfo.setUserName("geeksun@163.com");
 		mailInfo.setPassword("geeksun19");
 		String email = userBean.getEmail();
-		mailInfo.setContent(userBean.getUserName() + "，你好，用户注册邮件测试" + userBean.getValidateCode());
+		mailInfo.setContent(userBean.getUserName() + "，你好，用户注册邮件测试, 您的邀请码是" + userBean.getValidateCode());
 		mailInfo.setFromAddress("geeksun@163.com");
 		mailInfo.setSubject("用户注册邮件测试");
 		mailInfo.setToAddress(email);
