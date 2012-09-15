@@ -24,7 +24,8 @@ import com.bird.po.MailInfo;
  *  2009-11-17
  */
 public class MailSenderUtil {
-	
+	/** 邮件服务器  */
+	private static String MAIL_SERVER_HOST= "smtp.163.com";
 	
 	public static void main(String[] args) {
 		MailInfo mailInfo = new MailInfo();
@@ -36,7 +37,7 @@ public class MailSenderUtil {
 		mailInfo.setSubject("用户注册邮件测试");
 		mailInfo.setToAddress(email);
 		mailInfo.setValidate(true);
-		mailInfo.setMailServerHost("smtp.163.com");
+		mailInfo.setMailServerHost(MAIL_SERVER_HOST);
 		sendMail(mailInfo);
 	}
 
@@ -100,7 +101,7 @@ public class MailSenderUtil {
 		mailInfo.setSubject("用户注册邮件测试");
 		mailInfo.setToAddress(email);
 		mailInfo.setValidate(true);
-		mailInfo.setMailServerHost("mail.163.com");
+		mailInfo.setMailServerHost(MAIL_SERVER_HOST);
 		
 		return sendMail(mailInfo);
 	}
@@ -121,7 +122,7 @@ public class MailSenderUtil {
 		mailInfo.setSubject("用户找回密码邮件测试");
 		mailInfo.setToAddress(email);
 		mailInfo.setValidate(true);
-		mailInfo.setMailServerHost("mail.163.com");
+		mailInfo.setMailServerHost(MAIL_SERVER_HOST);
 		
 		return sendMail(mailInfo);
 	}
