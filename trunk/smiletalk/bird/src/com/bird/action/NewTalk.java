@@ -12,8 +12,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.ambow.log.timer.LogProcess;
-import com.ambow.log.vo.DataLogVo;
+//import com.ambow.log.timer.LogProcess;
+//import com.ambow.log.vo.DataLogVo;
 import com.bird.domain.TopicBean;
 import com.bird.domain.UserBean;
 import com.bird.service.TopicService;
@@ -64,7 +64,7 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 		int result = topicService.insertObject(topicBean);
 		if(result>0){
 			// 数据日志代码开始
-			DataLogVo dataLog = new DataLogVo();
+			/*DataLogVo dataLog = new DataLogVo();
 			//模块ID 查ACT_Module表
 			dataLog.setModuleId(11);
 			//操作者ID 用户ID
@@ -83,7 +83,7 @@ public class NewTalk extends ActionSupport implements ServletRequestAware,Sessio
 			dataLog.setObjId("content");
 			//备注（操作的补充信息）
 			dataLog.setRemark("");
-			LogProcess.logList.add(dataLog);
+			LogProcess.logList.add(dataLog);*/
 			// 日志代码结束
 			
 			out.print("1");
