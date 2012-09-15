@@ -49,7 +49,7 @@
 						</td>
 					</tr>
 					<tr align="center">
-						<td><input type="button" onclick="justTalk()" value="  Talk  " > </td>
+						<td><input type="button" onclick="justTalk()" value=" ·¢  ÑÔ " > </td>
 					</tr>
 				</table>
 			</form>
