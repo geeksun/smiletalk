@@ -2,10 +2,10 @@ package com.bird.schedule;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+/*
 import com.ambow.log.util.LogUtil;
 import com.ambow.log.vo.PropertiesBean;
-
+*/
 public class TestHello {
 	
 	public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class TestHello {
 		ApplicationContext context = new ClassPathXmlApplicationContext("application-timer.xml");   
 		System.out.println("*****Íê±Ï******");
 		
-		PropertiesBean propertiesBean = (PropertiesBean) context.getBean("propertiesBean");
+		/*PropertiesBean propertiesBean = (PropertiesBean) context.getBean("propertiesBean");
 		String filterFields = propertiesBean.getFilterFields();
 		if(!LogUtil.isBlank(filterFields)){
 			if(filterFields.contains("&&")){
@@ -23,7 +23,7 @@ public class TestHello {
 			}else{
 				System.out.println(filterFields);
 			}
-		}
+		}*/
 		
 		
 	}
