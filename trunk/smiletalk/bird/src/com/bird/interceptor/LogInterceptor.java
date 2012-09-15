@@ -27,15 +27,15 @@ public class LogInterceptor extends AbstractInterceptor {
 	@SuppressWarnings("unchecked")
 	public String intercept(ActionInvocation invocation) throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		String method = invocation.getProxy().getMethod();
+		//String method = invocation.getProxy().getMethod();
 		
 		ActionContext ctx = invocation.getInvocationContext();
 		Map session = ctx.getSession();
 		
-		final Map<String, Object> parameters = invocation
+		/*final Map<String, Object> parameters = invocation
         .getInvocationContext().getParameters();
 		StringBuilder sb_key = new StringBuilder();
-		StringBuilder sb_value = new StringBuilder();
+		StringBuilder sb_value = new StringBuilder();*/
 		/**
 	    for(Map.Entry<String,Object> entry:parameters.entrySet()){
         	String key = (String) entry.getKey();
@@ -71,13 +71,13 @@ public class LogInterceptor extends AbstractInterceptor {
 	    }
 	    
 	    String ip = request.getRemoteAddr();
-	    
+	    */
 	    // 判断用户是否已登录
 		UserBean user = (UserBean) session.get(ConstantUtil.USER);
 		
         if (user != null) {
-        	String url = request.getRequestURI();
-        	ActionModuleVo actionModuleVo = DataBaseUtil.findActionModule(url);
+        	//String url = request.getRequestURI();
+        	/*ActionModuleVo actionModuleVo = DataBaseUtil.findActionModule(url);
         	if(actionModuleVo!=null){		
         		// operate log
         		OperateLogVo operLog = new OperateLogVo();
@@ -103,9 +103,9 @@ public class LogInterceptor extends AbstractInterceptor {
             	operLog.setModuleId(actionModuleVo.getModuleId());
             	
             	LogProcess.logList.add(operLog);
-        	}
+        	}*/
         }
-        */
+        
         return invocation.invoke();
 	}
 
