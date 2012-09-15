@@ -1,5 +1,12 @@
-/*package com.bird.interceptor;
+package com.bird.interceptor;
 
+/*
+import com.ambow.log.db.DataBaseUtil;
+import com.ambow.log.timer.LogProcess;
+import com.ambow.log.util.LogUtil;
+import com.ambow.log.vo.ActionModuleVo;
+import com.ambow.log.vo.OperateLogVo;
+*/
 import java.net.URLDecoder;
 import java.util.Date;
 import java.util.Map;
@@ -7,12 +14,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
-
-import com.ambow.log.db.DataBaseUtil;
-import com.ambow.log.timer.LogProcess;
-import com.ambow.log.util.LogUtil;
-import com.ambow.log.vo.ActionModuleVo;
-import com.ambow.log.vo.OperateLogVo;
 import com.bird.domain.UserBean;
 import com.bird.util.ConstantUtil;
 import com.opensymphony.xwork2.ActionContext;
@@ -35,6 +36,7 @@ public class LogInterceptor extends AbstractInterceptor {
         .getInvocationContext().getParameters();
 		StringBuilder sb_key = new StringBuilder();
 		StringBuilder sb_value = new StringBuilder();
+		/**
 	    for(Map.Entry<String,Object> entry:parameters.entrySet()){
         	String key = (String) entry.getKey();
         	// check key
@@ -103,9 +105,8 @@ public class LogInterceptor extends AbstractInterceptor {
             	LogProcess.logList.add(operLog);
         	}
         }
-        
+        */
         return invocation.invoke();
 	}
 
 }
-*/
