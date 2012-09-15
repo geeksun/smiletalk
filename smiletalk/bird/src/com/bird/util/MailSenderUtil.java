@@ -16,14 +16,28 @@ import com.bird.po.MailInfo;
 
 /**
  * @author jzq
- *  邮件工具类
+ *  邮件工具类: 支持SMTP协议
+ *  SMTP 的全称是“Simple Mail Transfer Protocol”，即简单邮件传输协议。它是一组用于从源地址到目的地址传输邮件的规范，通过它来控制邮件的中转方式。
+ *  SMTP 协议属于 TCP/IP 协议簇，它帮助每台计算机在发送或中转信件时找到下一个目的地。SMTP 服务器就是遵循 SMTP 协议的发送邮件服务器。 
+ *　SMTP 认证，简单地说就是要求必须在提供了账户名和密码之后才可以登录 SMTP 服务器，这就使得那些垃圾邮件的散播者无可乘之机。 
+ *　增加 SMTP 认证的目的是为了使用户避免受到垃圾邮件的侵扰。
  *  2009-11-17
  */
 public class MailSenderUtil {
 	
 	
 	public static void main(String[] args) {
-
+		MailInfo mailInfo = new MailInfo();
+		mailInfo.setUserName("geeksun@163.com");
+		mailInfo.setPassword("geeksun19");
+		String email = "330896202@qq.com";
+		mailInfo.setContent("test，你好，用户注册邮件测试" );
+		mailInfo.setFromAddress("geeksun@163.com");
+		mailInfo.setSubject("用户注册邮件测试");
+		mailInfo.setToAddress(email);
+		mailInfo.setValidate(true);
+		mailInfo.setMailServerHost("smtp.163.com");
+		sendMail(mailInfo);
 	}
 
 	/**
@@ -78,15 +92,15 @@ public class MailSenderUtil {
 			return 0;
 		}
 		MailInfo mailInfo = new MailInfo();
-		mailInfo.setUserName("jiangzhiqiang@madeinchina-inc.com");
-		mailInfo.setPassword("123456");
+		mailInfo.setUserName("geeksun@163.com");
+		mailInfo.setPassword("geeksun19");
 		String email = userBean.getEmail();
 		mailInfo.setContent(userBean.getUserName() + "，你好，用户注册邮件测试" + userBean.getValidateCode());
-		mailInfo.setFromAddress("jiangzhiqiang@madeinchina-inc.com");
+		mailInfo.setFromAddress("geeksun@163.com");
 		mailInfo.setSubject("用户注册邮件测试");
 		mailInfo.setToAddress(email);
 		mailInfo.setValidate(true);
-		mailInfo.setMailServerHost("mail.madeinchina-inc.com");
+		mailInfo.setMailServerHost("mail.163.com");
 		
 		return sendMail(mailInfo);
 	}
@@ -99,15 +113,15 @@ public class MailSenderUtil {
 			return 0;
 		}
 		MailInfo mailInfo = new MailInfo();
-		mailInfo.setUserName("jiangzhiqiang@madeinchina-inc.com");
-		mailInfo.setPassword("123456");
+		mailInfo.setUserName("geeksun@163.com");
+		mailInfo.setPassword("geeksun19");
 		String email = userBean.getEmail();
-		mailInfo.setContent(userBean.getUserName() + "，你好，您的密码是：" + userBean.getPassword() + "，请妥善保存。");
-		mailInfo.setFromAddress("jiangzhiqiang@madeinchina-inc.com");
+		mailInfo.setContent(userBean.getUserName() + "，你好，您的密码是：" + userBean.getPassword() + "，请记住");
+		mailInfo.setFromAddress("geeksun@163.com");
 		mailInfo.setSubject("用户找回密码邮件测试");
 		mailInfo.setToAddress(email);
 		mailInfo.setValidate(true);
-		mailInfo.setMailServerHost("mail.madeinchina-inc.com");
+		mailInfo.setMailServerHost("mail.163.com");
 		
 		return sendMail(mailInfo);
 	}
