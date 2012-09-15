@@ -1,4 +1,4 @@
-package com.bird.interceptor;
+/*package com.bird.interceptor;
 
 import java.net.URLDecoder;
 import java.util.Date;
@@ -108,3 +108,4 @@ public class LogInterceptor extends AbstractInterceptor {
 	}
 
 }
+*/
