@@ -17,7 +17,7 @@
 		<sqlMap resource="sqlMap/User.xml"/>
 		<sqlMap resource="sqlMap/Topic.xml"/>
 		<sqlMap resource="sqlMap/Follow.xml"/>
-		
+		<sqlMap resource="sqlMap/Log.xml"/>
 		
 		
 </sqlMapConfig>
