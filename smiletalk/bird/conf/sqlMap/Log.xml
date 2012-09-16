@@ -6,7 +6,7 @@
 <sqlMap>
 	<insert id="addLog" parameterClass="com.bird.domain.LogBean">
 		<![CDATA[
-insert log (userName,createdate,content,operation) values (#userName#,NOW(),#content#,#operation#)
+insert log (userName,createdate,content,operation) values (#userName#,now(),#content#,#operation#)
 		]]>
 	</insert>
 
