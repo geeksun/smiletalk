@@ -8,11 +8,10 @@ import com.bird.dao.FollowDao;
 import com.bird.dao.UserDao;
 import com.bird.domain.FollowBean;
 import com.bird.domain.UserBean;
-import com.bird.service.SuperService;
 import com.bird.service.UserService;
 import com.bird.util.MailSenderUtil;
 
-public class UserServiceImpl extends SuperService implements UserService {
+public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	private FollowDao followDao;
 	
