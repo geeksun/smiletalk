@@ -13,10 +13,18 @@ public class LogBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -3606986764997360541L;
+	private Long id;
 	private String userName;
 	private Date createDate;
 	private String content;
 	private String operation;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getUserName() {
 		return userName;
 	}
