@@ -83,7 +83,7 @@ public class LogAspectj {
         //创建日志对象  
         LogBean log = new LogBean();
         log.setUserName("testAccount");
-        log.setOperation("joinPoint:"+joinPoint+", Method:"+methodName+"()");
+        log.setContent("joinPoint:"+joinPoint.getTarget().getClass().getName()+", Method:"+methodName+"()");
         
         log.setOperation("登录");
         logService.addLog(log);
