@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<!--处理日志方面的bean-->
+    <bean name="logHandler" class="com.bird.spring.aop.LogBeforeAdvice"></bean>
+    <!--处理业务的bean-->
+    <bean name="userService" class="com.bird.service.impl.UserServiceImpl"></bean>
+    <!--将日志bean和业务bean通过代理的方式进行代理整合-->
+    <bean name="logProxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+       <property name="interceptorNames">
+           <list>
+              <value>logHandler</value>
+              <!--此处还可以放置多个处理方面的bean-->
+           </list>
+       </property>
+       <property name="beanNames">
+           <list>
+              <value>userService</value>
+              <!-- 此处可以放置多个业务bean -->
+           </list>
+       </property>
+    </bean>
+    
+    
+</beans>
