@@ -62,7 +62,8 @@
        <property name="transactionAttributes">
            <props>
               <prop key="insert*">PROPAGATION_REQUIRED</prop>
-              <prop key="add*">PROPAGATION_REQUIRED</prop>
+              <!-- LogAspectj中的AOP日志方法 -->
+              <prop key="login*">PROPAGATION_REQUIRED</prop>
 	    	  <prop key="update*">PROPAGATION_REQUIRED</prop>
 	    	  <!-- 发送邮件 -->
 	    	  <prop key="send*">PROPAGATION_REQUIRED</prop>
