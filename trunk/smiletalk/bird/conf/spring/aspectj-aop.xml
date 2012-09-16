@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+		
+		<!-- 加入Aspectj配置 -->
+		<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />   
+		<aop:aspectj-autoproxy />
+		<bean id="logAspect" class="com.bird.spring.aspectj.LogAspectj" />
+		
+		<bean id="logService" class="com.bird.service.impl.LogServiceImpl">
+			<property name="logDao">
+				<ref local="logDao" />
+			</property>
+		</bean>
+		<bean id="logDao" class="com.bird.dao.impl.LogDaoImpl">
+			<property name="sqlMapClient">
+				<ref bean="sqlMapClient"/>
+			</property>
+		</bean>
+</beans>
