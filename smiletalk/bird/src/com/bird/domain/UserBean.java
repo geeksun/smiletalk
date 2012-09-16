@@ -8,7 +8,7 @@ import java.util.List;
  * iTalk ”√ªß
  * 2009-11-4
  */
-public class UserBean  implements Serializable{
+public class UserBean implements Serializable{
 	/**
 	 * 
 	 */
