@@ -1,0 +1,1 @@
+类似twitter的微对话记录板，记录what are you thinking,what are you doing,what are want to say,what are want to do?
